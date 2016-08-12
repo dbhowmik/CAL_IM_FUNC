@@ -1,7 +1,7 @@
 # CAL implementation of image processing functions
 This repo relates to Rathlin deliverable D9: Encoding exemplary CAL image processing functions.
 
-Disclaimer: This is a non-exhaustive list. Not all function will be implemented within the lif-time of Rathlin (I) project. Exemplars will be implemented from selected categories. 
+Disclaimer: This is a non-exhaustive list. Not all function will be implemented within the life-time of Rathlin (I) project. Exemplars will be implemented from selected categories. 
 
 # Functions:
 (I: Implemented, IP: In-progress  P: Planned)
