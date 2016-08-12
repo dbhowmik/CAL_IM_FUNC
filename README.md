@@ -91,4 +91,3 @@ Disclaimer: This is a non-exhaustive list. Not all function will be implemented 
 5. https://en.wikipedia.org/wiki/Mean_shift
 6. http://www.cse.psu.edu/~rtc12/CSE598G/introMeanShift.pdf
 7. http://dx.doi.org/10.1109/TPAMI.2003.1195991
-8. 
