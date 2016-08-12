@@ -7,16 +7,16 @@ Disclaimer: This is a non-exhaustive list. Not all function will be implemented 
 (I: Implemented, IP: In-progress  P: Planned)
 
 #Image Arithmetic (P)
-1. Addition
-2. Subtraction
-3. Multiplication
-4. Division
-5. Blending
-6. Logical AND/NAND
-7. Logical OR/NOR
-8. Logical XOR/XNOR
-9. Invert / Logical NOT
-10. Bitshift Operators
+1. Addition - pointwise addition: image + image (or constant)
+2. Subtraction - pointwise subtraction: image - image (or constant)
+3. Multiplication - pointwise multiplication: images * image (or constant)
+4. Division - pointwise division: images / image (or constant)
+5. Blending / Fusion - pointwise linear combination of two image
+6. Logical AND/NAND - pointwise logical ANDing/NANDing of two binary images
+7. Logical OR/NOR - pointwise logical ORing/NORing of two binary images
+8. Logical XOR/XNOR - pointwise logical XORing/XNORing of two binary images
+9. Invert / Logical NOT - pointwise inversion of a binary image
+10. Bitshift Operators - pointwise scaling of an image using shift operation 2^x. More efficient than division / multiplication. 
 
 # Point Operations (P)
 1. Thresholding
