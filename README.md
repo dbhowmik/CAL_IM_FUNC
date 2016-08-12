@@ -83,7 +83,7 @@ Disclaimer: This is a non-exhaustive list. Not all function will be implemented 
 5. RFS tracking  
 
 
-Reference read: 
+#Reference read: 
 1. http://homepages.inf.ed.ac.uk/rbf/HIPR2/wksheets.htm
 2. https://en.wikipedia.org/wiki/Kernel_(image_processing)
 3. https://en.wikipedia.org/wiki/Discrete_wavelet_transform
