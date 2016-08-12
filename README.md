@@ -6,7 +6,7 @@ Disclaimer: This is a non-exhaustive list. Not all function will be implemented 
 # Functions:
 (I: Implemented, IP: In-progress  P: Planned)
 
-#Image Arithmaetic (P)
+#Image Arithmatic (P)
 1. Addition
 2. Subtraction
 3. Multiplication
