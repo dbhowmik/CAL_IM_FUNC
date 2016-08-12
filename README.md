@@ -81,6 +81,7 @@ Disclaimer: This is a non-exhaustive list. Not all function will be implemented 
 3. Crowd Analsysis
 4. Person Re-Identification
 5. RFS tracking  
+6. ACF pedestrian detector
 
 
 #Reference read: 
