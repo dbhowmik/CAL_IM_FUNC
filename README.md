@@ -19,29 +19,29 @@ Disclaimer: This is a non-exhaustive list. Not all function will be implemented 
 10. Bitshift Operators - pointwise scaling of an image using shift operation 2^x. More efficient than division / multiplication. 
 
 # Point Operations (P)
-1. Thresholding
-2. Adaptive Thresholding
-3. Contrast Stretching
-4. Histogram Equalisation
-5. Logarithmic Operator
-6. Exponential / Raise to Power Operator
-7. RGB to YUV Color Space Converstion
-8. YUV to RGB Color Space Converstion
+1. Thresholding - select pixels with given values to produce binary image
+2. Adaptive Thresholding - like Thresholding except choose values locally
+3. Contrast Stretching - spreading out graylevel distribution
+4. Histogram Equalisation - general method of modifying intensity distribution
+5. Logarithmic Operator - reducing contrast of brighter regions
+6. Exponential / Raise to Power Operator - enhancing contrast of brighter regions
+7. RGB to YUV - Color Space Converstion 
+8. YUV to RGB - Color Space Converstion
 
 # Geometric Operations (P)
-1. Scale
-2. Rotate
-3. Reflect
-4. Translate
-5. Affine Transform
+1. Scale - change image content size (Bilinear / Bicubic)
+2. Rotate - change image content orientation
+3. Reflect - flip over image contents
+4. Translate - change image content position
+5. Affine Transform - general image content linear geometric transformation
 
 # Image Analysis (P)
-1. Intensity Histogram
-2. Classification
-3. Connected Components Labeling 
-4. Pixel Value Distribution
-5. Classified Pixels
-6. Connected Componenets
+1. Intensity Histogram - the image intensity distribution
+2. Classification - mapping from pixel values to feature or object classes
+3. Connected Components Labeling - grouping pixels with the same class label into regions
+4. Pixel Value Distribution - the number of pixels having each value
+5. Classified Pixels - the category of scene entity that the corresponding pixel is taken from
+6. Connected Componenets - the groups of pixels all of which have the same label or classification
 
 # Morphology (P)
 1. Dilation - grow image regions
