@@ -1,0 +1,14 @@
+*.bak
+*.y
+*.x
+*.hi
+*.aux
+*.pdf
+*.o
+*#
+#*
+*.out
+*.log
+*.tex
+dist/
+*.ir

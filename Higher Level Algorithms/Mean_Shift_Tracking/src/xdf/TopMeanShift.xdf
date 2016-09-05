@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<XDF name="TopMeanShift">
+    <Instance id="source">
+        <Class name="std.stdio.Source_read"/>
+    </Instance>
+    <Instance id="End_of_str">
+        <Class name="std.stdio.EndOfStream"/>
+    </Instance>
+    <Instance id="Write_file">
+        <Class name="std.stdio.Writer"/>
+    </Instance>
+    <Instance id="loop_and_box">
+        <Class name="xdf.LoopNBox"/>
+    </Instance>
+    <Connection dst="Write_file" dst-port="Byte" src="End_of_str" src-port="Out"/>
+    <Connection dst="Write_file" dst-port="pEOF" src="End_of_str" src-port="pEOF"/>
+    <Connection dst="loop_and_box" dst-port="in" src="source" src-port="O"/>
+    <Connection dst="End_of_str" dst-port="In" src="loop_and_box" src-port="out"/>
+</XDF>
