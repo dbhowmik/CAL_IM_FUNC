@@ -53,9 +53,9 @@ Disclaimer: This is a non-exhaustive list. Not all function will be implemented 
 7. Thickening - structured dilation using image pattern matching
 8. Skeletonization/Medial Axis Transform - finding skeletons of binary regions
 
-# Feature Detectors (P)
+# Feature Detectors (IP)
 1. Roberts Cross Edge Detector - 2×2 gradient edge detector
-2. Sobel Edge Detector - 3×3 gradient edge detector
+2. Sobel Edge Detector - 3×3 gradient edge detector (I)
 3. Canny Edge Detector - non-maximal suppression of local gradient magnitude
 4. Compass Edge Detector - 3×3 gradient edge detectors
 5. Zero Crossing Detector - edge detector using the Laplacian of Gaussian operator
