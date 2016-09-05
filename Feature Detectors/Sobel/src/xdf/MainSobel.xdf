@@ -21,8 +21,15 @@
             </Entry>
         </Type>
     </Port>
-    <Port kind="Output" name="out">
+    <Port kind="Output" name="mag">
         <Type name="uint">
+            <Entry kind="Expr" name="size">
+                <Expr kind="Literal" literal-kind="Integer" value="8"/>
+            </Entry>
+        </Type>
+    </Port>
+    <Port kind="Output" name="gradient">
+        <Type name="int">
             <Entry kind="Expr" name="size">
                 <Expr kind="Literal" literal-kind="Integer" value="8"/>
             </Entry>
@@ -61,4 +68,6 @@
     <Connection dst="gy_cal" dst-port="val_21" src="Sobel_pipelined" src-port="pix_21"/>
     <Connection dst="gy_cal" dst-port="val_22" src="Sobel_pipelined" src-port="pix_22"/>
     <Connection dst="grad_mag_cal" dst-port="gy" src="gy_cal" src-port="gx"/>
+    <Connection dst="" dst-port="mag" src="grad_mag_cal" src-port="mag_val"/>
+    <Connection dst="" dst-port="gradient" src="grad_mag_cal" src-port="grad_val"/>
 </XDF>

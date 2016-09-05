@@ -15,11 +15,15 @@
     <Instance id="Stream2RGB">
         <Class name="std.stdio.StreamToRGB"/>
     </Instance>
+    <Instance id="TextDisplay">
+        <Class name="cal.textPrint"/>
+    </Instance>
     <Connection dst="Write_stream" dst-port="pEOF" src="End_of_Stream" src-port="pEOF"/>
-    <Connection dst="End_of_Stream" dst-port="Y" src="Main_SOBEL" src-port="out"/>
     <Connection dst="Write_stream" dst-port="Byte" src="End_of_Stream" src-port="Yout"/>
     <Connection dst="Stream2RGB" dst-port="stream" src="Source" src-port="O"/>
     <Connection dst="Main_SOBEL" dst-port="R" src="Stream2RGB" src-port="R"/>
     <Connection dst="Main_SOBEL" dst-port="G" src="Stream2RGB" src-port="G"/>
     <Connection dst="Main_SOBEL" dst-port="B" src="Stream2RGB" src-port="B"/>
+    <Connection dst="End_of_Stream" dst-port="Y" src="Main_SOBEL" src-port="mag"/>
+    <Connection dst="TextDisplay" dst-port="grad" src="Main_SOBEL" src-port="gradient"/>
 </XDF>

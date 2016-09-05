@@ -1,0 +1,22 @@
+/*
+ * Copyright (c) 2016, Project: Rathlin, Heriot-Watt University, Edinburgh, UK
+ * All rights reserved.
+ * 
+ */
+  
+// Author: Deepayan Bhowmik <d.bhowmik@hw.ac.uk> 
+ 				 
+
+package cal;
+import std.header.Parameter.*;
+import cal.Functions.*;
+
+actor textPrint() int(size=8) grad   
+					==> :
+					    
+    grad_val_display: action grad:[grad_val] ==> 
+    do
+    	println(grad_val);
+    end      
+       
+end

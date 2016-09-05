@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="ASCII"?>
-<pi:Diagram xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:al="http://eclipse.org/graphiti/mm/algorithms" xmlns:pi="http://eclipse.org/graphiti/mm/pictograms" visible="true" gridUnit="10" diagramTypeId="xdfDiagram" name="MainSobel" snapToGrid="true" pictogramLinks="//@link //@children.0/@link //@children.1/@link //@children.2/@link //@children.2/@anchors.0/@link //@children.2/@anchors.1/@link //@children.2/@anchors.2/@link //@children.2/@anchors.3/@link //@children.3/@link //@children.4/@link //@children.5/@link //@connections.0/@link //@connections.1/@link //@connections.2/@link //@connections.3/@link //@children.1/@anchors.0/@link //@children.1/@anchors.1/@link //@children.1/@anchors.2/@link //@children.1/@anchors.3/@link //@children.1/@anchors.4/@link //@children.1/@anchors.5/@link //@children.1/@anchors.6/@link //@children.1/@anchors.7/@link //@children.1/@anchors.8/@link //@children.6/@link //@children.7/@link //@children.8/@link //@children.6/@anchors.0/@link //@children.6/@anchors.1/@link //@children.6/@anchors.2/@link //@children.6/@anchors.3/@link //@children.6/@anchors.4/@link //@children.6/@anchors.5/@link //@children.6/@anchors.6/@link //@children.7/@anchors.0/@link //@children.7/@anchors.1/@link //@children.7/@anchors.2/@link //@children.7/@anchors.3/@link //@children.7/@anchors.4/@link //@children.7/@anchors.5/@link //@children.7/@anchors.6/@link //@connections.4/@link //@connections.5/@link //@connections.6/@link //@connections.7/@link //@connections.8/@link //@connections.9/@link //@connections.10/@link //@connections.11/@link //@connections.12/@link //@connections.13/@link //@connections.14/@link //@connections.15/@link //@connections.16/@link //@connections.17/@link //@children.8/@anchors.0/@link //@children.8/@anchors.1/@link //@children.8/@anchors.2/@link //@children.8/@anchors.3/@link" version="0.11.0">
+<pi:Diagram xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:al="http://eclipse.org/graphiti/mm/algorithms" xmlns:pi="http://eclipse.org/graphiti/mm/pictograms" visible="true" gridUnit="10" diagramTypeId="xdfDiagram" name="MainSobel" snapToGrid="true" pictogramLinks="//@link //@children.0/@link //@children.1/@link //@children.2/@link //@children.2/@anchors.0/@link //@children.2/@anchors.1/@link //@children.2/@anchors.2/@link //@children.2/@anchors.3/@link //@children.3/@link //@children.4/@link //@children.5/@link //@connections.0/@link //@connections.1/@link //@connections.2/@link //@connections.3/@link //@children.1/@anchors.0/@link //@children.1/@anchors.1/@link //@children.1/@anchors.2/@link //@children.1/@anchors.3/@link //@children.1/@anchors.4/@link //@children.1/@anchors.5/@link //@children.1/@anchors.6/@link //@children.1/@anchors.7/@link //@children.1/@anchors.8/@link //@children.6/@link //@children.7/@link //@children.8/@link //@children.6/@anchors.0/@link //@children.6/@anchors.1/@link //@children.6/@anchors.2/@link //@children.6/@anchors.3/@link //@children.6/@anchors.4/@link //@children.6/@anchors.5/@link //@children.6/@anchors.6/@link //@children.7/@anchors.0/@link //@children.7/@anchors.1/@link //@children.7/@anchors.2/@link //@children.7/@anchors.3/@link //@children.7/@anchors.4/@link //@children.7/@anchors.5/@link //@children.7/@anchors.6/@link //@connections.4/@link //@connections.5/@link //@connections.6/@link //@connections.7/@link //@connections.8/@link //@connections.9/@link //@connections.10/@link //@connections.11/@link //@connections.12/@link //@connections.13/@link //@connections.14/@link //@connections.15/@link //@connections.16/@link //@connections.17/@link //@children.8/@anchors.0/@link //@children.8/@anchors.1/@link //@children.8/@anchors.2/@link //@children.8/@anchors.3/@link //@connections.18/@link //@children.9/@link //@connections.19/@link" version="0.12.0">
   <properties key="xdf_diagram_version" value="2"/>
   <graphicsAlgorithm xsi:type="al:Rectangle" background="//@colors.1" foreground="//@colors.0" lineWidth="1" transparency="0.0" width="1000" height="1000"/>
   <link>
@@ -7,21 +7,21 @@
   </link>
   <children xsi:type="pi:ContainerShape" visible="true" active="true">
     <properties key="XDF_ID" value="OUT_PORT"/>
-    <graphicsAlgorithm xsi:type="al:Rectangle" lineWidth="1" filled="false" lineVisible="false" transparency="0.0" width="29" height="50" x="795" y="193">
+    <graphicsAlgorithm xsi:type="al:Rectangle" lineWidth="1" filled="false" lineVisible="false" transparency="0.0" width="29" height="50" x="795" y="144">
       <graphicsAlgorithmChildren xsi:type="al:Polygon" lineStyle="UNSPECIFIED" width="29" height="34" style="//@styles.0/@styles.4">
         <properties key="XDF_ID" value="PORT_SHAPE"/>
         <points/>
         <points y="34"/>
         <points x="29" y="17"/>
       </graphicsAlgorithmChildren>
-      <graphicsAlgorithmChildren xsi:type="al:Text" lineStyle="UNSPECIFIED" width="29" height="13" y="38" style="//@styles.1/@styles.2" horizontalAlignment="UNSPECIFIED" verticalAlignment="UNSPECIFIED" value="out">
+      <graphicsAlgorithmChildren xsi:type="al:Text" lineStyle="UNSPECIFIED" width="29" height="13" y="38" style="//@styles.1/@styles.2" horizontalAlignment="UNSPECIFIED" verticalAlignment="UNSPECIFIED" value="mag">
         <properties key="XDF_ID" value="PORT_LABEL"/>
       </graphicsAlgorithmChildren>
     </graphicsAlgorithm>
     <link>
       <businessObjects href="MainSobel.xdf#//@outputs.0"/>
     </link>
-    <anchors xsi:type="pi:ChopboxAnchor"/>
+    <anchors xsi:type="pi:ChopboxAnchor" incomingConnections="//@connections.18"/>
   </children>
   <children xsi:type="pi:ContainerShape" visible="true" active="true">
     <properties key="XDF_ID" value="INSTANCE"/>
@@ -575,7 +575,7 @@
       </link>
       <location y="63"/>
     </anchors>
-    <anchors xsi:type="pi:FixPointAnchor" visible="true" active="true" useAnchorLocationAsConnectionEndpoint="true">
+    <anchors xsi:type="pi:FixPointAnchor" visible="true" active="true" outgoingConnections="//@connections.18" useAnchorLocationAsConnectionEndpoint="true">
       <properties key="XDF_ID" value="INSTANCE_PORT"/>
       <properties key="REF_PORT_NAME" value="mag_val"/>
       <properties key="SHAPE_DIRECTION" value="output"/>
@@ -585,7 +585,7 @@
       </link>
       <location x="120" y="49"/>
     </anchors>
-    <anchors xsi:type="pi:FixPointAnchor" visible="true" active="true" useAnchorLocationAsConnectionEndpoint="true">
+    <anchors xsi:type="pi:FixPointAnchor" visible="true" active="true" outgoingConnections="//@connections.19" useAnchorLocationAsConnectionEndpoint="true">
       <properties key="XDF_ID" value="INSTANCE_PORT"/>
       <properties key="REF_PORT_NAME" value="grad_val"/>
       <properties key="SHAPE_DIRECTION" value="output"/>
@@ -595,6 +595,24 @@
       </link>
       <location x="120" y="63"/>
     </anchors>
+  </children>
+  <children xsi:type="pi:ContainerShape" visible="true" active="true">
+    <properties key="XDF_ID" value="OUT_PORT"/>
+    <graphicsAlgorithm xsi:type="al:Rectangle" lineWidth="1" filled="false" lineVisible="false" transparency="0.0" width="39" height="50" x="790" y="208">
+      <graphicsAlgorithmChildren xsi:type="al:Polygon" lineStyle="UNSPECIFIED" width="29" height="34" x="5" style="//@styles.0/@styles.4">
+        <properties key="XDF_ID" value="PORT_SHAPE"/>
+        <points/>
+        <points y="34"/>
+        <points x="29" y="17"/>
+      </graphicsAlgorithmChildren>
+      <graphicsAlgorithmChildren xsi:type="al:Text" lineStyle="UNSPECIFIED" width="39" height="13" y="38" style="//@styles.1/@styles.2" horizontalAlignment="UNSPECIFIED" verticalAlignment="UNSPECIFIED" value="gradient">
+        <properties key="XDF_ID" value="PORT_LABEL"/>
+      </graphicsAlgorithmChildren>
+    </graphicsAlgorithm>
+    <link>
+      <businessObjects href="MainSobel.xdf#//@outputs.1"/>
+    </link>
+    <anchors xsi:type="pi:ChopboxAnchor" incomingConnections="//@connections.19"/>
   </children>
   <styles lineWidth="1" lineVisible="true" transparency="0.0" id="COMMON_GENERIC" horizontalAlignment="UNSPECIFIED" verticalAlignment="UNSPECIFIED">
     <styles lineStyle="UNSPECIFIED" filled="true" id="INSTANCE" horizontalAlignment="UNSPECIFIED" verticalAlignment="UNSPECIFIED">
@@ -875,7 +893,7 @@
       </graphicsAlgorithm>
     </connectionDecorators>
     <bendpoints x="629" y="60"/>
-    <bendpoints x="629" y="210"/>
+    <bendpoints x="629" y="211"/>
   </connections>
   <connections xsi:type="pi:FreeFormConnection" visible="true" active="true" start="//@children.1/@anchors.4" end="//@children.7/@anchors.1">
     <graphicsAlgorithm xsi:type="al:Polyline" lineWidth="1" filled="false" transparency="0.0" style="//@styles.0/@styles.5"/>
@@ -954,6 +972,34 @@
     <graphicsAlgorithm xsi:type="al:Polyline" lineWidth="1" filled="false" transparency="0.0" style="//@styles.0/@styles.5"/>
     <link>
       <businessObjects href="MainSobel.xdf#//@edges.17"/>
+    </link>
+    <connectionDecorators visible="true" locationRelative="true" location="1.0">
+      <graphicsAlgorithm xsi:type="al:Polygon" lineWidth="1" filled="true" lineVisible="false" transparency="0.0" style="//@styles.0/@styles.5">
+        <points/>
+        <points x="-12" y="5"/>
+        <points x="-12" y="-5"/>
+      </graphicsAlgorithm>
+    </connectionDecorators>
+  </connections>
+  <connections xsi:type="pi:FreeFormConnection" visible="true" active="true" start="//@children.8/@anchors.2" end="//@children.0/@anchors.0">
+    <graphicsAlgorithm xsi:type="al:Polyline" lineWidth="1" filled="false" transparency="0.0" style="//@styles.0/@styles.5"/>
+    <link>
+      <businessObjects href="MainSobel.xdf#//@edges.18"/>
+    </link>
+    <connectionDecorators visible="true" locationRelative="true" location="1.0">
+      <graphicsAlgorithm xsi:type="al:Polygon" lineWidth="1" filled="true" lineVisible="false" transparency="0.0" style="//@styles.0/@styles.5">
+        <points/>
+        <points x="-12" y="5"/>
+        <points x="-12" y="-5"/>
+      </graphicsAlgorithm>
+    </connectionDecorators>
+    <bendpoints x="780" y="211"/>
+    <bendpoints x="780" y="161"/>
+  </connections>
+  <connections xsi:type="pi:FreeFormConnection" visible="true" active="true" start="//@children.8/@anchors.3" end="//@children.9/@anchors.0">
+    <graphicsAlgorithm xsi:type="al:Polyline" lineWidth="1" filled="false" transparency="0.0" style="//@styles.0/@styles.5"/>
+    <link>
+      <businessObjects href="MainSobel.xdf#//@edges.19"/>
     </link>
     <connectionDecorators visible="true" locationRelative="true" location="1.0">
       <graphicsAlgorithm xsi:type="al:Polygon" lineWidth="1" filled="true" lineVisible="false" transparency="0.0" style="//@styles.0/@styles.5">
