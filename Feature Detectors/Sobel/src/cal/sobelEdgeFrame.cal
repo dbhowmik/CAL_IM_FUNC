@@ -1,0 +1,83 @@
+/*
+ * Copyright (c) 2014, Project: Rathlin, Heriot-Watt University, Edinburgh, UK
+ * All rights reserved.
+ * 
+ */
+  
+// Author: Deepayan Bhowmik <d.bhowmik@hw.ac.uk> 
+ 				 
+
+package cal;
+import std.header.Parameter.*;
+import cal.Functions.*;
+
+actor sobelEdgeFrame() uint(size=8) Y  
+					==> uint(size=8) Edge_Y:
+
+	uint(size=8) Buffer[IM_HEIGHT][IM_WIDTH];	
+	int countX := 0;
+	int countY := 0;	
+	
+	getCoeffValue: action Y:[value] ==>  	
+	do			
+		Buffer[countX][countY] := value;				
+		countY := countY + 1;
+		
+		if(countY = IM_WIDTH) then
+			countX := countX + 1;
+			countY := 0; 
+		end									
+	end
+	
+	doneCountX: action ==>
+	guard countX = IM_HEIGHT
+	do
+		countX := 0;				
+	end
+
+	/* Filtering 3x3 */
+	// Variables for filtering
+	uint(size=8) tmp[IM_HEIGHT][IM_WIDTH];  
+	
+	sobel_filter: action ==>
+	var int gx, int gy, int sum
+	do		
+		foreach int y in 1 .. (IM_HEIGHT-1) do
+			foreach int x in 1 .. (IM_WIDTH-1) do							
+				gx := xGradient(Buffer[y-1][x-1], Buffer[y][x-1], Buffer[y+1][x-1], Buffer[y-1][x+1], Buffer[y][x+1], Buffer[y+1][x+1]); 
+				gy := yGradient(Buffer[y-1][x-1], Buffer[y-1][x], Buffer[y-1][x+1], Buffer[y+1][x-1], Buffer[y+1][x], Buffer[y+1][x+1]);
+				
+				sum := abs(gx) + abs(gy);				
+				tmp[y][x] := clip_i32_u8(sum);				
+			end			
+		end 
+		
+	end
+	
+	sendFilterValue: action ==> Edge_Y:[coeff_Val]
+	var uint(size=8) coeff_Val
+	do  
+		coeff_Val := tmp[countX][countY];		
+		countY := countY + 1;		
+		if(countY = IM_WIDTH) then
+			countX := countX + 1;
+			countY := 0; 
+		end
+	end
+		
+	schedule fsm s0 :			
+		s0 (getCoeffValue ) --> s0;
+		s0 (doneCountX ) --> s1;
+		s1 (sobel_filter) --> s2;
+		s2 (sendFilterValue) --> s2;
+		s2 (doneCountX) --> s0;		
+	end
+	
+	priority
+		doneCountX > getCoeffValue;
+		doneCountX > sendFilterValue;		
+	end
+	
+	
+	
+end

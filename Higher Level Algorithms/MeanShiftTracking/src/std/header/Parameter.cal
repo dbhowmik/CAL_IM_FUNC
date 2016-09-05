@@ -1,0 +1,195 @@
+package std.header;
+
+unit Parameter:
+//---------------------------------------------
+// Image size information 
+//	uint(size=16) IM_WIDTH = 176;
+//	uint(size=16) IM_HEIGHT = 144;
+//	
+//// Tracking window parameters	
+//	uint(size=16) RECT_WIDTH = 20;	
+//	uint(size=16) RECT_HEIGHT = 26;
+//	uint(size=16) CENTRE_X = 159;
+//	uint(size=16) CENTRE_Y = 76;
+//----------------------------------------------
+
+//// Image size information 
+//	int IM_WIDTH = 384;
+//	int IM_HEIGHT = 288;
+//	
+//// Tracking window parameters	
+//	int RECT_WIDTH = 20;	
+//	int RECT_HEIGHT = 46;
+//	int CENTRE_X = 337;
+//	//int CENTRE_X = 356;
+//	int CENTRE_Y = 156;
+
+//-----------------------------------------------
+//	uint(size=16) IM_WIDTH = 768;
+//	uint(size=16) IM_HEIGHT = 576;
+//	
+//// Tracking window parameters	
+//	uint(size=16) RECT_WIDTH = 108;	
+//	uint(size=16) RECT_HEIGHT = 48;
+//	uint(size=16) CENTRE_X = 678;
+//	uint(size=16) CENTRE_Y = 314;
+//------------------------------------------------
+
+//// Image size information for Zedboard 
+//	int IM_WIDTH = 320;
+//	int IM_HEIGHT = 240;
+//	
+//// Tracking window parameters	
+//	int RECT_WIDTH = 32;	
+//	int RECT_HEIGHT = 32;
+//	int CENTRE_X = 160;
+//	int CENTRE_Y = 90;
+
+
+	// Image size information for Zedboard 
+	int IM_WIDTH = 320;
+	int IM_HEIGHT = 240;
+	
+// Tracking window parameters	
+	int RECT_WIDTH = 32;	
+	int RECT_HEIGHT = 32;
+	int CENTRE_X = 284;
+	int CENTRE_Y = 120;
+	//int CENTRE_X = 159;
+	//int CENTRE_Y = 76;
+
+
+	
+	int HALF_X = RECT_WIDTH/2;
+	int HALF_Y = RECT_HEIGHT/2;
+	
+	int X_SIZE = 2*HALF_X + 1;
+	int Y_SIZE = 2*HALF_Y + 1;
+	
+// Color model parameters		
+	int BPC = 16;                //bins per colour
+	int BPC_SHIFT = 4; // 2^4 = 16
+	int NUMBINS = BPC*BPC*BPC;   //total number of bins
+	
+	int BINSIZE = 16;            //size of each bin MUST BE NUMBINS/256
+	int BINSIZE_SHIFT = 4; // 2^4 = 16
+	
+// Control signal
+    bool START_SIGNAL = true;
+    int(size=16) K_ARRAY[X_SIZE][Y_SIZE] = [[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -144, -36, 0, -36, -144, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], 
+											[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -18, 390, 726, 1027, 1207, 1315, 1351, 1315, 1207, 1027, 726, 390, -18, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+											[0, 0, 0, 0, 0, 0, 0, 0, -69, 582, 1062, 1470, 1806, 2107, 2287, 2395, 2431, 2395, 2287, 2107, 1806, 1470, 1062, 582, -69, 0, 0, 0, 0, 0, 0, 0, 0],
+											[0, 0, 0, 0, 0, 0, 0, 303, 939, 1590, 2070, 2478, 2814, 3115, 3295, 3403, 3439, 3403, 3295, 3115, 2814, 2478, 2070, 1590, 939, 303, 0, 0, 0, 0, 0, 0, 0], 
+											[0, 0, 0, 0, 0, 0, 531, 1239, 1875, 2526, 3006, 3414, 3750, 4051, 4231, 4339, 4375, 4339, 4231, 4051, 3750, 3414, 3006, 2526, 1875, 1239, 531, 0, 0, 0, 0, 0, 0], 
+											[0, 0, 0, 0, 0, 752, 1532, 2240, 2876, 3527, 4007, 4415, 4751, 5052, 5232, 5340, 5376, 5340, 5232, 5052, 4751, 4415, 4007, 3527, 2876, 2240, 1532, 752, 0, 0, 0, 0, 0], 
+											[0, 0, 0, 0, 531, 1532, 2312, 3020, 3656, 4307, 4787, 5195, 5531, 5832, 6012, 6120, 6156, 6120, 6012, 5832, 5531, 5195, 4787, 4307, 3656, 3020, 2312, 1532, 531, 0, 0, 0, 0], 
+											[0, 0, 0, 303, 1239, 2240, 3020, 3728, 4364, 5015, 5495, 5903, 6239, 6540, 6720, 6828, 6864, 6828, 6720, 6540, 6239, 5903, 5495, 5015, 4364, 3728, 3020, 2240, 1239, 303, 0, 0, 0], 
+											[0, 0, -69, 939, 1875, 2876, 3656, 4364, 5000, 5651, 6131, 6539, 6875, 7176, 7356, 7464, 7500, 7464, 7356, 7176, 6875, 6539, 6131, 5651, 5000, 4364, 3656, 2876, 1875, 939, -69, 0, 0], 
+											[0, 0, 582, 1590, 2526, 3527, 4307, 5015, 5651, 6302, 6782, 7190, 7526, 7827, 8007, 8115, 8151, 8115, 8007, 7827, 7526, 7190, 6782, 6302, 5651, 5015, 4307, 3527, 2526, 1590, 582, 0, 0], 
+											[0, -18, 1062, 2070, 3006, 4007, 4787, 5495, 6131, 6782, 7262, 7670, 8006, 8307, 8487, 8595, 8631, 8595, 8487, 8307, 8006, 7670, 7262, 6782, 6131, 5495, 4787, 4007, 3006, 2070, 1062, -18, 0], 
+											[0, 390, 1470, 2478, 3414, 4415, 5195, 5903, 6539, 7190, 7670, 8078, 8414, 8715, 8895, 9003, 9039, 9003, 8895, 8715, 8414, 8078, 7670, 7190, 6539, 5903, 5195, 4415, 3414, 2478, 1470, 390, 0], 
+											[0, 726, 1806, 2814, 3750, 4751, 5531, 6239, 6875, 7526, 8006, 8414, 8750, 9051, 9231, 9339, 9375, 9339, 9231, 9051, 8750, 8414, 8006, 7526, 6875, 6239, 5531, 4751, 3750, 2814, 1806, 726, 0], 
+											[0, 1027, 2107, 3115, 4051, 5052, 5832, 6540, 7176, 7827, 8307, 8715, 9051, 9352, 9532, 9640, 9676, 9640, 9532, 9352, 9051, 8715, 8307, 7827, 7176, 6540, 5832, 5052, 4051, 3115, 2107, 1027, 0], 
+											[-144, 1207, 2287, 3295, 4231, 5232, 6012, 6720, 7356, 8007, 8487, 8895, 9231, 9532, 9712, 9820, 9856, 9820, 9712, 9532, 9231, 8895, 8487, 8007, 7356, 6720, 6012, 5232, 4231, 3295, 2287, 1207, -144], 
+											[-36, 1315, 2395, 3403, 4339, 5340, 6120, 6828, 7464, 8115, 8595, 9003, 9339, 9640, 9820, 9928, 9964, 9928, 9820, 9640, 9339, 9003, 8595, 8115, 7464, 6828, 6120, 5340, 4339, 3403, 2395, 1315, -36], 
+											[0, 1351, 2431, 3439, 4375, 5376, 6156, 6864, 7500, 8151, 8631, 9039, 9375, 9676, 9856, 9964, 10000, 9964, 9856, 9676, 9375, 9039, 8631, 8151, 7500, 6864, 6156, 5376, 4375, 3439, 2431, 1351, 0], 
+											[-36, 1315, 2395, 3403, 4339, 5340, 6120, 6828, 7464, 8115, 8595, 9003, 9339, 9640, 9820, 9928, 9964, 9928, 9820, 9640, 9339, 9003, 8595, 8115, 7464, 6828, 6120, 5340, 4339, 3403, 2395, 1315, -36], 
+											[-144, 1207, 2287, 3295, 4231, 5232, 6012, 6720, 7356, 8007, 8487, 8895, 9231, 9532, 9712, 9820, 9856, 9820, 9712, 9532, 9231, 8895, 8487, 8007, 7356, 6720, 6012, 5232, 4231, 3295, 2287, 1207, -144], 
+											[0, 1027, 2107, 3115, 4051, 5052, 5832, 6540, 7176, 7827, 8307, 8715, 9051, 9352, 9532, 9640, 9676, 9640, 9532, 9352, 9051, 8715, 8307, 7827, 7176, 6540, 5832, 5052, 4051, 3115, 2107, 1027, 0], 
+											[0, 726, 1806, 2814, 3750, 4751, 5531, 6239, 6875, 7526, 8006, 8414, 8750, 9051, 9231, 9339, 9375, 9339, 9231, 9051, 8750, 8414, 8006, 7526, 6875, 6239, 5531, 4751, 3750, 2814, 1806, 726, 0], 
+											[0, 390, 1470, 2478, 3414, 4415, 5195, 5903, 6539, 7190, 7670, 8078, 8414, 8715, 8895, 9003, 9039, 9003, 8895, 8715, 8414, 8078, 7670, 7190, 6539, 5903, 5195, 4415, 3414, 2478, 1470, 390, 0], 
+											[0, -18, 1062, 2070, 3006, 4007, 4787, 5495, 6131, 6782, 7262, 7670, 8006, 8307, 8487, 8595, 8631, 8595, 8487, 8307, 8006, 7670, 7262, 6782, 6131, 5495, 4787, 4007, 3006, 2070, 1062, -18, 0], 
+											[0, 0, 582, 1590, 2526, 3527, 4307, 5015, 5651, 6302, 6782, 7190, 7526, 7827, 8007, 8115, 8151, 8115, 8007, 7827, 7526, 7190, 6782, 6302, 5651, 5015, 4307, 3527, 2526, 1590, 582, 0, 0], 
+											[0, 0, -69, 939, 1875, 2876, 3656, 4364, 5000, 5651, 6131, 6539, 6875, 7176, 7356, 7464, 7500, 7464, 7356, 7176, 6875, 6539, 6131, 5651, 5000, 4364, 3656, 2876, 1875, 939, -69, 0, 0], 
+											[0, 0, 0, 303, 1239, 2240, 3020, 3728, 4364, 5015, 5495, 5903, 6239, 6540, 6720, 6828, 6864, 6828, 6720, 6540, 6239, 5903, 5495, 5015, 4364, 3728, 3020, 2240, 1239, 303, 0, 0, 0], 
+											[0, 0, 0, 0, 531, 1532, 2312, 3020, 3656, 4307, 4787, 5195, 5531, 5832, 6012, 6120, 6156, 6120, 6012, 5832, 5531, 5195, 4787, 4307, 3656, 3020, 2312, 1532, 531, 0, 0, 0, 0], 
+											[0, 0, 0, 0, 0, 752, 1532, 2240, 2876, 3527, 4007, 4415, 4751, 5052, 5232, 5340, 5376, 5340, 5232, 5052, 4751, 4415, 4007, 3527, 2876, 2240, 1532, 752, 0, 0, 0, 0, 0], 
+											[0, 0, 0, 0, 0, 0, 531, 1239, 1875, 2526, 3006, 3414, 3750, 4051, 4231, 4339, 4375, 4339, 4231, 4051, 3750, 3414, 3006, 2526, 1875, 1239, 531, 0, 0, 0, 0, 0, 0], 
+											[0, 0, 0, 0, 0, 0, 0, 303, 939, 1590, 2070, 2478, 2814, 3115, 3295, 3403, 3439, 3403, 3295, 3115, 2814, 2478, 2070, 1590, 939, 303, 0, 0, 0, 0, 0, 0, 0], 
+											[0, 0, 0, 0, 0, 0, 0, 0, -69, 582, 1062, 1470, 1806, 2107, 2287, 2395, 2431, 2395, 2287, 2107, 1806, 1470, 1062, 582, -69, 0, 0, 0, 0, 0, 0, 0, 0], 
+											[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -18, 390, 726, 1027, 1207, 1315, 1351, 1315, 1207, 1027, 726, 390, -18, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], 
+											[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -144, -36, 0, -36, -144, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]];
+
+
+
+    bool K_DER[X_SIZE][Y_SIZE] =  [ [false, false, false, false, false, false, false, false, false, false, false, false, false, false, true, true, true, true, true, false, false, false, false, false, false, false, false, false, false, false, false, false, false], 
+								    [false, false, false, false, false, false, false, false, false, false, true, true, true, true, true, true, true, true, true, true, true, true, true, false, false, false, false, false, false, false, false, false, false],
+									[false, false, false, false, false, false, false, false, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, false, false, false, false, false, false, false, false], 
+									[false, false, false, false, false, false, false, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, false, false, false, false, false, false, false], 
+									[false, false, false, false, false, false, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, false, false, false, false, false, false], 
+									[false, false, false, false, false, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, false, false, false, false, false], 
+									[false, false, false, false, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, false, false, false, false], 
+									[false, false, false, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, false, false, false], 
+									[false, false, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, false, false], 
+									[false, false, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, false, false], 
+									[false, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, false], 
+									[false, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, false], 
+									[false, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, false], 
+									[false, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, false], 
+									[true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true], 
+									[true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true], 
+									[true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true], 
+									[true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true], 
+									[true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true],
+									[false, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, false], 
+									[false, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, false], 
+									[false, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, false], 
+									[false, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, false], 
+									[false, false, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, false, false], 
+									[false, false, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, false, false], 
+									[false, false, false, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, false, false, false], 
+									[false, false, false, false, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, false, false, false, false], 
+									[false, false, false, false, false, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, false, false, false, false, false], 
+									[false, false, false, false, false, false, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, false, false, false, false, false, false], 
+									[false, false, false, false, false, false, false, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, false, false, false, false, false, false, false], 
+									[false, false, false, false, false, false, false, false, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, false, false, false, false, false, false, false, false], 
+									[false, false, false, false, false, false, false, false, false, false, true, true, true, true, true, true, true, true, true, true, true, true, true, false, false, false, false, false, false, false, false, false, false], 
+									[false, false, false, false, false, false, false, false, false, false, false, false, false, false, true, true, true, true, true, false, false, false, false, false, false, false, false, false, false, false, false, false, false]];
+
+    
+//    int(size=16) K_ARRAY[X_SIZE][Y_SIZE] = [[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -169, -64, -16, 0, -16, -64, -169, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], 
+//											[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 51, 379, 744, 1000, 1224, 1459, 1611, 1731, 1836, 1884, 1900, 1884, 1836, 1731, 1611, 1459, 1224, 1000, 744, 379, 51, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], 
+//											[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 464, 896, 1391, 1751, 2079, 2444, 2700, 2924, 3159, 3311, 3431, 3536, 3584, 3600, 3584, 3536, 3431, 3311, 3159, 2924, 2700, 2444, 2079, 1751, 1391, 896, 464, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], 
+//											[0, 0, 0, 0, 0, 0, 0, 339, 875, 1500, 1964, 2396, 2891, 3251, 3579, 3944, 4200, 4424, 4659, 4811, 4931, 5036, 5084, 5100, 5084, 5036, 4931, 4811, 4659, 4424, 4200, 3944, 3579, 3251, 2891, 2396, 1964, 1500, 875, 339, 0, 0, 0, 0, 0, 0, 0], 
+//											[0, 0, 0, 0, 0, 316, 1071, 1639, 2175, 2800, 3264, 3696, 4191, 4551, 4879, 5244, 5500, 5724, 5959, 6111, 6231, 6336, 6384, 6400, 6384, 6336, 6231, 6111, 5959, 5724, 5500, 5244, 4879, 4551, 4191, 3696, 3264, 2800, 2175, 1639, 1071, 316, 0, 0, 0, 0, 0], 
+//											[0, 0, 0, 104, 776, 1416, 2171, 2739, 3275, 3900, 4364, 4796, 5291, 5651, 5979, 6344, 6600, 6824, 7059, 7211, 7331, 7436, 7484, 7500, 7484, 7436, 7331, 7211, 7059, 6824, 6600, 6344, 5979, 5651, 5291, 4796, 4364, 3900, 3275, 2739, 2171, 1416, 776, 104, 0, 0, 0], 
+//											[0, 0, 119, 1004, 1676, 2316, 3071, 3639, 4175, 4800, 5264, 5696, 6191, 6551, 6879, 7244, 7500, 7724, 7959, 8111, 8231, 8336, 8384, 8400, 8384, 8336, 8231, 8111, 7959, 7724, 7500, 7244, 6879, 6551, 6191, 5696, 5264, 4800, 4175, 3639, 3071, 2316, 1676, 1004, 119, 0, 0], 
+//											[0, 75, 819, 1704, 2376, 3016, 3771, 4339, 4875, 5500, 5964, 6396, 6891, 7251, 7579, 7944, 8200, 8424, 8659, 8811, 8931, 9036, 9084, 9100, 9084, 9036, 8931, 8811, 8659, 8424, 8200, 7944, 7579, 7251, 6891, 6396, 5964, 5500, 4875, 4339, 3771, 3016, 2376, 1704, 819, 75, 0], 
+//											[0, 575, 1319, 2204, 2876, 3516, 4271, 4839, 5375, 6000, 6464, 6896, 7391, 7751, 8079, 8444, 8700, 8924, 9159, 9311, 9431, 9536, 9584, 9600, 9584, 9536, 9431, 9311, 9159, 8924, 8700, 8444, 8079, 7751, 7391, 6896, 6464, 6000, 5375, 4839, 4271, 3516, 2876, 2204, 1319, 575, 0], 
+//											[-100, 875, 1619, 2504, 3176, 3816, 4571, 5139, 5675, 6300, 6764, 7196, 7691, 8051, 8379, 8744, 9000, 9224, 9459, 9611, 9731, 9836, 9884, 9900, 9884, 9836, 9731, 9611, 9459, 9224, 9000, 8744, 8379, 8051, 7691, 7196, 6764, 6300, 5675, 5139, 4571, 3816, 3176, 2504, 1619, 875, -100], 
+//											[0, 975, 1719, 2604, 3276, 3916, 4671, 5239, 5775, 6400, 6864, 7296, 7791, 8151, 8479, 8844, 9100, 9324, 9559, 9711, 9831, 9936, 9984, 10000, 9984, 9936, 9831, 9711, 9559, 9324, 9100, 8844, 8479, 8151, 7791, 7296, 6864, 6400, 5775, 5239, 4671, 3916, 3276, 2604, 1719, 975, 0], 
+//											[-100, 875, 1619, 2504, 3176, 3816, 4571, 5139, 5675, 6300, 6764, 7196, 7691, 8051, 8379, 8744, 9000, 9224, 9459, 9611, 9731, 9836, 9884, 9900, 9884, 9836, 9731, 9611, 9459, 9224, 9000, 8744, 8379, 8051, 7691, 7196, 6764, 6300, 5675, 5139, 4571, 3816, 3176, 2504, 1619, 875, -100], 
+//											[0, 575, 1319, 2204, 2876, 3516, 4271, 4839, 5375, 6000, 6464, 6896, 7391, 7751, 8079, 8444, 8700, 8924, 9159, 9311, 9431, 9536, 9584, 9600, 9584, 9536, 9431, 9311, 9159, 8924, 8700, 8444, 8079, 7751, 7391, 6896, 6464, 6000, 5375, 4839, 4271, 3516, 2876, 2204, 1319, 575, 0], 
+//											[0, 75, 819, 1704, 2376, 3016, 3771, 4339, 4875, 5500, 5964, 6396, 6891, 7251, 7579, 7944, 8200, 8424, 8659, 8811, 8931, 9036, 9084, 9100, 9084, 9036, 8931, 8811, 8659, 8424, 8200, 7944, 7579, 7251, 6891, 6396, 5964, 5500, 4875, 4339, 3771, 3016, 2376, 1704, 819, 75, 0], 
+//											[0, 0, 119, 1004, 1676, 2316, 3071, 3639, 4175, 4800, 5264, 5696, 6191, 6551, 6879, 7244, 7500, 7724, 7959, 8111, 8231, 8336, 8384, 8400, 8384, 8336, 8231, 8111, 7959, 7724, 7500, 7244, 6879, 6551, 6191, 5696, 5264, 4800, 4175, 3639, 3071, 2316, 1676, 1004, 119, 0, 0], 
+//											[0, 0, 0, 104, 776, 1416, 2171, 2739, 3275, 3900, 4364, 4796, 5291, 5651, 5979, 6344, 6600, 6824, 7059, 7211, 7331, 7436, 7484, 7500, 7484, 7436, 7331, 7211, 7059, 6824, 6600, 6344, 5979, 5651, 5291, 4796, 4364, 3900, 3275, 2739, 2171, 1416, 776, 104, 0, 0, 0], 
+//											[0, 0, 0, 0, 0, 316, 1071, 1639, 2175, 2800, 3264, 3696, 4191, 4551, 4879, 5244, 5500, 5724, 5959, 6111, 6231, 6336, 6384, 6400, 6384, 6336, 6231, 6111, 5959, 5724, 5500, 5244, 4879, 4551, 4191, 3696, 3264, 2800, 2175, 1639, 1071, 316, 0, 0, 0, 0, 0], 
+//											[0, 0, 0, 0, 0, 0, 0, 339, 875, 1500, 1964, 2396, 2891, 3251, 3579, 3944, 4200, 4424, 4659, 4811, 4931, 5036, 5084, 5100, 5084, 5036, 4931, 4811, 4659, 4424, 4200, 3944, 3579, 3251, 2891, 2396, 1964, 1500, 875, 339, 0, 0, 0, 0, 0, 0, 0], 
+//											[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 464, 896, 1391, 1751, 2079, 2444, 2700, 2924, 3159, 3311, 3431, 3536, 3584, 3600, 3584, 3536, 3431, 3311, 3159, 2924, 2700, 2444, 2079, 1751, 1391, 896, 464, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], 
+//											[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 51, 379, 744, 1000, 1224, 1459, 1611, 1731, 1836, 1884, 1900, 1884, 1836, 1731, 1611, 1459, 1224, 1000, 744, 379, 51, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], 
+//											[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -169, -64, -16, 0, -16, -64, -169, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]];
+//	
+//	bool K_DER[X_SIZE][Y_SIZE] = [[	false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, true, true, true, true, true, true, true, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false], 
+//								  [	false, false, false, false, false, false, false, false, false, false, false, false, false, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, false, false, false, false, false, false, false, false, false, false, false, false, false], 
+//								  [	false, false, false, false, false, false, false, false, false, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, false, false, false, false, false, false, false, false, false], 
+//									[false, false, false, false, false, false, false, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, false, false, false, false, false, false, false],
+//									[false, false, false, false, false, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, false, false, false, false, false],
+//									[false, false, false, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, false, false, false],
+//									[false, false, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, false, false],
+//									[false, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, false],
+//									[false, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, false],
+//									[true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true],
+//									[true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true],
+//									[true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true],
+//									[false, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, false],
+//									[false, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, false],
+//									[false, false, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, false, false],
+//									[false, false, false, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, false, false, false],
+//									[false, false, false, false, false, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, false, false, false, false, false],
+//									[false, false, false, false, false, false, false, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, false, false, false, false, false, false, false],
+//									[false, false, false, false, false, false, false, false, false, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, false, false, false, false, false, false, false, false, false],
+//									[false, false, false, false, false, false, false, false, false, false, false, false, false, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, false, false, false, false, false, false, false, false, false, false, false, false, false],
+//									[false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, true, true, true, true, true, true, true, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false]];
+
+
+end

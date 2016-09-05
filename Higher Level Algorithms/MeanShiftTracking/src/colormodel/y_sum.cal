@@ -1,0 +1,42 @@
+package colormodel;
+import std.header.Parameter.*;
+
+actor y_sum() int curPixelWeight, bool reset, uint Y ==> int ySum:
+	
+	int y_sum_value := 0;
+	bool reset_signal;
+	int y;
+	int half_y := HALF_Y;	
+	
+	calYsum: action curPixelWeight:[cur_wght_val], reset:[reset_val], Y:[y_val] ==> 	
+	do	
+		y := y_val;
+		y_sum_value := y_sum_value + (y-half_y)*cur_wght_val;
+		
+		reset_signal := reset_val;								
+	end		
+	
+	
+	checkResetSig: action ==>
+	guard reset_signal = true
+	do
+		reset_signal := false;
+	end
+		
+	send: action ==> ySum:[sum]			
+	var int sum
+	do
+		sum := y_sum_value;
+		y_sum_value := 0;
+	end
+	
+	schedule fsm s0 :	
+   		s0 (calYsum ) --> s0;
+   		s0 (checkResetSig) --> s1;
+   		s1 (send) --> s0; 					
+	end
+	
+	priority		
+		checkResetSig > calYsum;		
+	end
+end

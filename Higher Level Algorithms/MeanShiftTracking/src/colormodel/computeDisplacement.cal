@@ -1,0 +1,138 @@
+/*
+ * Copyright (c) 2014, Project: Rathlin, Heriot-Watt University, Edinburgh, UK
+ * All rights reserved.
+ * 
+ * Redistribution and use in source and binary forms, with or without
+ * modification, are permitted provided that the following conditions are met:
+ * 
+ *   * Redistributions of source code must retain the above copyright notice,
+ *     this list of conditions and the following disclaimer.
+ *   * Redistributions in binary form must reproduce the above copyright notice,
+ *     this list of conditions and the following disclaimer in the documentation
+ *     and/or other materials provided with the distribution.
+ *   * Neither the name of the Heriot-Watt University nor the names of its
+ *     contributors may be used to endorse or promote products derived from this
+ *     software without specific prior written permission.
+ * 
+ * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
+ * AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+ * IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
+ * ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT OWNER OR CONTRIBUTORS BE
+ * LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
+ * CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF
+ * SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS
+ * INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT,
+ * STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY
+ * WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
+ * SUCH DAMAGE.
+ */
+  
+// Author: Deepayan Bhowmik <d.bhowmik@hw.ac.uk> 
+ 				 
+
+package colormodel;
+import std.header.Parameter.*;
+import std.util.Math.*;
+
+actor computeDisplacement() int(size=16) weights ==> int dx, int dy:
+	int count_x := 0;
+	int count_y := 0;
+	
+	/* Get the weights & the kernel values*/
+	int(size=16) weightBuffer[X_SIZE][Y_SIZE];
+
+	getWeightsArray: action weights:[weight_val] ==>
+	do
+		if(K_DER[count_x][count_y]) then
+    				weightBuffer[count_x][count_y] := weight_val;
+    	else
+    				weightBuffer[count_x][count_y] := 0;
+    	end
+    			
+    			
+    			
+		
+		count_y := count_y + 1;
+		
+		if(count_y = Y_SIZE) then
+			count_x := count_x + 1;
+			count_y := 0;
+		end								
+	end
+		    
+    doneArrayCount: action ==>
+    guard count_x = X_SIZE
+    do	
+    	count_y := 0;
+    	count_x := 0;      		    	     	    	
+    end
+
+
+	int dx_val;
+	int dy_val;
+	compute_displacement: action ==> dx:[dx_val], dy:[dy_val]
+	var int weight_sum,
+		int x_sum,
+		int y_sum 	
+    do	    	   
+    	weight_sum := 0;
+    	x_sum := 0;
+    	y_sum := 0;
+    	 	   
+    	foreach int x in -HALF_X .. (HALF_X-1) do
+    		foreach int y in -HALF_Y .. (HALF_Y-1) do
+    		weight_sum := weight_sum + weightBuffer[x+HALF_X+1][y+HALF_Y+1];
+    			
+    		x_sum := x_sum + x*weightBuffer[x+HALF_X+1][y+HALF_Y+1];
+    		y_sum := y_sum + y*weightBuffer[x+HALF_X+1][y+HALF_Y+1];		     			
+    		end
+    	end    	    	    
+    	    	
+    	/* dx */  
+    	Div(x_sum, weight_sum);
+    	dx_val := Div_result;	 	    	   
+    	
+    	/* dy */
+    	Div(y_sum, weight_sum);
+    	dy_val := Div_result;
+    end
+
+	procedure Div(int num, int den)
+    var int quotient := 0,
+        int sign_num := 1,
+        int sign_den := 1
+    begin
+   		if(num<0)then sign_num := -1; end
+    	if(den<0)then sign_den := -1; end
+   
+    	num := abs(num);
+    	den := abs(den);
+    if(den != 0) then
+    	while (num >= den) 
+    	do
+        	num  := num - den; // (if numerator is not equal or less than the divisor)
+        	quotient := quotient + 1;
+    	end
+    else
+   		quotient := num;
+   	end	
+    
+    if((sign_num + sign_den)=0) then
+    	Div_result := -quotient;
+    else
+    	Div_result := quotient;
+    end
+  
+   end 
+   int Div_result;
+   
+	schedule fsm s1 :	
+		s1 (getWeightsArray ) --> s1;
+   		s1 (doneArrayCount) --> s2;
+   		s2 (compute_displacement) --> s1; 					
+	end
+	
+	priority		
+		doneArrayCount > getWeightsArray;		
+	end
+end

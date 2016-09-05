@@ -1,0 +1,81 @@
+/*
+ * Copyright (c) 2014, Project: Rathlin, Heriot-Watt University, Edinburgh, UK
+ * All rights reserved.
+  */
+  
+// Author: Deepayan Bhowmik <d.bhowmik@hw.ac.uk> 
+ 				 
+
+package colormodel;
+import std.header.Parameter.*;
+import std.util.Math.*;
+
+actor computeDisplacement2() int(size=16) weights ==> int weightSum, int xSum, int ySum:
+	int count_x := 0;
+	int count_y := 0;
+	
+	/* Get the weights & the kernel values*/
+	int(size=16) weightBuffer[X_SIZE][Y_SIZE];
+
+	getWeightsArray: action weights:[weight_val] ==>
+	do		
+		if(K_DER[count_x][count_y]) then
+    				weightBuffer[count_x][count_y] := weight_val;
+    	else
+    				weightBuffer[count_x][count_y] := 0;
+    	end
+    
+		count_y := count_y + 1;
+		
+		if(count_y = Y_SIZE) then
+			count_x := count_x + 1;
+			count_y := 0;
+		end								
+	end
+	
+    doneArrayCount: action ==>
+    guard count_x = X_SIZE
+    do	
+    	count_y := 0;
+    	count_x := 0;      		    	     	    	
+    end
+
+	compute_displacement: action ==> weightSum:[weight_val], xSum:[x_val], ySum:[y_val]
+	var int weight_sum,
+		int x_sum,
+		int y_sum,
+		int weight_val,
+		int x_val,
+		int y_val 	
+    do	    	   
+    	weight_sum := 0;
+    	x_sum := 0;
+    	y_sum := 0;
+    	 	   
+    	foreach int x in -HALF_X .. (HALF_X-1) do
+    		foreach int y in -HALF_Y .. (HALF_Y-1) do    		
+    		
+    		weight_sum := weight_sum + weightBuffer[x+HALF_X+1][y+HALF_Y+1];
+    			
+    		x_sum := x_sum + x*weightBuffer[x+HALF_X+1][y+HALF_Y+1];
+    		y_sum := y_sum + y*weightBuffer[x+HALF_X+1][y+HALF_Y+1];		     			
+    		end
+    	end    	    	    
+    	    	
+    	weight_val := weight_sum;
+    	x_val := x_sum;
+    	y_val := y_sum;
+    end
+
+	
+   
+	schedule fsm s1 :	
+   		s1 (getWeightsArray ) --> s1;
+   		s1 (doneArrayCount) --> s2;
+   		s2 (compute_displacement) --> s1; 					
+	end
+	
+	priority		
+		doneArrayCount > getWeightsArray;		
+	end
+end

@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<XDF name="Input">
+    <Port kind="Input" name="input">
+        <Type name="uint">
+            <Entry kind="Expr" name="size">
+                <Expr kind="Literal" literal-kind="Integer" value="8"/>
+            </Entry>
+        </Type>
+    </Port>
+    <Port kind="Output" name="R">
+        <Type name="uint">
+            <Entry kind="Expr" name="size">
+                <Expr kind="Literal" literal-kind="Integer" value="8"/>
+            </Entry>
+        </Type>
+    </Port>
+    <Port kind="Output" name="G">
+        <Type name="uint">
+            <Entry kind="Expr" name="size">
+                <Expr kind="Literal" literal-kind="Integer" value="8"/>
+            </Entry>
+        </Type>
+    </Port>
+    <Port kind="Output" name="B">
+        <Type name="uint">
+            <Entry kind="Expr" name="size">
+                <Expr kind="Literal" literal-kind="Integer" value="8"/>
+            </Entry>
+        </Type>
+    </Port>
+    <Instance id="stream2RGB">
+        <Class name="std.stdio.StreamToRGB"/>
+    </Instance>
+    <Connection dst="stream2RGB" dst-port="stream" src="" src-port="input"/>
+    <Connection dst="" dst-port="R" src="stream2RGB" src-port="R"/>
+    <Connection dst="" dst-port="G" src="stream2RGB" src-port="G"/>
+    <Connection dst="" dst-port="B" src="stream2RGB" src-port="B"/>
+</XDF>

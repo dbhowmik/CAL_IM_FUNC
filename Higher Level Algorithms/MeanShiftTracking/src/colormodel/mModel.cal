@@ -1,0 +1,119 @@
+/*
+ * Copyright (c) 2014, Project: Rathlin, Heriot-Watt University, Edinburgh, UK
+ * All rights reserved.
+ * 
+ */
+  
+// Author: Deepayan Bhowmik <d.bhowmik@hw.ac.uk> 
+ 				 
+
+package colormodel;
+import std.header.Parameter.*;
+import std.util.Math.*;
+
+actor mModel() int bin, bool cntSig
+					==> int Qu, int Pu, int bin_o:
+
+    /* Variable declaration */	
+	int count_x := 0;
+	int count_y := 0;
+	
+    int m_model[NUMBINS];
+	int total := 0;
+	bool frame_control := false;	
+	bool control_signal := false;
+    
+    checkControlSig: action cntSig:[signal]==>
+	do
+		control_signal := signal;							 	
+	end
+	
+	updateModel: action bin:[binVal]==> bin_o:[OutVal]
+	var int OutVal
+	do				
+		if(frame_control) then
+			OutVal := binVal;
+		end
+		
+		m_model[binVal] := m_model[binVal] + K_ARRAY[count_x][count_y];
+		total := total + K_ARRAY[count_x][count_y];
+		
+		count_y := count_y + 1;		
+		if(count_y = Y_SIZE) then
+			count_y := 0;
+			count_x := count_x + 1;
+		end			      	            		            		      		
+	end 
+	
+	doneCount_bin: action ==> 
+    guard count_x = X_SIZE
+    do
+    	count_x := 0;
+    	frame_control := true;    	       	    	
+    end
+	
+	/* Send output */
+	int count := 0;
+	send_Qu: action ==> Qu:[model_val]
+	var int model_val	    
+	do	    	
+		 model_val := m_model[count] >> 2;
+		 m_model[count] := 0; 
+		 count := count + 1;
+		 		 										
+	end
+	
+	send_Pu: action ==> Pu:[model_val]
+	var int model_val		
+	do	
+	model_val := m_model[count] >> 2;
+		m_model[count] := 0;
+		count := count + 1;												
+	end
+	
+	doneCount_mModel: action ==> 
+	guard count = NUMBINS
+    do	
+    	count := 0;    
+    	total := 0; 	
+    end
+        
+    // Action to control states 
+    idle: action ==>
+    guard control_signal = false
+    do
+    	frame_control := false;    
+    end
+   
+    track: action ==>
+    guard control_signal = true
+    do 
+    end    
+     
+   
+   schedule fsm s0:	   		
+   		s0 (updateModel) --> s0;
+   		s0 (doneCount_bin ) --> s2;
+		
+		s2 (send_Qu ) --> s2;
+		s2 (doneCount_mModel) --> s3;
+		
+	//-- Finished initial Qu --//		
+		s3 (updateModel) --> s3;
+   		s3 (doneCount_bin ) --> s5;
+		
+		s5 (send_Pu ) --> s5;
+		s5 (doneCount_mModel) --> s6;
+		
+		s6 (checkControlSig) --> s7;		
+		s7 (idle) --> s0;
+		s7 (track) --> s3;			
+	end      
+	
+	priority		
+		doneCount_bin > updateModel;
+		doneCount_mModel > send_Qu;
+		doneCount_mModel > send_Pu;	
+		idle > track;		
+	end	
+end

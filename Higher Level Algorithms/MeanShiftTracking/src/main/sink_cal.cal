@@ -1,0 +1,17 @@
+/*
+ * Copyright (c) 2016, Project: Rathlin, Heriot-Watt University, Edinburgh, UK
+ * All rights reserved.
+ */
+  
+// Author: Deepayan Bhowmik <d.bhowmik@hw.ac.uk> 
+ 				 
+
+package main;
+
+import std.header.Parameter.*;
+
+actor sink_cal() int(size=16) x ==>:
+	send: action x:[val]==> 
+	do 		
+	end			
+end

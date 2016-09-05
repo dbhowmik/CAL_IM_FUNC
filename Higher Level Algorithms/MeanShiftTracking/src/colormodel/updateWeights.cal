@@ -1,0 +1,129 @@
+/*
+ * Copyright (c) 2014, Project: Rathlin, Heriot-Watt University, Edinburgh, UK
+ * All rights reserved.
+ */
+  
+// Author: Deepayan Bhowmik <d.bhowmik@hw.ac.uk> 
+ 				 
+
+package colormodel;
+import std.header.Parameter.*;
+import std.util.Math.*;
+
+actor updateWeights() int QuModel, int PuModel, int bin ==> int(size=16) weights://, bool db2:
+	int(size=16) R[NUMBINS];	
+	int count := 0;
+	int count_x := 0;
+	int count_y := 0;
+	
+	int Qu_model_buffer[NUMBINS];
+	
+	getColorModelQu: action QuModel:[value_Qu]==>	
+	do	
+		Qu_model_buffer[count] := value_Qu;
+					
+		count := count + 1;											  							
+	end		
+	
+	
+	getColorModelPu: action PuModel:[value_Pu]==>	
+	var int tmp
+	do	
+		if(value_Pu = 0) then
+    			R[count] := 0;
+    		else
+    			Div(Qu_model_buffer[count], value_Pu);
+    			tmp := Div_result;
+    			sqrt_cal(tmp);
+    			R[count] := sqrtValue;
+    		end    		    	
+				
+		count := count + 1;											  							
+	end		
+			
+	doneCount_mModel: action ==>
+	guard count = NUMBINS
+    do	 
+    	count := 0;
+    end
+    
+    getBinValue: action bin:[value] ==> weights:[weight_val]
+	var int(size=16) weight_val
+    do    	
+   		weight_val := R[value];
+	   	    	    			   
+    	count_y := count_y + 1;		
+		if(count_y = Y_SIZE) then
+			count_y := 0;
+			count_x := count_x + 1;
+		end													
+    end
+    
+    doneCount_bin: action ==> //db2:[true]
+    guard count_x = X_SIZE
+    do
+    	count_x := 0;
+    	count_y := 0;      	  	        
+    end
+ 
+   /* ********************************************************
+   * Algorithm uses 'Bakhshali approximation' for square root calculation
+   * ********************************************************/
+  	procedure sqrt_cal(int num)
+	  var
+	    int N := 0, //This is the sqrt of pSq
+	    int i := num,
+	    int j := 0          
+	  begin
+	  	while(j*j<=i) do
+			N := j;
+			j := j+1;     		
+     	end		 
+	     sqrtValue := N;      
+	  end
+	  int sqrtValue;   
+  	
+  		procedure Div(int num, int den)
+    var int quotient := 0,
+        int sign_num := 1,
+        int sign_den := 1
+    begin
+   		if(num<0)then sign_num := -1; end
+    	if(den<0)then sign_den := -1; end
+   
+    	num := abs(num);
+    	den := abs(den);
+    if(den != 0) then
+    	while (num >= den) 
+    	do
+        	num  := num - den; // (if numerator is not equal or less than the divisor)
+        	quotient := quotient + 1;
+    	end
+    else
+   		quotient := num;
+   	end	
+    
+    if((sign_num + sign_den)=0) then
+    	Div_result := -quotient;
+    else
+    	Div_result := quotient;
+    end
+  
+   end 
+   int Div_result;
+	schedule fsm s0 :	
+		s0 (getColorModelQu ) --> s0;
+   		s0 (doneCount_mModel ) --> s1;
+   		s1 (getColorModelPu ) --> s1;
+   		s1 (doneCount_mModel ) --> s2;
+   		s2 (getBinValue ) --> s2;
+   		s2 (doneCount_bin ) --> s1;	
+	end
+	
+	priority		
+		doneCount_mModel > getColorModelQu;
+		doneCount_mModel > getColorModelPu;	
+		doneCount_bin > getBinValue;
+	end
+	
+end

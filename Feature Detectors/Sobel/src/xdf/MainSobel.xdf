@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<XDF name="MainSobel">
+    <Port kind="Input" name="R">
+        <Type name="uint">
+            <Entry kind="Expr" name="size">
+                <Expr kind="Literal" literal-kind="Integer" value="8"/>
+            </Entry>
+        </Type>
+    </Port>
+    <Port kind="Input" name="G">
+        <Type name="uint">
+            <Entry kind="Expr" name="size">
+                <Expr kind="Literal" literal-kind="Integer" value="8"/>
+            </Entry>
+        </Type>
+    </Port>
+    <Port kind="Input" name="B">
+        <Type name="uint">
+            <Entry kind="Expr" name="size">
+                <Expr kind="Literal" literal-kind="Integer" value="8"/>
+            </Entry>
+        </Type>
+    </Port>
+    <Port kind="Output" name="out">
+        <Type name="uint">
+            <Entry kind="Expr" name="size">
+                <Expr kind="Literal" literal-kind="Integer" value="8"/>
+            </Entry>
+        </Type>
+    </Port>
+    <Instance id="Sobel_pipelined">
+        <Class name="cal.sobelEdge"/>
+    </Instance>
+    <Instance id="RGB2Y">
+        <Class name="std.stdio.RGBtoY"/>
+    </Instance>
+    <Instance id="gx_cal">
+        <Class name="cal.Gx"/>
+    </Instance>
+    <Instance id="gy_cal">
+        <Class name="cal.Gy"/>
+    </Instance>
+    <Instance id="grad_mag_cal">
+        <Class name="cal.GradMag"/>
+    </Instance>
+    <Connection dst="RGB2Y" dst-port="R" src="" src-port="R"/>
+    <Connection dst="Sobel_pipelined" dst-port="Y" src="RGB2Y" src-port="Y"/>
+    <Connection dst="RGB2Y" dst-port="B" src="" src-port="B"/>
+    <Connection dst="RGB2Y" dst-port="G" src="" src-port="G"/>
+    <Connection dst="gx_cal" dst-port="val_00" src="Sobel_pipelined" src-port="pix_00"/>
+    <Connection dst="gx_cal" dst-port="val_10" src="Sobel_pipelined" src-port="pix_10"/>
+    <Connection dst="gx_cal" dst-port="val_20" src="Sobel_pipelined" src-port="pix_20"/>
+    <Connection dst="gx_cal" dst-port="val_02" src="Sobel_pipelined" src-port="pix_02"/>
+    <Connection dst="gx_cal" dst-port="val_12" src="Sobel_pipelined" src-port="pix_12"/>
+    <Connection dst="gx_cal" dst-port="val_22" src="Sobel_pipelined" src-port="pix_22"/>
+    <Connection dst="gy_cal" dst-port="val_00" src="Sobel_pipelined" src-port="pix_00"/>
+    <Connection dst="grad_mag_cal" dst-port="gx" src="gx_cal" src-port="gx"/>
+    <Connection dst="gy_cal" dst-port="val_01" src="Sobel_pipelined" src-port="pix_01"/>
+    <Connection dst="gy_cal" dst-port="val_02" src="Sobel_pipelined" src-port="pix_02"/>
+    <Connection dst="gy_cal" dst-port="val_20" src="Sobel_pipelined" src-port="pix_20"/>
+    <Connection dst="gy_cal" dst-port="val_21" src="Sobel_pipelined" src-port="pix_21"/>
+    <Connection dst="gy_cal" dst-port="val_22" src="Sobel_pipelined" src-port="pix_22"/>
+    <Connection dst="grad_mag_cal" dst-port="gy" src="gy_cal" src-port="gx"/>
+</XDF>

@@ -1,0 +1,24 @@
+/*
+ * Copyright (c) 2016, Project: Rathlin, Heriot-Watt University, Edinburgh, UK
+ * All rights reserved.
+ * 
+ */
+  
+// Author: Deepayan Bhowmik <d.bhowmik@hw.ac.uk> 
+ 				 
+
+package cal;
+import std.header.Parameter.*;
+import cal.Functions.*;
+
+actor Gx() uint(size=8) val_00, uint(size=8) val_10, uint(size=8) val_20, 
+		   uint(size=8) val_02, uint(size=8) val_12, uint(size=8) val_22   
+					==> int gx:
+
+    gx_cal: action val_00:[pix_00],val_10:[pix_10],val_20:[pix_20],val_02:[pix_02],val_12:[pix_12],val_22:[pix_22]==> gx:[gx_out]
+    var int gx_out
+    do
+    	gx_out := xGradient(pix_00, pix_10, pix_20, pix_02, pix_12, pix_22);
+    end
+        
+end

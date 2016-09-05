@@ -1,0 +1,281 @@
+/*
+ * Copyright (c) 2014, Project: Rathlin, Heriot-Watt University, Edinburgh, UK
+ * All rights reserved.
+ * 
+ */
+  
+// Author: Deepayan Bhowmik <d.bhowmik@hw.ac.uk> 
+ 				 
+
+package colormodel;
+import std.header.Parameter.*;
+import std.util.Math.*;
+
+actor updateColormodel() uint(size=8) R, uint(size=8) G, uint(size=8) B, 
+					int init_X, int init_Y, bool cntSig,
+					int centre_x_i, int centre_y_i, bool loop_status  
+					==> int Qu, int Pu, int bin_o, bool db1:
+
+    /* Variable declaration */	
+	int count_x := 0;
+	int count_y := 0;
+		
+	/* Get RGB value in the buffer */
+	uint(size=8)  bufferR[IM_HEIGHT][IM_WIDTH];
+	uint(size=8)  bufferG[IM_HEIGHT][IM_WIDTH];
+	uint(size=8)  bufferB[IM_HEIGHT][IM_WIDTH];
+		
+	getValueRGB: action R:[BytesR], G:[BytesG], B:[BytesB] ==>		
+	do		
+		bufferR[count_x][count_y] := BytesR;
+		bufferG[count_x][count_y] := BytesG;
+		bufferB[count_x][count_y] := BytesB;
+		
+		count_y := count_y + 1;		
+
+		if(count_y = IM_WIDTH) then
+			count_y := 0;
+			count_x := count_x + 1;
+		end					
+		
+							
+	end
+		
+    doneCountIm: action ==> 
+	guard count_x = IM_HEIGHT
+	do
+		count_x := 0;		
+		count_y := 0;	
+	end			
+	
+    bool control_signal := false;
+    
+    checkControlSig: action cntSig:[signal]==>
+	do
+		control_signal := signal;							 	
+	end
+	
+	    
+    /* Get centre XY value of the rectangle and loop status */
+    int centre_x := 0;
+    int centre_y := 0;
+    bool while_loop_term_status;
+        
+    initialise: action init_X:[val_init_x], init_Y:[val_init_y]==>
+    guard control_signal = true
+	do
+		centre_x := val_init_x;
+		centre_y := val_init_y;		
+		while_loop_term_status := true;						
+	end
+    
+    getCentreXY_loop: action centre_x_i:[val_x], centre_y_i:[val_y], loop_status:[val_loop] ==>
+    do
+    	centre_x := val_x;
+    	centre_y := val_y;    	    	
+    	while_loop_term_status := val_loop;    	     	  	  	    	    	   
+    end
+    
+        
+    isLoopTrue: action ==>
+    do
+    	if(while_loop_term_status = false) then
+    		while_loop_term_status := true;
+    		count_x := IM_HEIGHT;
+    	end
+    end
+    
+	/*
+	 * Kernel derivation actor
+	 */
+	int(size=16) bin[X_SIZE][Y_SIZE]; 
+	int m_model[NUMBINS];
+	int total;
+	
+	updateModel: action ==>
+	var 
+		int iX,
+		int iY,
+		int x_index,
+		int y_index,
+		int model_index
+	do				
+		/* Clear model and bin values */				
+		
+		total := 0;
+		      			
+		foreach int x in -HALF_X .. HALF_X do
+			foreach int y in -HALF_Y .. HALF_Y do
+				iX := centre_x + x;
+                iY := centre_y + y;
+                
+                x_index := x+HALF_X;
+                y_index := y+HALF_Y;
+                                                
+                /* Find the bin */
+                findBin(bufferR[iY][iX], bufferG[iY][iX], bufferB[iY][iX]);                
+                bin[x_index][y_index] := binValue;
+                
+                
+               
+                /* Model values */
+             	model_index := bin[x_index][y_index];             	
+                m_model[model_index] := m_model[model_index] + K_ARRAY[x_index][y_index];//kArrayBuffer[x_index][y_index];
+                
+                total := total + K_ARRAY[x_index][y_index];// kArrayBuffer[x_index][y_index] ;
+                                                                                              								
+			end
+		end 
+	 	 	
+      	// Check out this value. This may be different for different input and window size. 
+      	// If the total is smaller then the decimal point precision must be smaller. 
+      	
+      	//total := total / 1000000; // Take precision upto 6 decimal; 
+      	Div(total,1000000);
+      	total := Div_result;
+      	            		            		      		
+	end 
+	
+	/* Send output */
+	int count := 0;
+	send_Qu: action ==> Qu:[model_val]
+	var int model_val	    
+	do	    	
+		 Div(m_model[count],total);	
+		model_val  := Div_result;
+		  m_model[count] := 0; 
+		count := count + 1;											
+	end
+	
+	send_Pu: action ==> Pu:[model_val]
+	var int model_val		
+	do	    		
+		Div(m_model[count],total);	
+		model_val  := Div_result;
+		m_model[count] := 0;
+		count := count + 1;											
+	end
+	
+	doneCount_mModel: action ==>
+	guard count = NUMBINS
+    do	
+    	count := 0;     	
+    end
+        
+    send_bin: action ==> bin_o:[bin_val]
+    var int bin_val    	
+    do    	
+    	bin_val := bin[count_x][count_y];	    	    	    	 	
+		count_y := count_y + 1;		
+		if(count_y = Y_SIZE) then
+			count_y := 0;
+			count_x := count_x + 1;
+		end									
+    end
+    
+    doneCount_bin: action ==> db1:[true]
+    guard count_x = X_SIZE
+    do
+    	count_x := 0;
+    	count_y := 0;       	    	
+    end
+	
+  /* ********************************************************
+   * Function: Find bin value
+   * ********************************************************/
+   procedure findBin(uint(size=8) R, uint(size=8) G, uint(size=8) B)
+   var
+   	 int r,
+   	 int g,
+   	 int b   	 
+   begin	
+     r := R >> BINSIZE_SHIFT;
+     g := G >> BINSIZE_SHIFT;
+     b := B >> BINSIZE_SHIFT;
+     
+     binValue := r + (g << BPC_SHIFT) + (b << (BPC_SHIFT+BPC_SHIFT));
+   end    
+   int binValue;	
+   
+   
+   procedure Div(int num, int den)
+    var int quotient := 0,
+        int sign_num := 1,
+        int sign_den := 1
+    begin
+   		if(num<0)then sign_num := -1; end
+    	if(den<0)then sign_den := -1; end
+   
+    	num := abs(num);
+    	den := abs(den);
+    if(den != 0) then
+    	while (num >= den) 
+    	do
+        	num  := num - den; // (if numerator is not equal or less than the divisor)
+        	quotient := quotient + 1;
+    	end
+    else
+   		quotient := num;
+   	end	
+    
+    if((sign_num + sign_den)=0) then
+    	Div_result := -quotient;
+    else
+    	Div_result := quotient;
+    end
+  
+   end 
+   int Div_result;
+   
+   
+   // Action to control states 
+   idle: action ==>
+   guard control_signal = false
+   do
+   end
+   
+   track: action ==>
+   guard control_signal = true
+   do 
+   end
+   
+   
+   schedule fsm init:	
+   		init (checkControlSig) --> init;	
+   		init (initialise ) --> s1;
+   		s1 (getValueRGB) --> s1;
+		s1 (doneCountIm ) --> s3;
+		
+		s3 (updateModel) --> s5;
+		
+		s5 (send_Qu ) --> s5;
+		s5 (doneCount_mModel) --> s7;
+	//-- Finish initial Qu collection and send it --//		
+		s6 (getCentreXY_loop ) --> s7;
+   		s7 (isLoopTrue) --> s8;
+   		 	
+		s8 (getValueRGB) --> s8;
+		s8 (doneCountIm ) --> s10;
+				
+		s10 (updateModel) --> s11;
+		
+		s11 (send_Pu ) --> s11;
+		s11 (doneCount_mModel) --> s12;
+				
+		s12 (send_bin ) --> s12;		
+		s12 (doneCount_bin ) --> s13;
+		
+		s13 (checkControlSig) --> s14;		
+		s14 (idle) --> init;
+		s14 (track) --> s6;		
+	end      
+	
+	priority		
+		initialise > checkControlSig;
+		doneCountIm > getValueRGB;
+		doneCount_mModel > send_Qu;
+		doneCount_mModel > send_Pu;
+		doneCount_bin > send_bin;
+		idle > track;
+	end	
+end

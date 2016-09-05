@@ -1,0 +1,11 @@
+package std.header;
+
+unit Parameter:
+//---------------------------------------------
+	// Image size information for Zedboard 
+	int IM_WIDTH = 512;
+	int IM_HEIGHT = 512;
+	
+	int(size=16) LOOKUP[2][5] = [[0, 36, 84, 173, 567],[10, 30, 50, 70, 89]];  
+	
+end

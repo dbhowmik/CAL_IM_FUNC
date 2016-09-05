@@ -1,0 +1,11 @@
+package colormodel;
+
+actor dx() int xSum, int weightSum==> uint DX:
+			
+	getValues: action xSum:[x_sum_val], weightSum:[weight_sum_val]==> DX:[dx_val]
+	var uint dx_val
+	do				
+    	dx_val := x_sum_val / weight_sum_val;
+	end
+end
+	

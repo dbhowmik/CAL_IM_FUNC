@@ -1,0 +1,141 @@
+/*
+ * Copyright (c) 2014, Project: Rathlin, Heriot-Watt University, Edinburgh, UK
+ * All rights reserved.
+ * 
+ */
+  
+// Author: Deepayan Bhowmik <d.bhowmik@hw.ac.uk> 
+ 				 
+
+package colormodel;
+import std.header.Parameter.*;
+import std.util.Math.*;
+
+actor mModel2() int bin
+					==> int Qu, int Pu, int bin_o, bool db1:
+
+    /* Variable declaration */	
+	int count_x := 0;
+	int count_y := 0;
+	
+    int m_model[NUMBINS];
+	int total := 0;
+	bool frame_control := false;
+	
+	updateModel: action bin:[binVal]==> bin_o:[OutVal]
+	var int OutVal
+	do				
+		if(frame_control) then
+			OutVal := binVal;
+		end
+		
+		m_model[binVal] := m_model[binVal] + K_ARRAY[count_x][count_y];
+		total := total + K_ARRAY[count_x][count_y];
+		
+		count_y := count_y + 1;		
+		if(count_y = Y_SIZE) then
+			count_y := 0;
+			count_x := count_x + 1;
+		end			      	            		            		      		
+	end 
+	
+	doneCount_bin: action ==> 
+    guard count_x = X_SIZE
+    do
+    	count_x := 0;
+    	frame_control := true;    	       	    	
+    end
+	
+//	normalise: action ==>
+//	do
+//		Div(total,1000000);
+//      	total := Div_result;
+//    end
+    
+	/* Send output */
+	int count := 0;
+	send_Qu: action ==> Qu:[model_val]
+	var int model_val	    
+	do	    	
+		 //Div(m_model[count],total);	
+		 //model_val  := Div_result;
+		 model_val := m_model[count] >> 2;
+		 m_model[count] := 0; 
+		 count := count + 1;
+		 		 										
+	end
+	
+	send_Pu: action ==> Pu:[model_val]
+	var int model_val		
+	do	    		
+		//Div(m_model[count],total);	
+		//model_val  := Div_result;
+		model_val := m_model[count] >> 2;
+		m_model[count] := 0;
+		count := count + 1;												
+	end
+	
+	doneCount_mModel: action ==> db1:[true]
+	guard count = NUMBINS
+    do	
+    	count := 0;    
+    	total := 0; 	
+    end
+        
+    
+//   procedure Div(int num, int den)
+//    var int quotient := 0,
+//        int sign_num := 1,
+//        int sign_den := 1
+//    begin
+//   		if(num<0)then sign_num := -1; end
+//    	if(den<0)then sign_den := -1; end
+//   
+//    	num := abs(num);
+//    	den := abs(den);
+//    if(den != 0) then
+//    	while (num >= den) 
+//    	do
+//        	num  := num - den; // (if numerator is not equal or less than the divisor)
+//        	quotient := quotient + 1;
+//    	end
+//    else
+//   		quotient := num;
+//   	end	
+//    
+//    if((sign_num + sign_den)=0) then
+//    	Div_result := -quotient;
+//    else
+//    	Div_result := quotient;
+//    end
+//  
+//   end 
+//   int Div_result;
+   
+     
+   
+   schedule fsm s0:	
+   		s0 (updateModel) --> s0;
+   		s0 (doneCount_bin ) --> s2;
+		
+		//s1 (normalise) --> s2;
+		
+		s2 (send_Qu ) --> s2;
+		s2 (doneCount_mModel) --> s3;
+		
+	//-- Finished initial Qu --//		
+		s3 (updateModel) --> s3;
+   		s3 (doneCount_bin ) --> s5;
+		
+		//s4 (normalise) --> s5;
+		
+		s5 (send_Pu ) --> s5;
+		s5 (doneCount_mModel) --> s3;
+	end      
+	
+	priority		
+		doneCount_bin > updateModel;
+		doneCount_mModel > send_Qu;
+		doneCount_mModel > send_Pu;			
+	end	
+end

@@ -1,0 +1,70 @@
+/*
+ * Copyright (c) 2016, Project: Rathlin, Heriot-Watt University, Edinburgh, UK
+ * All rights reserved.
+ * 
+ */
+  
+// Author: Deepayan Bhowmik <d.bhowmik@hw.ac.uk> 
+ 				 
+
+package cal;
+import std.header.Parameter.*;
+import cal.Functions.*;
+
+actor GradMag() int gx, int gy   
+					==> uint(size=8) mag_val, int(size=8) grad_val:
+					    
+    grad_mag_cal: action gx:[gx_val], gy:[gy_val] ==> mag_val:[mag], grad_val:[grad]
+    var uint(size=8) mag,
+    	int(size=8) grad,
+    	int tmp,
+    	int absTmp
+    do
+    	mag := clip_i32_u8(abs(gx_val) + abs(gy_val));
+    	
+    	Div(gy_val,gx_val);
+    	tmp := Div_result; 
+    	
+    	absTmp := abs(tmp);
+    	
+    	foreach int i in 0 .. 4 do 
+    		if(absTmp >= LOOKUP[0][i]) then
+    			grad:= LOOKUP[1][i];    			
+    		end    	
+    	end
+    	
+    	if(tmp<0) then
+    	  	grad := grad-90;
+    	end
+    end
+       
+       
+    procedure Div(int num, int den)
+    var int quotient := 0,
+        int sign_num := 1,
+        int sign_den := 1
+    begin
+   		if(num<0)then sign_num := -1; end
+    	if(den<0)then sign_den := -1; end
+   
+    	num := abs(num);
+    	den := abs(den);
+    	if(den != 0) then
+    		while (num >= den) 
+    		do
+        		num  := num - den; // (if numerator is not equal or less than the divisor)
+        		quotient := quotient + 1;
+    		end
+    	else
+   			quotient := num;
+   		end	
+    
+    	if((sign_num + sign_den)=0) then
+    		Div_result := -quotient;
+    	else
+    		Div_result := quotient;
+    	end
+  
+   	end 
+    int Div_result;    
+end

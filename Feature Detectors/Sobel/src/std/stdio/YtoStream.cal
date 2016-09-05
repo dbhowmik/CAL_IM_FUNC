@@ -1,0 +1,68 @@
+/*
+ * Copyright (c) 2015, Project: Rathlin, Heriot-Watt University, Edinburgh, UK
+ * All rights reserved.
+ */
+  
+// Author: Deepayan Bhowmik <d.bhowmik@hw.ac.uk> 
+
+package std.stdio;
+import std.header.Parameter.*;
+import std.header.Source.*;
+
+actor YtoStream() uint(size=8) Y ==> uint(size=8) Yout, bool pEOF: 
+	
+	uint(size=8)  pictureBufferYUV[IM_WIDTH * IM_HEIGHT];
+	
+	int count := 0;
+	
+	
+	getPixValueY: action Y:[Bytes] ==>	
+	do
+		pictureBufferYUV[count] := Bytes;					
+		count := count + 1;			
+		//println(count);	
+	end
+					
+    
+	doneCount: action ==> 
+	guard count = IM_WIDTH * IM_HEIGHT
+	do
+		count := 0;
+	end		
+	
+	int count_frame := 0;
+	doneCountYUV: action ==>  //pEOF:[true]
+	guard count = IM_WIDTH * IM_HEIGHT
+	do	    
+		count := 0;
+		
+		count_frame := count_frame + 1;
+		println("Frame number : " + count_frame);
+		
+		if(count_frame > 100) then
+			source_exit(0);
+		end
+		
+	end
+	
+	send: action ==> Yout:[stream], pEOF:[false]
+	var uint(size=8) stream
+	do	    
+		stream  := pictureBufferYUV[count];				
+		count := count + 1;		
+		//println(count);			
+	end
+	
+	schedule fsm s0 :		
+		s0 ( getPixValueY ) --> s0;
+		s0 ( doneCount ) --> s1;	
+		s1 ( send )-->s1;
+		s1 ( doneCountYUV)-->s0;
+	end
+	
+	priority
+		doneCount > getPixValueY;
+		doneCountYUV > send;
+	end	
+	
+end

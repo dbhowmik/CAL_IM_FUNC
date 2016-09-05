@@ -1,0 +1,54 @@
+/*
+ * Copyright (c) 2014, Project: Rathlin, Heriot-Watt University, Edinburgh, UK
+ * All rights reserved.
+ */
+  
+// Author: Deepayan Bhowmik <d.bhowmik@hw.ac.uk> 
+ 				 
+
+package colormodel;
+import std.header.Parameter.*;
+import std.util.Math.*;
+
+actor DX() int weightSum, int xSum ==> int dx:
+	
+
+	compute_displacement: action weightSum:[weightVal], xSum:[xVal] ==> dx:[dx_val]
+	var int dx_val 	
+    do	    	       	    	    	
+    	/* dx */  
+    	Div(xVal, weightVal);
+    	dx_val := Div_result;	 	    	   
+    	     		    	    
+    end
+
+	procedure Div(int num, int den)
+    var int quotient := 0,
+        int sign_num := 1,
+        int sign_den := 1
+    begin
+   		if(num<0)then sign_num := -1; end
+    	if(den<0)then sign_den := -1; end
+   
+    	num := abs(num);
+    	den := abs(den);
+    if(den != 0) then
+    	while (num >= den) 
+    	do
+        	num  := num - den; // (if numerator is not equal or less than the divisor)
+        	quotient := quotient + 1;
+    	end
+    else
+   		quotient := num;
+   	end	
+    
+    if((sign_num + sign_den)=0) then
+    	Div_result := -quotient;
+    else
+    	Div_result := quotient;
+    end
+  
+   end 
+   int Div_result;
+   
+end

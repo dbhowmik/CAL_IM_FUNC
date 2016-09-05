@@ -1,0 +1,11 @@
+package colormodel;
+
+actor dy() int ySum, int weightSum==> uint DY:
+	
+	getValues: action ySum:[y_sum_val], weightSum:[weight_sum_val]==> DY:[dy_val]
+	var uint dy_val
+	do				
+    	dy_val := y_sum_val / weight_sum_val;    							
+	end
+end
+	

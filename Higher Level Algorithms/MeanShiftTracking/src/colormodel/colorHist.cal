@@ -1,0 +1,178 @@
+/*
+ * Copyright (c) 2014, Project: Rathlin, Heriot-Watt University, Edinburgh, UK
+ * All rights reserved.
+ * 
+ */
+  
+// Author: Deepayan Bhowmik <d.bhowmik@hw.ac.uk> 
+ 				 
+
+package colormodel;
+import std.header.Parameter.*;
+import std.util.Math.*;
+
+actor colorHist() uint(size=8) R, uint(size=8) G, uint(size=8) B, 
+					int(size=16) init_X, int(size=16) init_Y, bool cntSig,
+					int centre_x_i, int centre_y_i, bool loop_status  
+					==> int bin_o:
+
+    /* Variable declaration */	
+	int count_x := 0;
+	int count_y := 0;
+	int rotate = 5;
+		
+	/* Get RGB value in the buffer */
+	uint(size=(8-rotate))  bufferR[IM_HEIGHT][IM_WIDTH];
+	uint(size=(8-rotate))  bufferG[IM_HEIGHT][IM_WIDTH];
+	uint(size=(8-rotate))  bufferB[IM_HEIGHT][IM_WIDTH];
+		
+	getValueRGB: action R:[BytesR], G:[BytesG], B:[BytesB] ==>		
+	do		
+		bufferR[count_x][count_y] := BytesR>>rotate;
+		bufferG[count_x][count_y] := BytesG>>rotate;
+		bufferB[count_x][count_y] := BytesB>>rotate;
+		
+		count_y := count_y + 1;		
+
+		if(count_y = IM_WIDTH) then
+			count_y := 0;
+			count_x := count_x + 1;
+		end					
+		
+							
+	end
+		
+    doneCountIm: action ==> 
+	guard count_x = IM_HEIGHT
+	do		
+		count_x := 0;		
+		count_y := 0;	
+	end			
+	
+    bool control_signal := false;
+    
+    checkControlSig: action cntSig:[signal]==>
+	do
+		control_signal := signal;							 	
+	end
+	
+	    
+    /* Get centre XY value of the rectangle and loop status */
+    int centre_x := 0;
+    int centre_y := 0;
+    bool while_loop_term_status;
+        
+    initialise: action init_X:[val_init_x], init_Y:[val_init_y]==>
+    guard control_signal = true
+	do
+		centre_x := val_init_x;
+		centre_y := val_init_y;		
+		while_loop_term_status := true;						
+	end
+    
+    getCentreXY_loop: action centre_x_i:[val_x], centre_y_i:[val_y], loop_status:[val_loop] ==>
+    do
+    	centre_x := val_x;
+    	centre_y := val_y;    	    	
+    	while_loop_term_status := val_loop;    	     	  	  	    	    	   
+    end
+    
+        
+    isLoopTrue: action ==>
+    do
+    	if(while_loop_term_status = false) then
+    		while_loop_term_status := true;
+    		count_x := IM_HEIGHT;
+    	end
+    end
+    	
+	int x:= -HALF_X;
+	int y:= -HALF_Y;
+	
+	calculateBin: action ==> bin_o:[val]
+	var 
+		int iX,
+		int iY,
+		int val
+	do				
+		iX := centre_x + x;
+        iY := centre_y + y;
+				
+		findBin(bufferR[iY][iX]<<rotate, bufferG[iY][iX]<<rotate, bufferB[iY][iX]<<rotate);                
+        val := binValue;
+				
+		y := y+1;
+		if(y = HALF_Y+1) then
+			y := -HALF_Y;
+			x := x+1;
+		end 	
+	end 
+	
+	
+	done_bin: action ==>
+	guard x = HALF_X+1
+	do
+		//println("Color HIst");
+		x := -HALF_X;
+	end
+	
+  /* ********************************************************
+   * Function: Find bin value
+   * ********************************************************/
+   procedure findBin(uint(size=8) R, uint(size=8) G, uint(size=8) B)
+   var
+   	 int r,
+   	 int g,
+   	 int b   	 
+   begin	
+     r := R >> BINSIZE_SHIFT;
+     g := G >> BINSIZE_SHIFT;
+     b := B >> BINSIZE_SHIFT;
+     
+     binValue := r + (g << BPC_SHIFT) + (b << (BPC_SHIFT+BPC_SHIFT));
+   end    
+   int binValue;	
+   
+   
+   // Action to control states 
+   idle: action ==>
+   guard control_signal = false
+   do
+   end
+   
+   track: action ==>
+   guard control_signal = true
+   do 
+   end
+   
+   
+   schedule fsm init:	
+   		init (checkControlSig) --> init;	
+   		init (initialise ) --> s1;
+   		s1 (getValueRGB) --> s1;
+		s1 (doneCountIm ) --> s3;
+		
+		s3 (calculateBin) --> s3;
+		s3 (done_bin) --> s7;
+		
+		s6 (getCentreXY_loop ) --> s7;
+   		s7 (isLoopTrue) --> s8;
+   		 	
+		s8 (getValueRGB) --> s8;
+		s8 (doneCountIm ) --> s10;
+				
+		s10 (calculateBin) --> s10;
+		s10 (done_bin) --> s13;
+		
+		s13 (checkControlSig) --> s14;		
+		s14 (idle) --> init;
+		s14 (track) --> s6;		
+	end      
+	
+	priority		
+		initialise > checkControlSig;
+		doneCountIm > getValueRGB;
+		done_bin > calculateBin; 		
+		idle > track;
+	end	
+end

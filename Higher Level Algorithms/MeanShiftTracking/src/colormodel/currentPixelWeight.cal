@@ -1,0 +1,41 @@
+/*
+ * Copyright (c) 2015, Project: Rathlin, Heriot-Watt University, Edinburgh, UK
+ * All rights reserved.
+ * 
+ */
+  
+// Author: Deepayan Bhowmik <d.bhowmik@hw.ac.uk> 
+ 				 
+
+package colormodel;
+import std.header.Parameter.*;
+import std.util.Math.*;
+
+actor currentPixelWeight() int weights ==> int currPixel:
+
+	int count_x := 0;
+	int count_y := 0;
+	
+	getWeightsArray: action weights:[weight_val] ==> currPixel:[currPixelVal]
+	var int currPixelVal
+	do		
+		if(K_DER[count_x][count_y]) then
+    		currPixelVal := weight_val;
+    	else
+    		currPixelVal := 0;
+    	end
+    	    	    			
+		count_y := count_y + 1;
+		
+		if(count_y = Y_SIZE) then
+			count_x := count_x + 1;
+			
+			if(count_x = X_SIZE) then
+				count_x := 0;				
+			end
+			
+			count_y := 0;
+		end								
+	end
+		
+end

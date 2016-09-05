@@ -1,0 +1,34 @@
+/*
+ * Copyright (c) 2016, Project: Rathlin, Heriot-Watt University, Edinburgh, UK
+ * All rights reserved.
+ */
+  
+// Author: Deepayan Bhowmik <d.bhowmik@hw.ac.uk> 
+
+ 
+package std.stdio;
+ 
+actor RGBtoY() uint(size=8) R, uint(size=8) G, uint(size=8) B ==>
+			uint(size=8) Y:
+				
+	int yt;
+	
+	action R:[r], G:[g], B:[b] ==> Y:[y]
+	var 
+		uint(size=8) y
+	do
+		
+		yt := ( (  66 * r + 129 * g +  25 * b + 128) >> 8) +  16;		
+			
+		if (yt > 0) then
+			if (yt < 255) then
+				y := yt;
+			else
+				y := 255;
+			end
+		else
+			y := 0;
+		end			
+	end
+	
+end
