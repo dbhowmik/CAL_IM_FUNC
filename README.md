@@ -75,9 +75,9 @@ Disclaimer: This is a non-exhaustive list. Not all function will be implemented 
 1. Histogram Computation
 2. Statistical Distributions
 
-# Higher Level Algorithm (P)
+# Higher Level Algorithm (IP)
 1. Scene Saliency Computation
-2. Meanshift Tracking
+2. Meanshift Tracking (I)
 3. Crowd Analsysis
 4. Person Re-Identification
 5. RFS tracking  
