@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<XDF name="MainVAmodel">
+    <Port kind="Input" name="input">
+        <Type name="uint">
+            <Entry kind="Expr" name="size">
+                <Expr kind="Literal" literal-kind="Integer" value="8"/>
+            </Entry>
+        </Type>
+    </Port>
+    <Port kind="Output" name="output">
+        <Type name="uint">
+            <Entry kind="Expr" name="size">
+                <Expr kind="Literal" literal-kind="Integer" value="8"/>
+            </Entry>
+        </Type>
+    </Port>
+    <Port kind="Output" name="EOS">
+        <Type name="bool"/>
+    </Port>
+    <Instance id="str2Y">
+        <Class name="std.stdio.StreamToY"/>
+    </Instance>
+    <Instance id="FWD_WV">
+        <Class name="xdf.multi-resolution-decomp"/>
+    </Instance>
+    <Instance id="Y2str">
+        <Class name="std.stdio.YtoStream"/>
+    </Instance>
+    <Instance id="SAL_map">
+        <Class name="xdf.saliencyMapGen"/>
+    </Instance>
+    <Connection dst="str2Y" dst-port="stream" src="" src-port="input"/>
+    <Connection dst="" dst-port="output" src="Y2str" src-port="Yout"/>
+    <Connection dst="FWD_WV" dst-port="in" src="str2Y" src-port="Y"/>
+    <Connection dst="Y2str" dst-port="Y" src="SAL_map" src-port="map_out"/>
+    <Connection dst="SAL_map" dst-port="LH1" src="FWD_WV" src-port="LH1"/>
+    <Connection dst="SAL_map" dst-port="HL1" src="FWD_WV" src-port="HL1"/>
+    <Connection dst="SAL_map" dst-port="HH1" src="FWD_WV" src-port="HH1"/>
+    <Connection dst="SAL_map" dst-port="LH2" src="FWD_WV" src-port="LH2"/>
+    <Connection dst="SAL_map" dst-port="HL2" src="FWD_WV" src-port="HL2"/>
+    <Connection dst="SAL_map" dst-port="HH2" src="FWD_WV" src-port="HH2"/>
+    <Connection dst="SAL_map" dst-port="LH3" src="FWD_WV" src-port="LH3"/>
+    <Connection dst="SAL_map" dst-port="HL3" src="FWD_WV" src-port="HL3"/>
+    <Connection dst="SAL_map" dst-port="HH3" src="FWD_WV" src-port="HH3"/>
+    <Connection dst="SAL_map" dst-port="LH4" src="FWD_WV" src-port="LH4"/>
+    <Connection dst="SAL_map" dst-port="HL4" src="FWD_WV" src-port="HL4"/>
+    <Connection dst="SAL_map" dst-port="HH4" src="FWD_WV" src-port="HH4"/>
+    <Connection dst="SAL_map" dst-port="LH5" src="FWD_WV" src-port="LH5"/>
+    <Connection dst="SAL_map" dst-port="HL5" src="FWD_WV" src-port="HL5"/>
+    <Connection dst="SAL_map" dst-port="HH5" src="FWD_WV" src-port="HH5"/>
+    <Connection dst="" dst-port="EOS" src="Y2str" src-port="pEOF"/>
+</XDF>

@@ -1,0 +1,14 @@
+package main.vamodel;
+import std.header.Parameter.*;
+
+// Sink actor 
+actor sinkLL5() int coeffStream ==> :
+	int count := 0; 
+	action coeffStream:[Val] ==>
+	do
+	count := count +1 ;	
+	//println(count + " " + Val);
+	
+	end
+
+end

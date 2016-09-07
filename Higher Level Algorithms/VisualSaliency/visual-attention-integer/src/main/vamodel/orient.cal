@@ -1,0 +1,859 @@
+package main.vamodel;
+
+import std.header.Parameter.*;
+import std.util.Math.*;
+
+actor orient() int coefficient ==> uint(size=8) map:
+	int coeffBuffer[IM_WIDTH][IM_HEIGHT];	
+	uint(size=32) countX := 0;
+	uint(size=32) countY := 0;	
+	
+	getImageValue: action coefficient:[value] ==>  	
+	do		
+		
+//		floor_32(absFloat(value*100));
+//		coeffBuffer[countX][countY] := Val_INT32;
+		
+		coeffBuffer[countX][countY] := abs(value*100);
+		
+		
+		countY := countY + 1;
+		
+		if(countY = IM_HEIGHT) then
+			countX := countX + 1;
+			countY := 0; 
+		end									
+	end
+	
+	doneCountX: action ==>
+	guard countX = IM_WIDTH
+	do
+		countX := 0;		
+	end
+	
+	 
+//	Orientation map
+	int LH1[SUB1_WIDTH][SUB1_HEIGHT]; int LH1_max := 0; 
+	int HL1[SUB1_WIDTH][SUB1_HEIGHT]; int HL1_max := 0;
+	int HH1[SUB1_WIDTH][SUB1_HEIGHT]; int HH1_max := 0;
+		
+	int LH2[SUB2_WIDTH][SUB2_HEIGHT]; int LH2_max := 0;
+	int HL2[SUB2_WIDTH][SUB2_HEIGHT]; int HL2_max := 0;
+	int HH2[SUB2_WIDTH][SUB2_HEIGHT]; int HH2_max := 0;
+		
+	int LH3[SUB3_WIDTH][SUB3_HEIGHT]; int LH3_max := 0;
+	int HL3[SUB3_WIDTH][SUB3_HEIGHT]; int HL3_max := 0;
+	int HH3[SUB3_WIDTH][SUB3_HEIGHT]; int HH3_max := 0;
+		
+	int LH4[SUB4_WIDTH][SUB4_HEIGHT]; int LH4_max := 0;
+	int HL4[SUB4_WIDTH][SUB4_HEIGHT]; int HL4_max := 0;
+	int HH4[SUB4_WIDTH][SUB4_HEIGHT]; int HH4_max := 0;
+	
+	int LH5[SUB5_WIDTH][SUB5_HEIGHT]; int LH5_max := 0;
+	int HL5[SUB5_WIDTH][SUB5_HEIGHT]; int HL5_max := 0;
+	int HH5[SUB5_WIDTH][SUB5_HEIGHT]; int HH5_max := 0;
+				   	
+	getSubband: action ==>	
+	do
+		foreach int x in 0 .. (SUB1_WIDTH-1) do
+			foreach int y in 0 .. (SUB1_HEIGHT-1) do
+				LH1[x][y] := abs(coeffBuffer[x][SUB1_HEIGHT + y]);
+				 	if(LH1[x][y]>LH1_max) then LH1_max := LH1[x][y]; end
+				HL1[x][y] := abs(coeffBuffer[SUB1_WIDTH + x][y]);
+					if(HL1[x][y]>HL1_max) then HL1_max := HL1[x][y]; end
+				HH1[x][y] := abs(coeffBuffer[SUB1_WIDTH + x][SUB1_HEIGHT+y]);
+					if(HH1[x][y]>HH1_max) then HH1_max := HH1[x][y]; end  
+			end
+		end 
+	
+		foreach int x in 0 .. (SUB2_WIDTH-1) do
+			foreach int y in 0 .. (SUB2_HEIGHT-1) do
+				LH2[x][y] := abs(coeffBuffer[x][SUB2_HEIGHT + y]);
+					if(LH2[x][y]>LH2_max) then LH2_max := LH2[x][y]; end
+				HL2[x][y] := abs(coeffBuffer[SUB2_WIDTH + x][y]);
+					if(HL2[x][y]>HL2_max) then HL2_max := HL2[x][y]; end
+				HH2[x][y] := abs(coeffBuffer[SUB2_WIDTH + x][SUB2_HEIGHT+y]);
+					if(HH2[x][y]>HH2_max) then HH2_max := HH2[x][y]; end  
+			end
+		end
+		
+		foreach int x in 0 .. (SUB3_WIDTH-1) do
+			foreach int y in 0 .. (SUB3_HEIGHT-1) do
+				LH3[x][y] := abs(coeffBuffer[x][SUB3_HEIGHT + y]);
+					if(LH3[x][y]>LH3_max) then LH3_max := LH3[x][y]; end
+				HL3[x][y] := abs(coeffBuffer[SUB3_WIDTH + x][y]);
+					if(HL3[x][y]>HL3_max) then HL3_max := HL3[x][y]; end
+				HH3[x][y] := abs(coeffBuffer[SUB3_WIDTH + x][SUB3_HEIGHT + y]);
+					if(HH3[x][y]>HH3_max) then HH3_max := HH3[x][y]; end  
+			end
+		end
+				
+		foreach int x in 0 .. (SUB4_WIDTH-1) do
+			foreach int y in 0 .. (SUB4_HEIGHT-1) do
+				LH4[x][y] := abs(coeffBuffer[x][SUB4_HEIGHT + y]);
+					if(LH4[x][y]>LH4_max) then LH4_max := LH4[x][y]; end
+				HL4[x][y] := abs(coeffBuffer[SUB4_WIDTH + x][y]);
+					if(HL4[x][y]>HL4_max) then HL4_max := HL4[x][y]; end
+				HH4[x][y] := abs(coeffBuffer[SUB4_WIDTH + x][SUB4_HEIGHT + y]);
+					if(HH4[x][y]>HH4_max) then HH4_max := HH4[x][y]; end  
+			end
+		end
+		
+		foreach int x in 0 .. (SUB5_WIDTH-1) do
+			foreach int y in 0 .. (SUB5_HEIGHT-1) do
+				LH5[x][y] := abs(coeffBuffer[x][SUB5_HEIGHT + y]);
+					if(LH5[x][y]>LH5_max) then LH5_max := LH5[x][y]; end
+				HL5[x][y] := abs(coeffBuffer[SUB5_WIDTH + x][y]);
+					if(HL5[x][y]>HL5_max) then HL5_max := HL5[x][y]; end
+				HH5[x][y] := abs(coeffBuffer[SUB5_WIDTH + x][SUB5_HEIGHT + y]);
+					if(HH5[x][y]>HH5_max) then HH5_max := HH5[x][y]; end  
+			end
+		end
+	end
+	
+	/* Normalization */		
+	subbandNormalization: action ==>
+	do		
+		foreach int x in 0 .. (SUB1_WIDTH-1) do
+			foreach int y in 0 .. (SUB1_HEIGHT-1) do				
+				LH1[x][y] := (LH1[x][y]* 100)/LH1_max ;
+				HL1[x][y] := (HL1[x][y]* 100)/HL1_max ; 	
+				HH1[x][y] := (HH1[x][y]* 100)/HH1_max ;							
+			end
+		end 
+	
+		foreach int x in 0 .. (SUB2_WIDTH-1) do
+			foreach int y in 0 .. (SUB2_HEIGHT-1) do
+				LH2[x][y] := (LH2[x][y]* 100)/LH2_max;
+				HL2[x][y] := (HL2[x][y]* 100)/HL2_max; 	
+				HH2[x][y] := (HH2[x][y]* 100)/HH2_max;				 
+			end
+		end
+		
+		foreach int x in 0 .. (SUB3_WIDTH-1) do
+			foreach int y in 0 .. (SUB3_HEIGHT-1) do
+				LH3[x][y] := (LH3[x][y]* 100)/LH3_max;
+				HL3[x][y] := (HL3[x][y]* 100)/HL3_max; 	
+				HH3[x][y] := (HH3[x][y]* 100)/HH3_max;				 
+			end
+		end
+				
+		foreach int x in 0 .. (SUB4_WIDTH-1) do
+			foreach int y in 0 .. (SUB4_HEIGHT-1) do
+				LH4[x][y] := (LH4[x][y]* 100)/LH4_max;
+				HL4[x][y] := (HL4[x][y]* 100)/HL4_max; 	
+				HH4[x][y] := (HH4[x][y]* 100)/HH4_max;				 
+			end
+		end
+		
+		foreach int x in 0 .. (SUB5_WIDTH-1) do
+			foreach int y in 0 .. (SUB5_HEIGHT-1) do
+				LH5[x][y] := (LH5[x][y]* 100)/LH5_max;
+				HL5[x][y] := (HL5[x][y]* 100)/HL5_max; 	
+				HH5[x][y] := (HH5[x][y]* 100)/HH5_max;				 
+			end
+		end					
+	end
+
+	/* Filtering 3x3 */
+	// Variables for filtering
+	int LH1_tmp[SUB1_WIDTH][SUB1_HEIGHT];  
+	int HL1_tmp[SUB1_WIDTH][SUB1_HEIGHT]; 
+	int HH1_tmp[SUB1_WIDTH][SUB1_HEIGHT]; 
+		
+	int LH2_tmp[SUB2_WIDTH][SUB2_HEIGHT]; 
+	int HL2_tmp[SUB2_WIDTH][SUB2_HEIGHT]; 
+	int HH2_tmp[SUB2_WIDTH][SUB2_HEIGHT]; 
+		
+	int LH3_tmp[SUB3_WIDTH][SUB3_HEIGHT]; 
+	int HL3_tmp[SUB3_WIDTH][SUB3_HEIGHT]; 
+	int HH3_tmp[SUB3_WIDTH][SUB3_HEIGHT]; 
+		
+	int LH4_tmp[SUB4_WIDTH][SUB4_HEIGHT]; 
+	int HL4_tmp[SUB4_WIDTH][SUB4_HEIGHT]; 
+	int HH4_tmp[SUB4_WIDTH][SUB4_HEIGHT]; 
+	
+	int LH5_tmp[SUB5_WIDTH][SUB5_HEIGHT]; 
+	int HL5_tmp[SUB5_WIDTH][SUB5_HEIGHT]; 
+	int HH5_tmp[SUB5_WIDTH][SUB5_HEIGHT];
+	
+	averageFilter3x3: action ==>
+	do		
+		foreach int x in 1 .. (SUB1_WIDTH-2) do
+			foreach int y in 1 .. (SUB1_HEIGHT-2) do
+				foreach int i in -(FILTERING_LENGTH3x3-1)/2 .. (FILTERING_LENGTH3x3-1)/2 do
+					foreach int j in -(FILTERING_LENGTH3x3-1)/2 .. (FILTERING_LENGTH3x3-1)/2 do
+						LH1_tmp[x][y] := LH1_tmp[x][y] + LH1[x+i][y+j];
+						HL1_tmp[x][y] := HL1_tmp[x][y] + HL1[x+i][y+j];
+						HH1_tmp[x][y] := HH1_tmp[x][y] + HH1[x+i][y+j];	
+					end
+				end	
+				// Scaling
+				LH1_tmp[x][y] := LH1_tmp[x][y] / SCALING_3x3;
+				HL1_tmp[x][y] := HL1_tmp[x][y] / SCALING_3x3; 	
+				HH1_tmp[x][y] := HH1_tmp[x][y] / SCALING_3x3;
+			end			
+		end 
+		
+		// Boundary condition (row)
+		foreach int x in 1 .. (SUB1_WIDTH-2) do
+			foreach int i in -(FILTERING_LENGTH3x3-1)/2 .. (FILTERING_LENGTH3x3-1)/2 do
+				foreach int j in 0 .. (FILTERING_LENGTH3x3-1)/2 do
+						LH1_tmp[x][0] := LH1_tmp[x][0] + LH1[x+i][j];
+						HL1_tmp[x][0] := HL1_tmp[x][0] + HL1[x+i][j];
+						HH1_tmp[x][0] := HH1_tmp[x][0] + HH1[x+i][j];	
+				end
+				LH1_tmp[x][0] := LH1_tmp[x][0] / SCALING_3x3_BOUNDARY;
+				HL1_tmp[x][0] := HL1_tmp[x][0] / SCALING_3x3_BOUNDARY;
+				HH1_tmp[x][0] := HH1_tmp[x][0] / SCALING_3x3_BOUNDARY; 
+				
+				foreach int j in -(FILTERING_LENGTH3x3-1)/2 .. 0 do
+						LH1_tmp[x][SUB1_HEIGHT-1] := LH1_tmp[x][SUB1_HEIGHT-1] + LH1[x+i][SUB1_HEIGHT-1+j];
+						HL1_tmp[x][SUB1_HEIGHT-1] := HL1_tmp[x][SUB1_HEIGHT-1] + HL1[x+i][SUB1_HEIGHT-1+j];
+						HH1_tmp[x][SUB1_HEIGHT-1] := HH1_tmp[x][SUB1_HEIGHT-1] + HH1[x+i][SUB1_HEIGHT-1+j];	
+				end				
+				LH1_tmp[x][SUB1_HEIGHT-1] := LH1_tmp[x][SUB1_HEIGHT-1] / SCALING_3x3_BOUNDARY;
+				HL1_tmp[x][SUB1_HEIGHT-1] := HL1_tmp[x][SUB1_HEIGHT-1] / SCALING_3x3_BOUNDARY;
+				HH1_tmp[x][SUB1_HEIGHT-1] := HH1_tmp[x][SUB1_HEIGHT-1] / SCALING_3x3_BOUNDARY; 				
+			end
+		end
+		
+		// Boundary condition (column)
+		foreach int y in 1 .. (SUB1_HEIGHT-2) do
+			foreach int j in -(FILTERING_LENGTH3x3-1)/2 .. (FILTERING_LENGTH3x3-1)/2 do
+				foreach int i in 0 .. (FILTERING_LENGTH3x3-1)/2 do
+						LH1_tmp[0][y] := LH1_tmp[0][y] + LH1[i][y+j];
+						HL1_tmp[0][y] := HL1_tmp[0][y] + HL1[i][y+j];
+						HH1_tmp[0][y] := HH1_tmp[0][y] + HH1[i][y+j];	
+				end
+				LH1_tmp[0][y] := LH1_tmp[0][y] / SCALING_3x3_BOUNDARY;
+				HL1_tmp[0][y] := HL1_tmp[0][y] / SCALING_3x3_BOUNDARY;
+				HH1_tmp[0][y] := HH1_tmp[0][y] / SCALING_3x3_BOUNDARY;
+				
+				foreach int i in -(FILTERING_LENGTH3x3-1)/2 .. 0 do
+						LH1_tmp[SUB1_WIDTH-1][y] := LH1_tmp[SUB1_WIDTH-1][y] + LH1[SUB1_WIDTH-1+i][y+j];
+						HL1_tmp[SUB1_WIDTH-1][y] := HL1_tmp[SUB1_WIDTH-1][y] + HL1[SUB1_WIDTH-1+i][y+j];
+						HH1_tmp[SUB1_WIDTH-1][y] := HH1_tmp[SUB1_WIDTH-1][y] + HH1[SUB1_WIDTH-1+i][y+j];	
+				end				
+				LH1_tmp[SUB1_WIDTH-1][y] := LH1_tmp[SUB1_WIDTH-1][y] / SCALING_3x3_BOUNDARY;
+				HL1_tmp[SUB1_WIDTH-1][y] := HL1_tmp[SUB1_WIDTH-1][y] / SCALING_3x3_BOUNDARY;
+				HH1_tmp[SUB1_WIDTH-1][y] := HH1_tmp[SUB1_WIDTH-1][y] / SCALING_3x3_BOUNDARY;
+			end
+		end
+		
+		// Four corner points
+		LH1_tmp[0][0] := (LH1[0][0] + LH1[0][1] + LH1[1][0] + LH1[1][1])/SCALING_3x3_CORNER;
+		LH1_tmp[0][SUB1_HEIGHT-1] := (LH1[0][SUB1_HEIGHT-1] + LH1[0][SUB1_HEIGHT-1-1] + LH1[1][SUB1_HEIGHT-1] + LH1[1][SUB1_HEIGHT-1-1])/SCALING_3x3_CORNER;
+		LH1_tmp[SUB1_WIDTH-1][0] := (LH1[SUB1_WIDTH-1][0] + LH1[SUB1_WIDTH-1][1] + LH1[SUB1_WIDTH-1-1][0] + LH1[SUB1_WIDTH-1-1][1])/SCALING_3x3_CORNER;
+		LH1_tmp[SUB1_WIDTH-1][SUB1_HEIGHT-1] := (LH1[SUB1_WIDTH-1][SUB1_HEIGHT-1] + LH1[SUB1_WIDTH-1][SUB1_HEIGHT-1-1] + LH1[SUB1_WIDTH-1-1][SUB1_HEIGHT-1] + LH1[SUB1_WIDTH-1-1][SUB1_HEIGHT-1-1])/SCALING_3x3_CORNER;
+		
+		HL1_tmp[0][0] := (HL1[0][0] + HL1[0][1] + HL1[1][0] + HL1[1][1])/SCALING_3x3_CORNER;
+		HL1_tmp[0][SUB1_HEIGHT-1] := (HL1[0][SUB1_HEIGHT-1] + HL1[0][SUB1_HEIGHT-1-1] + HL1[1][SUB1_HEIGHT-1] + HL1[1][SUB1_HEIGHT-1-1])/SCALING_3x3_CORNER;
+		HL1_tmp[SUB1_WIDTH-1][0] := (HL1[SUB1_WIDTH-1][0] + HL1[SUB1_WIDTH-1][1] + HL1[SUB1_WIDTH-1-1][0] + HL1[SUB1_WIDTH-1-1][1])/SCALING_3x3_CORNER;
+		HL1_tmp[SUB1_WIDTH-1][SUB1_HEIGHT-1] := (HL1[SUB1_WIDTH-1][SUB1_HEIGHT-1] + HL1[SUB1_WIDTH-1][SUB1_HEIGHT-1-1] + HL1[SUB1_WIDTH-1-1][SUB1_HEIGHT-1] + HL1[SUB1_WIDTH-1-1][SUB1_HEIGHT-1-1])/SCALING_3x3_CORNER;
+		
+		HH1_tmp[0][0] := (HH1[0][0] + HH1[0][1] + HH1[1][0] + HH1[1][1])/SCALING_3x3_CORNER;
+		HH1_tmp[0][SUB1_HEIGHT-1] := (HH1[0][SUB1_HEIGHT-1] + HH1[0][SUB1_HEIGHT-1-1] + HH1[1][SUB1_HEIGHT-1] + HH1[1][SUB1_HEIGHT-1-1])/SCALING_3x3_CORNER;
+		HH1_tmp[SUB1_WIDTH-1][0] := (HH1[SUB1_WIDTH-1][0] + HH1[SUB1_WIDTH-1][1] + HH1[SUB1_WIDTH-1-1][0] + HH1[SUB1_WIDTH-1-1][1])/SCALING_3x3_CORNER;
+		HH1_tmp[SUB1_WIDTH-1][SUB1_HEIGHT-1] := (HH1[SUB1_WIDTH-1][SUB1_HEIGHT-1] + HH1[SUB1_WIDTH-1][SUB1_HEIGHT-1-1] + HH1[SUB1_WIDTH-1-1][SUB1_HEIGHT-1] + HH1[SUB1_WIDTH-1-1][SUB1_HEIGHT-1-1])/SCALING_3x3_CORNER;  
+
+		// Next subband		
+		foreach int x in 1 .. (SUB2_WIDTH-2) do
+			foreach int y in 1 .. (SUB2_HEIGHT-2) do
+				foreach int i in -(FILTERING_LENGTH3x3-1)/2 .. (FILTERING_LENGTH3x3-1)/2 do
+					foreach int j in -(FILTERING_LENGTH3x3-1)/2 .. (FILTERING_LENGTH3x3-1)/2 do
+						LH2_tmp[x][y] := LH2_tmp[x][y] + LH2[x+i][y+j];
+						HL2_tmp[x][y] := HL2_tmp[x][y] + HL2[x+i][y+j];
+						HH2_tmp[x][y] := HH2_tmp[x][y] + HH2[x+i][y+j];	
+					end
+				end	
+				// Scaling
+				LH2_tmp[x][y] := LH2_tmp[x][y] / SCALING_3x3;
+				HL2_tmp[x][y] := HL2_tmp[x][y] / SCALING_3x3; 	
+				HH2_tmp[x][y] := HH2_tmp[x][y] / SCALING_3x3;  
+			end
+		end
+		
+		// Boundary condition (row)
+		foreach int x in 1 .. (SUB2_WIDTH-2) do
+			foreach int i in -(FILTERING_LENGTH3x3-1)/2 .. (FILTERING_LENGTH3x3-1)/2 do
+				foreach int j in 0 .. (FILTERING_LENGTH3x3-1)/2 do
+						LH2_tmp[x][0] := LH2_tmp[x][0] + LH2[x+i][j];
+						HL2_tmp[x][0] := HL2_tmp[x][0] + HL2[x+i][j];
+						HH2_tmp[x][0] := HH2_tmp[x][0] + HH2[x+i][j];	
+				end
+				LH2_tmp[x][0] := LH2_tmp[x][0] / SCALING_3x3_BOUNDARY;
+				HL2_tmp[x][0] := HL2_tmp[x][0] / SCALING_3x3_BOUNDARY;
+				HH2_tmp[x][0] := HH2_tmp[x][0] / SCALING_3x3_BOUNDARY; 
+				
+				foreach int j in -(FILTERING_LENGTH3x3-1)/2 .. 0 do
+						LH2_tmp[x][SUB2_HEIGHT-1] := LH2_tmp[x][SUB2_HEIGHT-1] + LH2[x+i][SUB2_HEIGHT-1+j];
+						HL2_tmp[x][SUB2_HEIGHT-1] := HL2_tmp[x][SUB2_HEIGHT-1] + HL2[x+i][SUB2_HEIGHT-1+j];
+						HH2_tmp[x][SUB2_HEIGHT-1] := HH2_tmp[x][SUB2_HEIGHT-1] + HH2[x+i][SUB2_HEIGHT-1+j];	
+				end				
+				LH2_tmp[x][SUB2_HEIGHT-1] := LH2_tmp[x][SUB2_HEIGHT-1] / SCALING_3x3_BOUNDARY;
+				HL2_tmp[x][SUB2_HEIGHT-1] := HL2_tmp[x][SUB2_HEIGHT-1] / SCALING_3x3_BOUNDARY;
+				HH2_tmp[x][SUB2_HEIGHT-1] := HH2_tmp[x][SUB2_HEIGHT-1] / SCALING_3x3_BOUNDARY; 				
+			end
+		end
+		
+		// Boundary condition (column)
+		foreach int y in 1 .. (SUB2_HEIGHT-2) do
+			foreach int j in -(FILTERING_LENGTH3x3-1)/2 .. (FILTERING_LENGTH3x3-1)/2 do
+				foreach int i in 0 .. (FILTERING_LENGTH3x3-1)/2 do
+						LH2_tmp[0][y] := LH2_tmp[0][y] + LH2[i][y+j];
+						HL2_tmp[0][y] := HL2_tmp[0][y] + HL2[i][y+j];
+						HH2_tmp[0][y] := HH2_tmp[0][y] + HH2[i][y+j];	
+				end
+				LH2_tmp[0][y] := LH2_tmp[0][y] / SCALING_3x3_BOUNDARY;
+				HL2_tmp[0][y] := HL2_tmp[0][y] / SCALING_3x3_BOUNDARY;
+				HH2_tmp[0][y] := HH2_tmp[0][y] / SCALING_3x3_BOUNDARY;
+				
+				foreach int i in -(FILTERING_LENGTH3x3-1)/2 .. 0 do
+						LH2_tmp[SUB2_WIDTH-1][y] := LH2_tmp[SUB2_WIDTH-1][y] + LH2[SUB2_WIDTH-1+i][y+j];
+						HL2_tmp[SUB2_WIDTH-1][y] := HL2_tmp[SUB2_WIDTH-1][y] + HL2[SUB2_WIDTH-1+i][y+j];
+						HH2_tmp[SUB2_WIDTH-1][y] := HH2_tmp[SUB2_WIDTH-1][y] + HH2[SUB2_WIDTH-1+i][y+j];	
+				end				
+				LH2_tmp[SUB2_WIDTH-1][y] := LH2_tmp[SUB2_WIDTH-1][y] / SCALING_3x3_BOUNDARY;
+				HL2_tmp[SUB2_WIDTH-1][y] := HL2_tmp[SUB2_WIDTH-1][y] / SCALING_3x3_BOUNDARY;
+				HH2_tmp[SUB2_WIDTH-1][y] := HH2_tmp[SUB2_WIDTH-1][y] / SCALING_3x3_BOUNDARY;
+			end
+		end
+		
+		// Four corner points
+		LH2_tmp[0][0] := (LH2[0][0] + LH2[0][1] + LH2[1][0] + LH2[1][1])/SCALING_3x3_CORNER;
+		LH2_tmp[0][SUB2_HEIGHT-1] := (LH2[0][SUB2_HEIGHT-1] + LH2[0][SUB2_HEIGHT-1-1] + LH2[1][SUB2_HEIGHT-1] + LH2[1][SUB2_HEIGHT-1-1])/SCALING_3x3_CORNER;
+		LH2_tmp[SUB2_WIDTH-1][0] := (LH2[SUB2_WIDTH-1][0] + LH2[SUB2_WIDTH-1][1] + LH2[SUB2_WIDTH-1-1][0] + LH2[SUB2_WIDTH-1-1][1])/SCALING_3x3_CORNER;
+		LH2_tmp[SUB2_WIDTH-1][SUB2_HEIGHT-1] := (LH2[SUB2_WIDTH-1][SUB2_HEIGHT-1] + LH2[SUB2_WIDTH-1][SUB2_HEIGHT-1-1] + LH2[SUB2_WIDTH-1-1][SUB2_HEIGHT-1] + LH2[SUB2_WIDTH-1-1][SUB2_HEIGHT-1-1])/SCALING_3x3_CORNER;  
+				
+		HL2_tmp[0][0] := (HL2[0][0] + HL2[0][1] + HL2[1][0] + HL2[1][1])/SCALING_3x3_CORNER;
+		HL2_tmp[0][SUB1_HEIGHT-1] := (HL2[0][SUB1_HEIGHT-1] + HL2[0][SUB1_HEIGHT-1-1] + HL2[1][SUB1_HEIGHT-1] + HL2[1][SUB1_HEIGHT-1-1])/SCALING_3x3_CORNER;
+		HL2_tmp[SUB1_WIDTH-1][0] := (HL2[SUB1_WIDTH-1][0] + HL2[SUB1_WIDTH-1][1] + HL2[SUB1_WIDTH-1-1][0] + HL2[SUB1_WIDTH-1-1][1])/SCALING_3x3_CORNER;
+		HL2_tmp[SUB1_WIDTH-1][SUB1_HEIGHT-1] := (HL2[SUB1_WIDTH-1][SUB1_HEIGHT-1] + HL2[SUB1_WIDTH-1][SUB1_HEIGHT-1-1] + HL2[SUB1_WIDTH-1-1][SUB1_HEIGHT-1] + HL2[SUB1_WIDTH-1-1][SUB1_HEIGHT-1-1])/SCALING_3x3_CORNER;
+		
+		HH2_tmp[0][0] := (HH2[0][0] + HH2[0][1] + HH2[1][0] + HH2[1][1])/SCALING_3x3_CORNER;
+		HH2_tmp[0][SUB1_HEIGHT-1] := (HH2[0][SUB1_HEIGHT-1] + HH2[0][SUB1_HEIGHT-1-1] + HH2[1][SUB1_HEIGHT-1] + HH2[1][SUB1_HEIGHT-1-1])/SCALING_3x3_CORNER;
+		HH2_tmp[SUB1_WIDTH-1][0] := (HH2[SUB1_WIDTH-1][0] + HH2[SUB1_WIDTH-1][1] + HH2[SUB1_WIDTH-1-1][0] + HH2[SUB1_WIDTH-1-1][1])/SCALING_3x3_CORNER;
+		HH2_tmp[SUB1_WIDTH-1][SUB1_HEIGHT-1] := (HH2[SUB1_WIDTH-1][SUB1_HEIGHT-1] + HH2[SUB1_WIDTH-1][SUB1_HEIGHT-1-1] + HH2[SUB1_WIDTH-1-1][SUB1_HEIGHT-1] + HH2[SUB1_WIDTH-1-1][SUB1_HEIGHT-1-1])/SCALING_3x3_CORNER;  
+		
+		// Next Subband
+		foreach int x in 1 .. (SUB3_WIDTH-2) do
+			foreach int y in 1 .. (SUB3_HEIGHT-2) do
+				foreach int i in -(FILTERING_LENGTH3x3-1)/2 .. (FILTERING_LENGTH3x3-1)/2 do
+					foreach int j in -(FILTERING_LENGTH3x3-1)/2 .. (FILTERING_LENGTH3x3-1)/2 do
+						LH3_tmp[x][y] := LH3_tmp[x][y] + LH3[x+i][y+j];
+						HL3_tmp[x][y] := HL3_tmp[x][y] + HL3[x+i][y+j];
+						HH3_tmp[x][y] := HH3_tmp[x][y] + HH3[x+i][y+j];	
+					end
+				end	
+				// Scaling
+				LH3_tmp[x][y] := LH3_tmp[x][y] / SCALING_3x3;
+				HL3_tmp[x][y] := HL3_tmp[x][y] / SCALING_3x3; 	
+				HH3_tmp[x][y] := HH3_tmp[x][y] / SCALING_3x3;  
+			end
+		end
+		
+		// Boundary condition (row)
+		foreach int x in 1 .. (SUB3_WIDTH-2) do
+			foreach int i in -(FILTERING_LENGTH3x3-1)/2 .. (FILTERING_LENGTH3x3-1)/2 do
+				foreach int j in 0 .. (FILTERING_LENGTH3x3-1)/2 do
+						LH3_tmp[x][0] := LH3_tmp[x][0] + LH3[x+i][j];
+						HL3_tmp[x][0] := HL3_tmp[x][0] + HL3[x+i][j];
+						HH3_tmp[x][0] := HH3_tmp[x][0] + HH3[x+i][j];	
+				end
+				LH3_tmp[x][0] := LH3_tmp[x][0] / SCALING_3x3_BOUNDARY;
+				HL3_tmp[x][0] := HL3_tmp[x][0] / SCALING_3x3_BOUNDARY;
+				HH3_tmp[x][0] := HH3_tmp[x][0] / SCALING_3x3_BOUNDARY; 
+				
+				foreach int j in -(FILTERING_LENGTH3x3-1)/2 .. 0 do
+						LH3_tmp[x][SUB3_HEIGHT-1] := LH3_tmp[x][SUB3_HEIGHT-1] + LH3[x+i][SUB3_HEIGHT-1+j];
+						HL3_tmp[x][SUB3_HEIGHT-1] := HL3_tmp[x][SUB3_HEIGHT-1] + HL3[x+i][SUB3_HEIGHT-1+j];
+						HH3_tmp[x][SUB3_HEIGHT-1] := HH3_tmp[x][SUB3_HEIGHT-1] + HH3[x+i][SUB3_HEIGHT-1+j];	
+				end				
+				LH3_tmp[x][SUB3_HEIGHT-1] := LH3_tmp[x][SUB3_HEIGHT-1] / SCALING_3x3_BOUNDARY;
+				HL3_tmp[x][SUB3_HEIGHT-1] := HL3_tmp[x][SUB3_HEIGHT-1] / SCALING_3x3_BOUNDARY;
+				HH3_tmp[x][SUB3_HEIGHT-1] := HH3_tmp[x][SUB3_HEIGHT-1] / SCALING_3x3_BOUNDARY; 				
+			end
+		end
+		
+		// Boundary condition (column)
+		foreach int y in 1 .. (SUB3_HEIGHT-2) do
+			foreach int j in -(FILTERING_LENGTH3x3-1)/2 .. (FILTERING_LENGTH3x3-1)/2 do
+				foreach int i in 0 .. (FILTERING_LENGTH3x3-1)/2 do
+						LH3_tmp[0][y] := LH3_tmp[0][y] + LH3[i][y+j];
+						HL3_tmp[0][y] := HL3_tmp[0][y] + HL3[i][y+j];
+						HH3_tmp[0][y] := HH3_tmp[0][y] + HH3[i][y+j];	
+				end
+				LH3_tmp[0][y] := LH3_tmp[0][y] / SCALING_3x3_BOUNDARY;
+				HL3_tmp[0][y] := HL3_tmp[0][y] / SCALING_3x3_BOUNDARY;
+				HH3_tmp[0][y] := HH3_tmp[0][y] / SCALING_3x3_BOUNDARY;
+				
+				foreach int i in -(FILTERING_LENGTH3x3-1)/2 .. 0 do
+						LH3_tmp[SUB3_WIDTH-1][y] := LH3_tmp[SUB3_WIDTH-1][y] + LH3[SUB3_WIDTH-1+i][y+j];
+						HL3_tmp[SUB3_WIDTH-1][y] := HL3_tmp[SUB3_WIDTH-1][y] + HL3[SUB3_WIDTH-1+i][y+j];
+						HH3_tmp[SUB3_WIDTH-1][y] := HH3_tmp[SUB3_WIDTH-1][y] + HH3[SUB3_WIDTH-1+i][y+j];	
+				end				
+				LH3_tmp[SUB3_WIDTH-1][y] := LH3_tmp[SUB3_WIDTH-1][y] / SCALING_3x3_BOUNDARY;
+				HL3_tmp[SUB3_WIDTH-1][y] := HL3_tmp[SUB3_WIDTH-1][y] / SCALING_3x3_BOUNDARY;
+				HH3_tmp[SUB3_WIDTH-1][y] := HH3_tmp[SUB3_WIDTH-1][y] / SCALING_3x3_BOUNDARY;
+			end
+		end
+		
+		// Four corner points
+		LH3_tmp[0][0] := (LH3[0][0] + LH3[0][1] + LH3[1][0] + LH3[1][1])/SCALING_3x3_CORNER;
+		LH3_tmp[0][SUB3_HEIGHT-1] := (LH3[0][SUB3_HEIGHT-1] + LH3[0][SUB3_HEIGHT-1-1] + LH3[1][SUB3_HEIGHT-1] + LH3[1][SUB3_HEIGHT-1-1])/SCALING_3x3_CORNER;
+		LH3_tmp[SUB3_WIDTH-1][0] := (LH3[SUB3_WIDTH-1][0] + LH3[SUB3_WIDTH-1][1] + LH3[SUB3_WIDTH-1-1][0] + LH3[SUB3_WIDTH-1-1][1])/SCALING_3x3_CORNER;
+		LH3_tmp[SUB3_WIDTH-1][SUB3_HEIGHT-1] := (LH3[SUB3_WIDTH-1][SUB3_HEIGHT-1] + LH3[SUB3_WIDTH-1][SUB3_HEIGHT-1-1] + LH3[SUB3_WIDTH-1-1][SUB3_HEIGHT-1] + LH3[SUB3_WIDTH-1-1][SUB3_HEIGHT-1-1])/SCALING_3x3_CORNER;  
+		
+		HL3_tmp[0][0] := (HL3[0][0] + HL3[0][1] + HL3[1][0] + HL3[1][1])/SCALING_3x3_CORNER;
+		HL3_tmp[0][SUB1_HEIGHT-1] := (HL3[0][SUB1_HEIGHT-1] + HL3[0][SUB1_HEIGHT-1-1] + HL3[1][SUB1_HEIGHT-1] + HL3[1][SUB1_HEIGHT-1-1])/SCALING_3x3_CORNER;
+		HL3_tmp[SUB1_WIDTH-1][0] := (HL3[SUB1_WIDTH-1][0] + HL3[SUB1_WIDTH-1][1] + HL3[SUB1_WIDTH-1-1][0] + HL3[SUB1_WIDTH-1-1][1])/SCALING_3x3_CORNER;
+		HL3_tmp[SUB1_WIDTH-1][SUB1_HEIGHT-1] := (HL3[SUB1_WIDTH-1][SUB1_HEIGHT-1] + HL3[SUB1_WIDTH-1][SUB1_HEIGHT-1-1] + HL3[SUB1_WIDTH-1-1][SUB1_HEIGHT-1] + HL3[SUB1_WIDTH-1-1][SUB1_HEIGHT-1-1])/SCALING_3x3_CORNER;
+		
+		HH3_tmp[0][0] := (HH3[0][0] + HH3[0][1] + HH3[1][0] + HH3[1][1])/SCALING_3x3_CORNER;
+		HH3_tmp[0][SUB1_HEIGHT-1] := (HH3[0][SUB1_HEIGHT-1] + HH3[0][SUB1_HEIGHT-1-1] + HH3[1][SUB1_HEIGHT-1] + HH3[1][SUB1_HEIGHT-1-1])/SCALING_3x3_CORNER;
+		HH3_tmp[SUB1_WIDTH-1][0] := (HH3[SUB1_WIDTH-1][0] + HH3[SUB1_WIDTH-1][1] + HH3[SUB1_WIDTH-1-1][0] + HH3[SUB1_WIDTH-1-1][1])/SCALING_3x3_CORNER;
+		HH3_tmp[SUB1_WIDTH-1][SUB1_HEIGHT-1] := (HH3[SUB1_WIDTH-1][SUB1_HEIGHT-1] + HH3[SUB1_WIDTH-1][SUB1_HEIGHT-1-1] + HH3[SUB1_WIDTH-1-1][SUB1_HEIGHT-1] + HH3[SUB1_WIDTH-1-1][SUB1_HEIGHT-1-1])/SCALING_3x3_CORNER;  
+		
+				
+		// Next Subband		
+		foreach int x in 1 .. (SUB4_WIDTH-2) do
+			foreach int y in 1 .. (SUB4_HEIGHT-2) do
+				foreach int i in -(FILTERING_LENGTH3x3-1)/2 .. (FILTERING_LENGTH3x3-1)/2 do
+					foreach int j in -(FILTERING_LENGTH3x3-1)/2 .. (FILTERING_LENGTH3x3-1)/2 do
+						LH4_tmp[x][y] := LH4_tmp[x][y] + LH4[x+i][y+j];
+						HL4_tmp[x][y] := HL4_tmp[x][y] + HL4[x+i][y+j];
+						HH4_tmp[x][y] := HH4_tmp[x][y] + HH4[x+i][y+j];	
+					end
+				end	
+				// Scaling
+				LH4_tmp[x][y] := LH4_tmp[x][y] / SCALING_3x3;
+				HL4_tmp[x][y] := HL4_tmp[x][y] / SCALING_3x3; 	
+				HH4_tmp[x][y] := HH4_tmp[x][y] / SCALING_3x3;  
+			end
+		end
+		
+		// Boundary condition (row)
+		foreach int x in 1 .. (SUB4_WIDTH-2) do
+			foreach int i in -(FILTERING_LENGTH3x3-1)/2 .. (FILTERING_LENGTH3x3-1)/2 do
+				foreach int j in 0 .. (FILTERING_LENGTH3x3-1)/2 do
+						LH4_tmp[x][0] := LH4_tmp[x][0] + LH4[x+i][j];
+						HL4_tmp[x][0] := HL4_tmp[x][0] + HL4[x+i][j];
+						HH4_tmp[x][0] := HH4_tmp[x][0] + HH4[x+i][j];	
+				end
+				LH4_tmp[x][0] := LH4_tmp[x][0] / SCALING_3x3_BOUNDARY;
+				HL4_tmp[x][0] := HL4_tmp[x][0] / SCALING_3x3_BOUNDARY;
+				HH4_tmp[x][0] := HH4_tmp[x][0] / SCALING_3x3_BOUNDARY; 
+				
+				foreach int j in -(FILTERING_LENGTH3x3-1)/2 .. 0 do
+						LH4_tmp[x][SUB4_HEIGHT-1] := LH4_tmp[x][SUB4_HEIGHT-1] + LH4[x+i][SUB4_HEIGHT-1+j];
+						HL4_tmp[x][SUB4_HEIGHT-1] := HL4_tmp[x][SUB4_HEIGHT-1] + HL4[x+i][SUB4_HEIGHT-1+j];
+						HH4_tmp[x][SUB4_HEIGHT-1] := HH4_tmp[x][SUB4_HEIGHT-1] + HH4[x+i][SUB4_HEIGHT-1+j];	
+				end				
+				LH4_tmp[x][SUB4_HEIGHT-1] := LH4_tmp[x][SUB4_HEIGHT-1] / SCALING_3x3_BOUNDARY;
+				HL4_tmp[x][SUB4_HEIGHT-1] := HL4_tmp[x][SUB4_HEIGHT-1] / SCALING_3x3_BOUNDARY;
+				HH4_tmp[x][SUB4_HEIGHT-1] := HH4_tmp[x][SUB4_HEIGHT-1] / SCALING_3x3_BOUNDARY; 				
+			end
+		end
+		
+		// Boundary condition (column)
+		foreach int y in 1 .. (SUB4_HEIGHT-2) do
+			foreach int j in -(FILTERING_LENGTH3x3-1)/2 .. (FILTERING_LENGTH3x3-1)/2 do
+				foreach int i in 0 .. (FILTERING_LENGTH3x3-1)/2 do
+						LH4_tmp[0][y] := LH4_tmp[0][y] + LH4[i][y+j];
+						HL4_tmp[0][y] := HL4_tmp[0][y] + HL4[i][y+j];
+						HH4_tmp[0][y] := HH4_tmp[0][y] + HH4[i][y+j];	
+				end
+				LH4_tmp[0][y] := LH4_tmp[0][y] / SCALING_3x3_BOUNDARY;
+				HL4_tmp[0][y] := HL4_tmp[0][y] / SCALING_3x3_BOUNDARY;
+				HH4_tmp[0][y] := HH4_tmp[0][y] / SCALING_3x3_BOUNDARY;
+				
+				foreach int i in -(FILTERING_LENGTH3x3-1)/2 .. 0 do
+						LH4_tmp[SUB4_WIDTH-1][y] := LH4_tmp[SUB4_WIDTH-1][y] + LH4[SUB4_WIDTH-1+i][y+j];
+						HL4_tmp[SUB4_WIDTH-1][y] := HL4_tmp[SUB4_WIDTH-1][y] + HL4[SUB4_WIDTH-1+i][y+j];
+						HH4_tmp[SUB4_WIDTH-1][y] := HH4_tmp[SUB4_WIDTH-1][y] + HH4[SUB4_WIDTH-1+i][y+j];	
+				end				
+				LH4_tmp[SUB4_WIDTH-1][y] := LH4_tmp[SUB4_WIDTH-1][y] / SCALING_3x3_BOUNDARY;
+				HL4_tmp[SUB4_WIDTH-1][y] := HL4_tmp[SUB4_WIDTH-1][y] / SCALING_3x3_BOUNDARY;
+				HH4_tmp[SUB4_WIDTH-1][y] := HH4_tmp[SUB4_WIDTH-1][y] / SCALING_3x3_BOUNDARY;
+			end
+		end
+		
+		// Four corner points
+		LH4_tmp[0][0] := (LH4[0][0] + LH4[0][1] + LH4[1][0] + LH4[1][1])/SCALING_3x3_CORNER;
+		LH4_tmp[0][SUB4_HEIGHT-1] := (LH4[0][SUB4_HEIGHT-1] + LH4[0][SUB4_HEIGHT-1-1] + LH4[1][SUB4_HEIGHT-1] + LH4[1][SUB4_HEIGHT-1-1])/SCALING_3x3_CORNER;
+		LH4_tmp[SUB4_WIDTH-1][0] := (LH4[SUB4_WIDTH-1][0] + LH4[SUB4_WIDTH-1][1] + LH4[SUB4_WIDTH-1-1][0] + LH4[SUB4_WIDTH-1-1][1])/SCALING_3x3_CORNER;
+		LH4_tmp[SUB4_WIDTH-1][SUB4_HEIGHT-1] := (LH4[SUB4_WIDTH-1][SUB4_HEIGHT-1] + LH4[SUB4_WIDTH-1][SUB4_HEIGHT-1-1] + LH4[SUB4_WIDTH-1-1][SUB4_HEIGHT-1] + LH4[SUB4_WIDTH-1-1][SUB4_HEIGHT-1-1])/SCALING_3x3_CORNER;  
+
+		HL4_tmp[0][0] := (HL4[0][0] + HL4[0][1] + HL4[1][0] + HL4[1][1])/SCALING_3x3_CORNER;
+		HL4_tmp[0][SUB1_HEIGHT-1] := (HL4[0][SUB1_HEIGHT-1] + HL4[0][SUB1_HEIGHT-1-1] + HL4[1][SUB1_HEIGHT-1] + HL4[1][SUB1_HEIGHT-1-1])/SCALING_3x3_CORNER;
+		HL4_tmp[SUB1_WIDTH-1][0] := (HL4[SUB1_WIDTH-1][0] + HL4[SUB1_WIDTH-1][1] + HL4[SUB1_WIDTH-1-1][0] + HL4[SUB1_WIDTH-1-1][1])/SCALING_3x3_CORNER;
+		HL4_tmp[SUB1_WIDTH-1][SUB1_HEIGHT-1] := (HL4[SUB1_WIDTH-1][SUB1_HEIGHT-1] + HL4[SUB1_WIDTH-1][SUB1_HEIGHT-1-1] + HL4[SUB1_WIDTH-1-1][SUB1_HEIGHT-1] + HL4[SUB1_WIDTH-1-1][SUB1_HEIGHT-1-1])/SCALING_3x3_CORNER;
+		
+		HH4_tmp[0][0] := (HH4[0][0] + HH4[0][1] + HH4[1][0] + HH4[1][1])/SCALING_3x3_CORNER;
+		HH4_tmp[0][SUB1_HEIGHT-1] := (HH4[0][SUB1_HEIGHT-1] + HH4[0][SUB1_HEIGHT-1-1] + HH4[1][SUB1_HEIGHT-1] + HH4[1][SUB1_HEIGHT-1-1])/SCALING_3x3_CORNER;
+		HH4_tmp[SUB1_WIDTH-1][0] := (HH4[SUB1_WIDTH-1][0] + HH4[SUB1_WIDTH-1][1] + HH4[SUB1_WIDTH-1-1][0] + HH4[SUB1_WIDTH-1-1][1])/SCALING_3x3_CORNER;
+		HH4_tmp[SUB1_WIDTH-1][SUB1_HEIGHT-1] := (HH4[SUB1_WIDTH-1][SUB1_HEIGHT-1] + HH4[SUB1_WIDTH-1][SUB1_HEIGHT-1-1] + HH4[SUB1_WIDTH-1-1][SUB1_HEIGHT-1] + HH4[SUB1_WIDTH-1-1][SUB1_HEIGHT-1-1])/SCALING_3x3_CORNER;  
+				
+		
+		// Next Subband
+		foreach int x in 1 .. (SUB5_WIDTH-2) do
+			foreach int y in 1 .. (SUB5_HEIGHT-2) do
+				foreach int i in -(FILTERING_LENGTH3x3-1)/2 .. (FILTERING_LENGTH3x3-1)/2 do
+					foreach int j in -(FILTERING_LENGTH3x3-1)/2 .. (FILTERING_LENGTH3x3-1)/2 do
+						LH5_tmp[x][y] := LH5_tmp[x][y] + LH5[x+i][y+j];
+						HL5_tmp[x][y] := HL5_tmp[x][y] + HL5[x+i][y+j];
+						HH5_tmp[x][y] := HH5_tmp[x][y] + HH5[x+i][y+j];	
+					end
+				end	
+				// Scaling
+				LH5_tmp[x][y] := LH5_tmp[x][y] / SCALING_3x3;
+				HL5_tmp[x][y] := HL5_tmp[x][y] / SCALING_3x3; 	
+				HH5_tmp[x][y] := HH5_tmp[x][y] / SCALING_3x3;  
+			end
+		end		
+		
+		// Boundary condition (row)
+		foreach int x in 1 .. (SUB5_WIDTH-2) do
+			foreach int i in -(FILTERING_LENGTH3x3-1)/2 .. (FILTERING_LENGTH3x3-1)/2 do
+				foreach int j in 0 .. (FILTERING_LENGTH3x3-1)/2 do
+						LH5_tmp[x][0] := LH5_tmp[x][0] + LH5[x+i][j];
+						HL5_tmp[x][0] := HL5_tmp[x][0] + HL5[x+i][j];
+						HH5_tmp[x][0] := HH5_tmp[x][0] + HH5[x+i][j];	
+				end
+				LH5_tmp[x][0] := LH5_tmp[x][0] / SCALING_3x3_BOUNDARY;
+				HL5_tmp[x][0] := HL5_tmp[x][0] / SCALING_3x3_BOUNDARY;
+				HH5_tmp[x][0] := HH5_tmp[x][0] / SCALING_3x3_BOUNDARY; 
+				
+				foreach int j in -(FILTERING_LENGTH3x3-1)/2 .. 0 do
+						LH5_tmp[x][SUB5_HEIGHT-1] := LH5_tmp[x][SUB5_HEIGHT-1] + LH5[x+i][SUB5_HEIGHT-1+j];
+						HL5_tmp[x][SUB5_HEIGHT-1] := HL5_tmp[x][SUB5_HEIGHT-1] + HL5[x+i][SUB5_HEIGHT-1+j];
+						HH5_tmp[x][SUB5_HEIGHT-1] := HH5_tmp[x][SUB5_HEIGHT-1] + HH5[x+i][SUB5_HEIGHT-1+j];	
+				end				
+				LH5_tmp[x][SUB5_HEIGHT-1] := LH5_tmp[x][SUB4_HEIGHT-1] / SCALING_3x3_BOUNDARY;
+				HL5_tmp[x][SUB5_HEIGHT-1] := HL5_tmp[x][SUB4_HEIGHT-1] / SCALING_3x3_BOUNDARY;
+				HH5_tmp[x][SUB5_HEIGHT-1] := HH5_tmp[x][SUB4_HEIGHT-1] / SCALING_3x3_BOUNDARY; 				
+			end
+		end
+		
+		// Boundary condition (column)
+		foreach int y in 1 .. (SUB5_HEIGHT-2) do
+			foreach int j in -(FILTERING_LENGTH3x3-1)/2 .. (FILTERING_LENGTH3x3-1)/2 do
+				foreach int i in 0 .. (FILTERING_LENGTH3x3-1)/2 do
+						LH5_tmp[0][y] := LH5_tmp[0][y] + LH5[i][y+j];
+						HL5_tmp[0][y] := HL5_tmp[0][y] + HL5[i][y+j];
+						HH5_tmp[0][y] := HH5_tmp[0][y] + HH5[i][y+j];	
+				end
+				LH5_tmp[0][y] := LH5_tmp[0][y] / SCALING_3x3_BOUNDARY;
+				HL5_tmp[0][y] := HL5_tmp[0][y] / SCALING_3x3_BOUNDARY;
+				HH5_tmp[0][y] := HH5_tmp[0][y] / SCALING_3x3_BOUNDARY;
+				
+				foreach int i in -(FILTERING_LENGTH3x3-1)/2 .. 0 do
+						LH5_tmp[SUB5_WIDTH-1][y] := LH5_tmp[SUB5_WIDTH-1][y] + LH5[SUB5_WIDTH-1+i][y+j];
+						HL5_tmp[SUB5_WIDTH-1][y] := HL5_tmp[SUB5_WIDTH-1][y] + HL5[SUB5_WIDTH-1+i][y+j];
+						HH5_tmp[SUB5_WIDTH-1][y] := HH5_tmp[SUB5_WIDTH-1][y] + HH5[SUB5_WIDTH-1+i][y+j];	
+				end				
+				LH5_tmp[SUB5_WIDTH-1][y] := LH5_tmp[SUB5_WIDTH-1][y] / SCALING_3x3_BOUNDARY;
+				HL5_tmp[SUB5_WIDTH-1][y] := HL5_tmp[SUB5_WIDTH-1][y] / SCALING_3x3_BOUNDARY;
+				HH5_tmp[SUB5_WIDTH-1][y] := HH5_tmp[SUB5_WIDTH-1][y] / SCALING_3x3_BOUNDARY;
+			end
+		end
+		
+		// Four corner points
+		LH5_tmp[0][0] := (LH5[0][0] + LH5[0][1] + LH5[1][0] + LH5[1][1])/SCALING_3x3_CORNER;
+		LH5_tmp[0][SUB5_HEIGHT-1] := (LH5[0][SUB5_HEIGHT-1] + LH5[0][SUB5_HEIGHT-1-1] + LH5[1][SUB5_HEIGHT-1] + LH5[1][SUB5_HEIGHT-1-1])/SCALING_3x3_CORNER;
+		LH5_tmp[SUB5_WIDTH-1][0] := (LH5[SUB5_WIDTH-1][0] + LH5[SUB5_WIDTH-1][1] + LH5[SUB5_WIDTH-1-1][0] + LH5[SUB5_WIDTH-1-1][1])/SCALING_3x3_CORNER;
+		LH5_tmp[SUB5_WIDTH-1][SUB5_HEIGHT-1] := (LH5[SUB5_WIDTH-1][SUB5_HEIGHT-1] + LH5[SUB5_WIDTH-1][SUB5_HEIGHT-1-1] + LH5[SUB5_WIDTH-1-1][SUB5_HEIGHT-1] + LH5[SUB5_WIDTH-1-1][SUB5_HEIGHT-1-1])/SCALING_3x3_CORNER;
+		
+		HL5_tmp[0][0] := (HL5[0][0] + HL5[0][1] + HL5[1][0] + HL5[1][1])/SCALING_3x3_CORNER;
+		HL5_tmp[0][SUB1_HEIGHT-1] := (HL5[0][SUB1_HEIGHT-1] + HL5[0][SUB1_HEIGHT-1-1] + HL5[1][SUB1_HEIGHT-1] + HL5[1][SUB1_HEIGHT-1-1])/SCALING_3x3_CORNER;
+		HL5_tmp[SUB1_WIDTH-1][0] := (HL5[SUB1_WIDTH-1][0] + HL5[SUB1_WIDTH-1][1] + HL5[SUB1_WIDTH-1-1][0] + HL5[SUB1_WIDTH-1-1][1])/SCALING_3x3_CORNER;
+		HL5_tmp[SUB1_WIDTH-1][SUB1_HEIGHT-1] := (HL5[SUB1_WIDTH-1][SUB1_HEIGHT-1] + HL5[SUB1_WIDTH-1][SUB1_HEIGHT-1-1] + HL5[SUB1_WIDTH-1-1][SUB1_HEIGHT-1] + HL5[SUB1_WIDTH-1-1][SUB1_HEIGHT-1-1])/SCALING_3x3_CORNER;
+		
+		HH5_tmp[0][0] := (HH5[0][0] + HH5[0][1] + HH5[1][0] + HH5[1][1])/SCALING_3x3_CORNER;
+		HH5_tmp[0][SUB1_HEIGHT-1] := (HH5[0][SUB1_HEIGHT-1] + HH5[0][SUB1_HEIGHT-1-1] + HH5[1][SUB1_HEIGHT-1] + HH4[1][SUB1_HEIGHT-1-1])/SCALING_3x3_CORNER;
+		HH5_tmp[SUB1_WIDTH-1][0] := (HH5[SUB1_WIDTH-1][0] + HH5[SUB1_WIDTH-1][1] + HH5[SUB1_WIDTH-1-1][0] + HH5[SUB1_WIDTH-1-1][1])/SCALING_3x3_CORNER;
+		HH5_tmp[SUB1_WIDTH-1][SUB1_HEIGHT-1] := (HH5[SUB1_WIDTH-1][SUB1_HEIGHT-1] + HH5[SUB1_WIDTH-1][SUB1_HEIGHT-1-1] + HH5[SUB1_WIDTH-1-1][SUB1_HEIGHT-1] + HH5[SUB1_WIDTH-1-1][SUB1_HEIGHT-1-1])/SCALING_3x3_CORNER;
+								 	  
+	end
+	
+	// Image resize. Blowing up all the subbands to original image size. 
+	// Resize variables
+	int LH1_rs[IM_WIDTH][IM_HEIGHT];  
+	int HL1_rs[IM_WIDTH][IM_HEIGHT]; 
+	int HH1_rs[IM_WIDTH][IM_HEIGHT]; 
+		
+	int LH2_rs[IM_WIDTH][IM_HEIGHT]; 
+	int HL2_rs[IM_WIDTH][IM_HEIGHT]; 
+	int HH2_rs[IM_WIDTH][IM_HEIGHT]; 
+		
+	int LH3_rs[IM_WIDTH][IM_HEIGHT]; 
+	int HL3_rs[IM_WIDTH][IM_HEIGHT]; 
+	int HH3_rs[IM_WIDTH][IM_HEIGHT]; 
+		
+	int LH4_rs[IM_WIDTH][IM_HEIGHT]; 
+	int HL4_rs[IM_WIDTH][IM_HEIGHT]; 
+	int HH4_rs[IM_WIDTH][IM_HEIGHT]; 
+	
+	int LH5_rs[IM_WIDTH][IM_HEIGHT]; 
+	int HL5_rs[IM_WIDTH][IM_HEIGHT]; 
+	int HH5_rs[IM_WIDTH][IM_HEIGHT];
+	
+	int x_ratio; int y_ratio; int px; int py;
+	
+	// Image resize using nearest neighbor algorithm. 
+	// Good comparison point against other algorithm e.g. bi-linear / bicubic. 
+	// Comparison will be accuracy vs FPGA (speed/resource etc.)   
+	
+	imageResize: action ==>
+	do
+	
+	LH1_max := 0;
+	HL1_max := 0;
+	HH1_max := 0;
+	
+	LH2_max := 0;
+	HL2_max := 0;
+	HH2_max := 0;
+	
+	LH3_max := 0;
+	HL3_max := 0;
+	HH3_max := 0;
+	
+	LH4_max := 0;
+	HL4_max := 0;
+	HH4_max := 0;
+	
+	LH5_max := 0;
+	HL5_max := 0;
+	HH5_max := 0; 
+	
+	//Subband 1
+		x_ratio := IM_WIDTH/SUB1_WIDTH;
+		y_ratio := IM_HEIGHT/SUB1_HEIGHT;		
+				
+		foreach int i in 0 .. (IM_WIDTH-1) do
+			foreach int j in 0 .. (IM_HEIGHT-1) do				
+				px := i/x_ratio;
+				py := j/y_ratio;				
+				
+				// Scale parameter and max calculation combined here  
+				LH1_rs[i][j] := LH1_tmp[px][py] * SCALE_PARAM_1;					
+				HL1_rs[i][j] := HL1_tmp[px][py] * SCALE_PARAM_1;					
+				HH1_rs[i][j] := HH1_tmp[px][py] * SCALE_PARAM_1;				
+					
+				if(LH1_rs[i][j]>LH1_max) then LH1_max := LH1_rs[i][j]; end
+				if(HL1_rs[i][j]>HL1_max) then HL1_max := HL1_rs[i][j]; end					
+				if(HH1_rs[i][j]>HH1_max) then HH1_max := HH1_rs[i][j]; end	
+			end 
+		end
+		
+				
+		//Subband 2
+		x_ratio := IM_WIDTH/SUB2_WIDTH;
+		y_ratio := IM_HEIGHT/SUB2_HEIGHT;		
+		
+		foreach int i in 0 .. (IM_WIDTH-1) do
+			foreach int j in 0 .. (IM_HEIGHT-1) do				
+				px := i/x_ratio;
+				py := j/y_ratio;
+								
+				LH2_rs[i][j] := LH2_tmp[px][py] * SCALE_PARAM_2;
+				HL2_rs[i][j] := HL2_tmp[px][py] * SCALE_PARAM_2;
+				HH2_rs[i][j] := HH2_tmp[px][py] * SCALE_PARAM_2;
+
+				if(LH2_rs[i][j]>LH2_max) then LH2_max := LH2_rs[i][j]; end
+				if(HL2_rs[i][j]>HL2_max) then HL2_max := HL2_rs[i][j]; end					
+				if(HH2_rs[i][j]>HH2_max) then HH2_max := HH2_rs[i][j]; end		
+			end 
+		end
+		
+		//Subband 3
+		x_ratio := IM_WIDTH/SUB3_WIDTH;
+		y_ratio := IM_HEIGHT/SUB3_HEIGHT;		
+		
+		foreach int i in 0 .. (IM_WIDTH-1) do
+			foreach int j in 0 .. (IM_HEIGHT-1) do
+				px := i/x_ratio;
+				py := j/y_ratio;		
+				
+				LH3_rs[i][j] := LH3_tmp[px][py] * SCALE_PARAM_3;
+				HL3_rs[i][j] := HL3_tmp[px][py] * SCALE_PARAM_3;
+				HH3_rs[i][j] := HH3_tmp[px][py] * SCALE_PARAM_3;
+
+				
+				if(LH3_rs[i][j]>LH3_max) then LH3_max := LH3_rs[i][j]; end
+				if(HL3_rs[i][j]>HL3_max) then HL3_max := HL3_rs[i][j]; end					
+				if(HH3_rs[i][j]>HH3_max) then HH3_max := HH3_rs[i][j]; end 				
+			end 
+		end
+		
+		//Subband 4
+		x_ratio := IM_WIDTH/SUB4_WIDTH;
+		y_ratio := IM_HEIGHT/SUB4_HEIGHT;		
+		
+		foreach int i in 0 .. (IM_WIDTH-1) do
+			foreach int j in 0 .. (IM_HEIGHT-1) do
+				px := i/x_ratio;
+				py := j/y_ratio;
+				
+				LH4_rs[i][j] := LH4_tmp[px][py] * SCALE_PARAM_4;
+				HL4_rs[i][j] := HL4_tmp[px][py] * SCALE_PARAM_4;
+				HH4_rs[i][j] := HH4_tmp[px][py] * SCALE_PARAM_4;
+				
+				if(LH4_rs[i][j]>LH4_max) then LH4_max := LH4_rs[i][j]; end
+				if(HL4_rs[i][j]>HL4_max) then HL4_max := HL4_rs[i][j]; end					
+				if(HH4_rs[i][j]>HH4_max) then HH4_max := HH4_rs[i][j]; end 				
+			end 
+		end
+		
+		//Subband 5
+		x_ratio := IM_WIDTH/SUB5_WIDTH;
+		y_ratio := IM_HEIGHT/SUB5_HEIGHT;		
+		
+		foreach int i in 0 .. (IM_WIDTH-1) do
+			foreach int j in 0 .. (IM_HEIGHT-1) do
+				px := i/x_ratio;
+				py := j/y_ratio;
+				
+				LH5_rs[i][j] := LH5_tmp[px][py] * SCALE_PARAM_5;
+				HL5_rs[i][j] := HL5_tmp[px][py] * SCALE_PARAM_5;
+				HH5_rs[i][j] := HH5_tmp[px][py] * SCALE_PARAM_5;
+				
+				if(LH5_rs[i][j]>LH5_max) then LH5_max := LH5_rs[i][j]; end
+				if(HL5_rs[i][j]>HL5_max) then HL5_max := HL5_rs[i][j]; end					
+				if(HH5_rs[i][j]>HH5_max) then HH5_max := HH5_rs[i][j]; end		
+			end 
+		end		
+	end
+
+	
+	/* Normalization and Visual map formation */		
+	
+	int maphor[IM_WIDTH][IM_HEIGHT];
+	int mapver[IM_WIDTH][IM_HEIGHT];
+	int mapdia[IM_WIDTH][IM_HEIGHT];
+	
+	int oritentMap_fp[IM_WIDTH][IM_HEIGHT];
+	
+	orientMap: action ==>
+	do	
+		foreach int x in 0 .. (IM_WIDTH-1) do
+			foreach int y in 0 .. (IM_HEIGHT-1) do
+				LH1_rs[x][y] := (LH1_rs[x][y]* 100)/LH1_max;
+				HL1_rs[x][y] := (HL1_rs[x][y]* 100)/HL1_max; 	
+				HH1_rs[x][y] := (HH1_rs[x][y]* 100)/HH1_max;
+				
+				LH2_rs[x][y] := (LH2_rs[x][y]* 100)/LH2_max;
+				HL2_rs[x][y] := (HL2_rs[x][y]* 100)/HL2_max; 	
+				HH2_rs[x][y] := (HH2_rs[x][y]* 100)/HH2_max;
+				
+				LH3_rs[x][y] := (LH3_rs[x][y]* 100)/LH3_max;
+				HL3_rs[x][y] := (HL3_rs[x][y]* 100)/HL3_max; 	
+				HH3_rs[x][y] := (HH3_rs[x][y]* 100)/HH3_max;
+				
+				LH4_rs[x][y] := (LH4_rs[x][y]* 100)/LH4_max;
+				HL4_rs[x][y] := (HL4_rs[x][y]* 100)/HL4_max; 	
+				HH4_rs[x][y] := (HH4_rs[x][y]* 100)/HH4_max;
+				
+				LH5_rs[x][y] := (LH5_rs[x][y]* 100)/LH5_max;
+				HL5_rs[x][y] := (HL5_rs[x][y]* 100)/HL5_max; 	
+				HH5_rs[x][y] := (HH5_rs[x][y]* 100)/HH5_max;
+				
+				maphor[x][y] := LH1_rs[x][y] + LH2_rs[x][y] + LH3_rs[x][y] + LH4_rs[x][y] + LH5_rs[x][y];
+				mapver[x][y] := HL1_rs[x][y] + HL2_rs[x][y] + HL3_rs[x][y] + HL4_rs[x][y] + HL5_rs[x][y];
+				mapdia[x][y] := HH1_rs[x][y] + HH2_rs[x][y] + HH3_rs[x][y] + HH4_rs[x][y] + HH5_rs[x][y];
+				
+				oritentMap_fp[x][y] := maphor[x][y]*maphor[x][y] + mapver[x][y]*mapver[x][y] + mapdia[x][y]*mapdia[x][y];    	
+				//println(oritentMap_fp[x][y]);			
+			end
+		end 
+						  				
+	end
+
+	uint(size=8) orientMap_INT[IM_WIDTH][IM_HEIGHT];
+	int orientMapMax := 0;
+		
+	finalMap: action ==>
+	var int tmp
+	do
+		foreach int x in 0 .. (IM_WIDTH-1) do
+			foreach int y in 0 .. (IM_HEIGHT-1) do
+				if(oritentMap_fp[x][y]>orientMapMax) then 
+					orientMapMax := oritentMap_fp[x][y];
+				end	 				
+			end
+		end
+		
+		foreach int x in 0 .. (IM_WIDTH-1) do
+			foreach int y in 0 .. (IM_HEIGHT-1) do
+				tmp := (oritentMap_fp[x][y]*255)/orientMapMax;
+								
+				floor_c(tmp);
+				orientMap_INT[x][y] := Val_UINT8;	 				
+			end
+		end
+	end
+	
+	/***************************************/
+	procedure floor_c(float num)
+	var int i := 0
+	begin
+		while(num >= 0.0) do
+			i := i+1;
+			num := num-1;
+		end
+		
+		Val_UINT8 := clip_i32_u8(i);
+	end
+	uint(size=8) Val_UINT8;
+	
+	
+//	procedure floor_32(float num)
+//	var int i := 0
+//	begin
+//		while(num >= 0.0) do
+//			i := i+1;
+//			num := num-1;
+//		end
+//		
+//		Val_INT32 := i;
+//	end
+//	int Val_INT32;
+	
+	sendMapValue: action ==> map:[Byte]
+	var uint(size=8) Byte
+	do  
+		Byte := orientMap_INT[countX][countY];		
+		countY := countY + 1;		
+		if(countY = IM_HEIGHT) then
+			countX := countX + 1;
+			countY := 0; 
+		end
+	end
+
+	
+	block: action ==>
+		guard false
+	end	
+	
+	schedule fsm s0 :			
+		s0 (getImageValue ) --> s0;
+		s0 (doneCountX ) --> s1;
+		s1 (getSubband) --> s2;
+		s2 (subbandNormalization) --> s3;
+		s3 (averageFilter3x3) --> s4;
+		s4 (imageResize) --> s5;
+		s5 (orientMap) --> s6; 
+		s6 (finalMap) --> s7;
+		s7 (sendMapValue) --> s7;
+		s7 (doneCountX) --> s8;
+		s8(block) --> s8;			
+	end
+	
+	priority
+		doneCountX > getImageValue;
+		doneCountX > sendMapValue;		
+	end
+
+end

@@ -1,0 +1,10 @@
+package main.vamodel;
+
+import std.header.Parameter.*;
+import std.util.Math.*;
+
+actor mapForm() int L1, int L2, int L3, int L4, int L5 ==> int mapSum:
+	action L1:[L1_Val], L2:[L2_Val], L3:[L3_Val], L4:[L4_Val], L5:[L5_Val] ==> mapSum:[L1_Val + L2_Val + L3_Val + L4_Val + L5_Val]
+	
+	end
+end

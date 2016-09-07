@@ -1,0 +1,10 @@
+package main.vamodel;
+
+import std.header.Parameter.*;
+import std.util.Math.*;
+
+actor orientForm() int map_Ver, int map_Hor, int map_Dia ==> int orient_map:
+	action map_Ver:[var_val], map_Hor:[hor_val], map_Dia:[dia_val] ==> orient_map:[var_val*var_val + hor_val*hor_val + dia_val*dia_val]
+	
+	end
+end

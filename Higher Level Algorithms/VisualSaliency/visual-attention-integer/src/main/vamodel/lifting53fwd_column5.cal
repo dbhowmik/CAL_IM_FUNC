@@ -1,0 +1,53 @@
+package main.vamodel;
+
+import std.header.Parameter.*;
+
+
+actor lifting53fwd_column5() int imageStream ==> int coeff_L, int coeff_H: 
+	int length := SUB4_HEIGHT;	
+	int imageBuffer[length];	
+	
+		
+  	getImageValue: action imageStream:[Bytes] repeat length ==>  	
+	do		
+		foreach int countX in 0 .. length-1
+		do
+			imageBuffer[countX] := Bytes[countX];						 					
+		end
+	end
+				
+	waveletTransform: action ==>			
+	do	
+		// Prediction 1
+        foreach int i in 0 .. (length/2-1) do
+           	imageBuffer[2*i+1] := imageBuffer[2*i+1] - ((imageBuffer[2*i+1-1] + imageBuffer[2*i+1+1])>>1);
+        end
+        imageBuffer[length-1] := imageBuffer[length-1] - imageBuffer[length-2] ;// Symmetric extension
+            	
+	    // Update 1
+    	foreach int i in 1 .. (length/2-1) do
+            imageBuffer[2*i] := imageBuffer[2*i] + ((imageBuffer[2*i-1] + imageBuffer[2*i+1]) >> 2);
+        end
+        imageBuffer[0] := imageBuffer[0] + (imageBuffer[1] >> 1); // Symmetric extension                   
+                      	        
+	end
+		
+	sendCoefficient: action ==> coeff_L:[L_val] repeat length/2, coeff_H:[H_val] repeat length/2  
+	var int L_val[length/2],
+		int H_val[length/2]
+	do
+		// De-interleave              
+		foreach int i in 0 .. length/2-1
+		do
+			L_val[i] := imageBuffer[2*i];
+			H_val[i] := imageBuffer[2*i+1];   
+		end		
+	end
+		
+	schedule fsm s0 :						
+		s0 (getImageValue ) --> s1;		
+		s1 (waveletTransform) --> s2; 
+		s2 (sendCoefficient) --> s0;				
+	end	
+	
+end

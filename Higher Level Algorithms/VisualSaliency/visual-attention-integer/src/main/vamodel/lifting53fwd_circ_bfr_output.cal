@@ -1,0 +1,39 @@
+package main.vamodel;
+
+import std.header.Parameter.*;
+
+
+actor lifting53fwd_circ_bfr_output() int imageStream ==> int coeff_H: 
+	int(size=4) sizeArr = 3;
+  int(size=16) threePixelBuffer[sizeArr]; // circular buffer
+  int(size=8) midPoint := 0;
+  // the C backend incorrectly uses '0' as an unsigned int when compared with < comparator,
+  // so the signed int type must be made explicit.
+  int(size=4) zero = 0;
+
+  firstTwoPixelsInRow: action imageStream:[a,b] ==> coeff_H:[0]
+  do
+  threePixelBuffer[0] := a;
+  threePixelBuffer[1] := b;
+  end
+
+  low: action imageStream:[c] ==> 
+  do
+  midPoint := (midPoint + 1) mod sizeArr;
+  threePixelBuffer[(midPoint + 1) mod sizeArr] := c;
+  end
+
+  high: action imageStream:[c] ==> coeff_H:[threePixelBuffer[midPoint]
+                                            - ((threePixelBuffer[ if (midPoint-1 < zero) then sizeArr-1 else (midPoint-1) end]
+                                                + threePixelBuffer[ if (midPoint+1 > sizeArr-1) then zero else (midPoint+1) end]) >> 1)]
+  do
+  midPoint := (midPoint + 1) mod sizeArr;
+  threePixelBuffer[(midPoint + 1) mod sizeArr] := c;
+  end
+
+  schedule fsm s0 :
+	s0 (firstTwoPixelsInRow ) --> s1;
+	s1 (high) --> s2;
+	s2 (low) --> s1;
+  end
+end

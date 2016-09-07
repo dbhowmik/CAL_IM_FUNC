@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<XDF name="FWT_Level_3">
+    <Port kind="Input" name="input">
+        <Type name="int">
+            <Entry kind="Expr" name="size">
+                <Expr kind="Literal" literal-kind="Integer" value="32"/>
+            </Entry>
+        </Type>
+    </Port>
+    <Port kind="Output" name="LL">
+        <Type name="int">
+            <Entry kind="Expr" name="size">
+                <Expr kind="Literal" literal-kind="Integer" value="32"/>
+            </Entry>
+        </Type>
+    </Port>
+    <Port kind="Output" name="LH">
+        <Type name="int">
+            <Entry kind="Expr" name="size">
+                <Expr kind="Literal" literal-kind="Integer" value="32"/>
+            </Entry>
+        </Type>
+    </Port>
+    <Port kind="Output" name="HL">
+        <Type name="int">
+            <Entry kind="Expr" name="size">
+                <Expr kind="Literal" literal-kind="Integer" value="32"/>
+            </Entry>
+        </Type>
+    </Port>
+    <Port kind="Output" name="HH">
+        <Type name="int">
+            <Entry kind="Expr" name="size">
+                <Expr kind="Literal" literal-kind="Integer" value="32"/>
+            </Entry>
+        </Type>
+    </Port>
+    <Instance id="filter_row_L3">
+        <Class name="main.vamodel.lifting53fwd_circ_bfr"/>
+    </Instance>
+    <Instance id="transpose_row_L_L3">
+        <Class name="main.vamodel.transpose_row3"/>
+    </Instance>
+    <Instance id="filter_column_L_L3">
+        <Class name="main.vamodel.lifting53fwd_circ_bfr"/>
+    </Instance>
+    <Instance id="transpose_column_LL_L3">
+        <Class name="main.vamodel.trans_col_wo_norm3"/>
+    </Instance>
+    <Instance id="transpose_row_H_L3">
+        <Class name="main.vamodel.transpose_row3"/>
+    </Instance>
+    <Instance id="transpose_column_LH_L3">
+        <Class name="main.vamodel.transpose_column3"/>
+    </Instance>
+    <Instance id="filter_column_H_L3">
+        <Class name="main.vamodel.lifting53fwd_circ_bfr"/>
+    </Instance>
+    <Instance id="transpose_column_HH_L3">
+        <Class name="main.vamodel.transpose_column3"/>
+    </Instance>
+    <Instance id="transpose_column_HL_L3">
+        <Class name="main.vamodel.transpose_column3"/>
+    </Instance>
+    <Connection dst="transpose_row_L_L3" dst-port="coeffStream"
+        src="filter_row_L3" src-port="coeff_L"/>
+    <Connection dst="transpose_row_H_L3" dst-port="coeffStream"
+        src="filter_row_L3" src-port="coeff_H"/>
+    <Connection dst="filter_column_L_L3" dst-port="imageStream"
+        src="transpose_row_L_L3" src-port="coeffStream_tr"/>
+    <Connection dst="filter_column_H_L3" dst-port="imageStream"
+        src="transpose_row_H_L3" src-port="coeffStream_tr"/>
+    <Connection dst="transpose_column_LL_L3" dst-port="coeffStream"
+        src="filter_column_L_L3" src-port="coeff_L"/>
+    <Connection dst="transpose_column_LH_L3" dst-port="coeffStream"
+        src="filter_column_L_L3" src-port="coeff_H"/>
+    <Connection dst="transpose_column_HL_L3" dst-port="coeffStream"
+        src="filter_column_H_L3" src-port="coeff_L"/>
+    <Connection dst="transpose_column_HH_L3" dst-port="coeffStream"
+        src="filter_column_H_L3" src-port="coeff_H"/>
+    <Connection dst="" dst-port="LL" src="transpose_column_LL_L3" src-port="coeffStream_tr"/>
+    <Connection dst="" dst-port="LH" src="transpose_column_LH_L3" src-port="coeffStream_tr"/>
+    <Connection dst="" dst-port="HL" src="transpose_column_HL_L3" src-port="coeffStream_tr"/>
+    <Connection dst="" dst-port="HH" src="transpose_column_HH_L3" src-port="coeffStream_tr"/>
+    <Connection dst="filter_row_L3" dst-port="imageStream" src="" src-port="input"/>
+</XDF>

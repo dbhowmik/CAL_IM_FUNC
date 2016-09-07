@@ -1,0 +1,41 @@
+package std.header;
+
+unit Parameter:
+
+// Image size information 
+	uint(size=16) IM_WIDTH = 640;
+	uint(size=16) IM_HEIGHT = 416;
+	
+// Subband size information	
+	uint(size=16) SUB5_WIDTH = IM_WIDTH/32;
+	uint(size=16) SUB5_HEIGHT = IM_HEIGHT/32;
+	
+	uint(size=16) SUB4_WIDTH = IM_WIDTH/16;
+	uint(size=16) SUB4_HEIGHT = IM_HEIGHT/16;
+	
+	uint(size=16) SUB3_WIDTH = IM_WIDTH/8;
+	uint(size=16) SUB3_HEIGHT = IM_HEIGHT/8;
+	
+	uint(size=16) SUB2_WIDTH = IM_WIDTH/4;
+	uint(size=16) SUB2_HEIGHT = IM_HEIGHT/4;
+	
+	uint(size=16) SUB1_WIDTH = IM_WIDTH/2;
+	uint(size=16) SUB1_HEIGHT = IM_HEIGHT/2;
+	
+// Decomposition level 
+	uint(size=8) LEVEL = 5;
+
+// Filter size 3x3
+	uint(size=8) FILTERING_LENGTH3x3 = 3;
+	uint(size=8) SCALING_3x3 = 9;
+	uint(size=8) SCALING_3x3_BOUNDARY = 6;
+	uint(size=8) SCALING_3x3_CORNER = 4;
+     	
+// Orientation map scaling
+	uint(size=8) SCALE_PARAM_5 = 1;
+	uint(size=8) SCALE_PARAM_4 = 4;
+	uint(size=8) SCALE_PARAM_3 = 10;
+	uint(size=8) SCALE_PARAM_2 = 4;
+	uint(size=8) SCALE_PARAM_1 = 1;
+			
+end

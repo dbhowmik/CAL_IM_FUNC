@@ -1,0 +1,58 @@
+package main.vamodel;
+
+import std.header.Parameter.*;
+
+actor trans_col_wo_norm4() int coeffStream ==> int coeffStream_tr: 
+	int width = SUB4_WIDTH;
+	int height = SUB4_HEIGHT;
+	
+	int  coeffBuffer[height][width];
+	
+	int countX := 0;
+	int countY := 0;	
+	
+	getCoeffValue: action coeffStream:[Val] repeat height ==>  	
+	do	
+		foreach int count in 0 .. height-1
+		do
+			coeffBuffer[count][countY] := Val[count];															
+		end
+		countY := countY + 1;										
+	end
+
+	doneCountY: action ==>
+	guard countY = width
+	do
+		countY := 0;		
+	end
+	
+	doneCountX: action ==>
+	guard countX = height
+	do
+		countX := 0;	
+	end
+		
+	sendCoeffValue: action ==> coeffStream_tr:[outVal] repeat width
+	var int outVal[width]   	
+	do		
+		foreach int i in 0 .. width-1
+		do
+			outVal[i] := coeffBuffer[countX][i];  			 
+		end						      	
+		countX := countX + 1;										
+	end
+				 
+	schedule fsm s0:
+		s0 (getCoeffValue ) --> s0;
+		s0 (doneCountY ) --> s1;		
+		s1 (sendCoeffValue) --> s1;
+		s1 (doneCountX) --> s0;	
+	end
+	
+	priority 
+		doneCountY > getCoeffValue;
+		doneCountX > sendCoeffValue;
+	end	
+
+
+end

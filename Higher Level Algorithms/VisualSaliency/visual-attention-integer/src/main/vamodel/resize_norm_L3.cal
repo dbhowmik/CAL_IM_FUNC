@@ -1,0 +1,93 @@
+package main.vamodel;
+
+import std.header.Parameter.*;
+import std.util.Math.*;
+
+actor resize_norm_L3() int coefficient ==> int filt_coeff:
+	int width = SUB3_WIDTH;
+	int height = SUB3_HEIGHT;
+	int scale := SCALE_PARAM_3;
+	
+	int coeffBuffer[height][width];	
+	int countX := 0;
+	int countY := 0;	
+	
+	getCoeffValue: action coefficient:[value] ==>  	
+	do			
+		coeffBuffer[countX][countY] := value;
+				
+		countY := countY + 1;
+		
+		if(countY = width) then
+			countX := countX + 1;
+			countY := 0; 
+		end									
+	end
+	
+	doneCountX: action ==>
+	guard countX = height
+	do
+		countX := 0;					
+	end
+
+	// Image resize using nearest neighbor algorithm. 
+	// Good comparison point against other algorithm e.g. bi-linear / bicubic. 
+	// Comparison will be accuracy vs FPGA speed/resource etc.
+	    
+	int tmp[IM_HEIGHT][IM_WIDTH];  
+	int max_val := 0;
+	int x_ratio; int y_ratio; int px; int py;
+	
+	imageResize: action ==>
+	do						
+		x_ratio := IM_HEIGHT/height;
+		y_ratio := IM_WIDTH/width;
+		max_val := 0;
+		
+				
+		foreach int i in 0 .. (IM_HEIGHT-1) do
+			foreach int j in 0 .. (IM_WIDTH-1) do				
+				px := i/x_ratio;
+				py := j/y_ratio;				
+								
+				// Scale parameter and max calculation combined here  
+				tmp[i][j] := coeffBuffer[px][py] * scale;					
+					
+				if(tmp[i][j]>max_val) then max_val := tmp[i][j]; end // Find maximum value for normalisation
+			end 
+		end
+		
+	end
+	
+	sendResizedValue: action ==> filt_coeff:[coeff_Val]
+	var int coeff_Val
+	do  
+		coeff_Val := (tmp[countX][countY]* 100)/max_val;
+			
+		countY := countY + 1;		
+		if(countY = IM_WIDTH) then
+			countX := countX + 1;
+			countY := 0; 
+		end
+	end
+	
+	doneResizeCountX: action ==>
+	guard countX = IM_HEIGHT
+	do
+		countX := 0;		
+	end
+		
+	schedule fsm s0 :			
+		s0 (getCoeffValue ) --> s0;
+		s0 (doneCountX ) --> s1;
+		s1 (imageResize) --> s2;
+		s2 (sendResizedValue) --> s2;
+		s2 (doneResizeCountX) --> s0;		
+	end
+	
+	priority
+		doneCountX > getCoeffValue;
+		doneResizeCountX > sendResizedValue;		
+	end
+
+end

@@ -1,0 +1,82 @@
+package main.vamodel;
+
+import std.header.Parameter.*;
+import std.util.Math.*;
+ 
+actor finalMap() int coefficient ==> uint(size=8) map:			
+	int coeffBuffer[IM_HEIGHT][IM_WIDTH];	
+	int countX := 0;
+	int countY := 0;	
+	
+	int max_val := 0;
+	
+	getImageValue: action coefficient:[value] ==>  	
+	do				
+		coeffBuffer[countX][countY] := value;
+		
+		if(coeffBuffer[countX][countY]>max_val) then max_val := coeffBuffer[countX][countY]; end // Find the maximum value.
+		
+		countY := countY + 1;
+		
+		if(countY = IM_WIDTH) then
+			countX := countX + 1;
+			countY := 0; 
+		end									
+	end
+	
+	doneCountX: action ==>
+	guard countX = IM_HEIGHT
+	do
+		countX := 0;		
+	end
+	
+	doneSendCountX: action ==>
+	guard countX = IM_HEIGHT
+	do
+		countX := 0;
+		max_val := 0;		
+	end
+					
+	finalMap: action ==> map:[Byte]
+	var int Byte, 
+		int tmp
+	do
+		tmp := (coeffBuffer[countX][countY]*255)/max_val;
+		floor_c(tmp);	
+		Byte := Val_UINT8; 
+		
+		countY := countY + 1;		
+		if(countY = IM_WIDTH) then
+			countX := countX + 1;
+			countY := 0; 
+		end
+		
+	end
+	
+	/***************************************/
+	procedure floor_c(int num)
+	var int i := 0
+	begin
+		while(num >= 0) do 
+			i := i+1;
+			num := num-1;
+		end
+		
+		Val_UINT8 := clip_i32_u8(i);
+	end
+	uint(size=8) Val_UINT8;
+	/***************************************/
+	
+	schedule fsm s0 :			
+		s0 (getImageValue ) --> s0;
+		s0 (doneCountX ) --> s1;
+		s1 (finalMap) --> s1;
+		s1 (doneSendCountX) --> s0;					
+	end
+	
+	priority
+		doneCountX > getImageValue;
+		doneSendCountX > finalMap;		
+	end
+
+end

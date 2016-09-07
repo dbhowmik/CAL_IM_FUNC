@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<XDF name="TopVAModel">
+    <Instance id="Source">
+        <Class name="std.stdio.Source"/>
+    </Instance>
+    <Instance id="write_stream">
+        <Class name="std.stdio.Writer"/>
+    </Instance>
+    <Instance id="mainModel">
+        <Class name="xdf.MainVAmodel"/>
+    </Instance>
+    <Connection dst="mainModel" dst-port="input" src="Source" src-port="O"/>
+    <Connection dst="write_stream" dst-port="Byte" src="mainModel" src-port="output"/>
+    <Connection dst="write_stream" dst-port="pEOF" src="mainModel" src-port="EOS"/>
+</XDF>
