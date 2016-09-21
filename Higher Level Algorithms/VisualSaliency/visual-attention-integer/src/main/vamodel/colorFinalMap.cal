@@ -1,0 +1,12 @@
+package main.vamodel;
+
+import std.header.Parameter.*;
+import std.util.Math.*;
+
+actor colorFinalMap() uint(size=8) map_Y, uint(size=8) map_U, uint(size=8) map_V ==> uint(size=8) final_map:
+	action map_Y:[Y_val], map_U:[U_val], map_V:[V_val] ==> final_map: [tmp_val] //  [(V_val>>1 + U_val>>2 + map_V>>2)]
+	var uint(size=8) tmp_val
+	do
+		tmp_val:= (Y_val*10 + U_val*0 + V_val*0)/10;
+	end
+end

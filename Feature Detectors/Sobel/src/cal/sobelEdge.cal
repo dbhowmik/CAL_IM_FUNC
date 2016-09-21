@@ -59,7 +59,7 @@ actor sobelEdge() uint(size=8) Y
 						pix_02:[tmp_02], pix_12:[tmp_12], pix_22:[tmp_22], pix_21:[tmp_21]	
 	do					
 		if(countX=0 || countX=IM_WIDTH || countY=0 || countY=IM_HEIGHT) then
-			tmp_00 := 0;
+		    tmp_00 := 0;
 		    tmp_02 := 0;
 		    tmp_01 := 0;
 		    tmp_10 := 0;

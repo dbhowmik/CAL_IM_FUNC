@@ -1,0 +1,270 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<XDF name="saliencyMapGen">
+    <Port kind="Input" name="LH1">
+        <Type name="int">
+            <Entry kind="Expr" name="size">
+                <Expr kind="Literal" literal-kind="Integer" value="32"/>
+            </Entry>
+        </Type>
+    </Port>
+    <Port kind="Input" name="HL1">
+        <Type name="int">
+            <Entry kind="Expr" name="size">
+                <Expr kind="Literal" literal-kind="Integer" value="32"/>
+            </Entry>
+        </Type>
+    </Port>
+    <Port kind="Input" name="HH1">
+        <Type name="int">
+            <Entry kind="Expr" name="size">
+                <Expr kind="Literal" literal-kind="Integer" value="32"/>
+            </Entry>
+        </Type>
+    </Port>
+    <Port kind="Input" name="LH2">
+        <Type name="int">
+            <Entry kind="Expr" name="size">
+                <Expr kind="Literal" literal-kind="Integer" value="32"/>
+            </Entry>
+        </Type>
+    </Port>
+    <Port kind="Input" name="HL2">
+        <Type name="int">
+            <Entry kind="Expr" name="size">
+                <Expr kind="Literal" literal-kind="Integer" value="32"/>
+            </Entry>
+        </Type>
+    </Port>
+    <Port kind="Input" name="HH2">
+        <Type name="int">
+            <Entry kind="Expr" name="size">
+                <Expr kind="Literal" literal-kind="Integer" value="32"/>
+            </Entry>
+        </Type>
+    </Port>
+    <Port kind="Input" name="LH3">
+        <Type name="int">
+            <Entry kind="Expr" name="size">
+                <Expr kind="Literal" literal-kind="Integer" value="32"/>
+            </Entry>
+        </Type>
+    </Port>
+    <Port kind="Input" name="HL3">
+        <Type name="int">
+            <Entry kind="Expr" name="size">
+                <Expr kind="Literal" literal-kind="Integer" value="32"/>
+            </Entry>
+        </Type>
+    </Port>
+    <Port kind="Input" name="HH3">
+        <Type name="int">
+            <Entry kind="Expr" name="size">
+                <Expr kind="Literal" literal-kind="Integer" value="32"/>
+            </Entry>
+        </Type>
+    </Port>
+    <Port kind="Input" name="LH4">
+        <Type name="int">
+            <Entry kind="Expr" name="size">
+                <Expr kind="Literal" literal-kind="Integer" value="32"/>
+            </Entry>
+        </Type>
+    </Port>
+    <Port kind="Input" name="HL4">
+        <Type name="int">
+            <Entry kind="Expr" name="size">
+                <Expr kind="Literal" literal-kind="Integer" value="32"/>
+            </Entry>
+        </Type>
+    </Port>
+    <Port kind="Input" name="HH4">
+        <Type name="int">
+            <Entry kind="Expr" name="size">
+                <Expr kind="Literal" literal-kind="Integer" value="32"/>
+            </Entry>
+        </Type>
+    </Port>
+    <Port kind="Input" name="LH5">
+        <Type name="int">
+            <Entry kind="Expr" name="size">
+                <Expr kind="Literal" literal-kind="Integer" value="32"/>
+            </Entry>
+        </Type>
+    </Port>
+    <Port kind="Input" name="HL5">
+        <Type name="int">
+            <Entry kind="Expr" name="size">
+                <Expr kind="Literal" literal-kind="Integer" value="32"/>
+            </Entry>
+        </Type>
+    </Port>
+    <Port kind="Input" name="HH5">
+        <Type name="int">
+            <Entry kind="Expr" name="size">
+                <Expr kind="Literal" literal-kind="Integer" value="32"/>
+            </Entry>
+        </Type>
+    </Port>
+    <Port kind="Output" name="map_out">
+        <Type name="uint">
+            <Entry kind="Expr" name="size">
+                <Expr kind="Literal" literal-kind="Integer" value="8"/>
+            </Entry>
+        </Type>
+    </Port>
+    <Instance id="Filter_LH1">
+        <Class name="main.vamodel.average_filter_3x3_L1"/>
+    </Instance>
+    <Instance id="Filter_LH2">
+        <Class name="main.vamodel.average_filter_3x3_L2"/>
+    </Instance>
+    <Instance id="Filter_LH3">
+        <Class name="main.vamodel.average_filter_3x3_L3"/>
+    </Instance>
+    <Instance id="Filter_HL1">
+        <Class name="main.vamodel.average_filter_3x3_L1"/>
+    </Instance>
+    <Instance id="Filter_HL2">
+        <Class name="main.vamodel.average_filter_3x3_L2"/>
+    </Instance>
+    <Instance id="Filter_HL3">
+        <Class name="main.vamodel.average_filter_3x3_L3"/>
+    </Instance>
+    <Instance id="Filter_LH4">
+        <Class name="main.vamodel.average_filter_3x3_L4"/>
+    </Instance>
+    <Instance id="Filter_LH5">
+        <Class name="main.vamodel.average_filter_3x3_L5"/>
+    </Instance>
+    <Instance id="Filter_HL4">
+        <Class name="main.vamodel.average_filter_3x3_L4"/>
+    </Instance>
+    <Instance id="Filter_HL5">
+        <Class name="main.vamodel.average_filter_3x3_L5"/>
+    </Instance>
+    <Instance id="Filter_HH1">
+        <Class name="main.vamodel.average_filter_3x3_L1"/>
+    </Instance>
+    <Instance id="Filter_HH2">
+        <Class name="main.vamodel.average_filter_3x3_L2"/>
+    </Instance>
+    <Instance id="Filter_HH3">
+        <Class name="main.vamodel.average_filter_3x3_L3"/>
+    </Instance>
+    <Instance id="Filter_HH4">
+        <Class name="main.vamodel.average_filter_3x3_L4"/>
+    </Instance>
+    <Instance id="Filter_HH5">
+        <Class name="main.vamodel.average_filter_3x3_L5"/>
+    </Instance>
+    <Instance id="Resize_LH1">
+        <Class name="main.vamodel.resize_norm_L1"/>
+    </Instance>
+    <Instance id="Resize_LH2">
+        <Class name="main.vamodel.resize_norm_L2"/>
+    </Instance>
+    <Instance id="Resize_LH3">
+        <Class name="main.vamodel.resize_norm_L3"/>
+    </Instance>
+    <Instance id="Resize_LH4">
+        <Class name="main.vamodel.resize_norm_L4"/>
+    </Instance>
+    <Instance id="Resize_LH5">
+        <Class name="main.vamodel.resize_norm_L5"/>
+    </Instance>
+    <Instance id="Resize_HL1">
+        <Class name="main.vamodel.resize_norm_L1"/>
+    </Instance>
+    <Instance id="Resize_HL2">
+        <Class name="main.vamodel.resize_norm_L2"/>
+    </Instance>
+    <Instance id="Resize_HL3">
+        <Class name="main.vamodel.resize_norm_L3"/>
+    </Instance>
+    <Instance id="Resize_HL4">
+        <Class name="main.vamodel.resize_norm_L4"/>
+    </Instance>
+    <Instance id="Resize_HL5">
+        <Class name="main.vamodel.resize_norm_L5"/>
+    </Instance>
+    <Instance id="Resize_HH1">
+        <Class name="main.vamodel.resize_norm_L1"/>
+    </Instance>
+    <Instance id="Resize_HH2">
+        <Class name="main.vamodel.resize_norm_L2"/>
+    </Instance>
+    <Instance id="Resize_HH3">
+        <Class name="main.vamodel.resize_norm_L3"/>
+    </Instance>
+    <Instance id="Resize_HH4">
+        <Class name="main.vamodel.resize_norm_L4"/>
+    </Instance>
+    <Instance id="Resize_HH5">
+        <Class name="main.vamodel.resize_norm_L5"/>
+    </Instance>
+    <Instance id="mapHor">
+        <Class name="main.vamodel.mapForm"/>
+    </Instance>
+    <Instance id="mapVer">
+        <Class name="main.vamodel.mapForm"/>
+    </Instance>
+    <Instance id="mapDia">
+        <Class name="main.vamodel.mapForm"/>
+    </Instance>
+    <Instance id="orientMap">
+        <Class name="main.vamodel.orientForm"/>
+    </Instance>
+    <Instance id="finalSalMap">
+        <Class name="main.vamodel.finalMap"/>
+    </Instance>
+    <Connection dst="Resize_LH1" dst-port="coefficient" src="Filter_LH1" src-port="filt_coeff"/>
+    <Connection dst="Resize_LH2" dst-port="coefficient" src="Filter_LH2" src-port="filt_coeff"/>
+    <Connection dst="Resize_LH3" dst-port="coefficient" src="Filter_LH3" src-port="filt_coeff"/>
+    <Connection dst="Resize_LH4" dst-port="coefficient" src="Filter_LH4" src-port="filt_coeff"/>
+    <Connection dst="Resize_LH5" dst-port="coefficient" src="Filter_LH5" src-port="filt_coeff"/>
+    <Connection dst="Resize_HL1" dst-port="coefficient" src="Filter_HL1" src-port="filt_coeff"/>
+    <Connection dst="Resize_HL2" dst-port="coefficient" src="Filter_HL2" src-port="filt_coeff"/>
+    <Connection dst="Resize_HL3" dst-port="coefficient" src="Filter_HL3" src-port="filt_coeff"/>
+    <Connection dst="Resize_HL4" dst-port="coefficient" src="Filter_HL4" src-port="filt_coeff"/>
+    <Connection dst="Resize_HL5" dst-port="coefficient" src="Filter_HL5" src-port="filt_coeff"/>
+    <Connection dst="Resize_HH1" dst-port="coefficient" src="Filter_HH1" src-port="filt_coeff"/>
+    <Connection dst="Resize_HH2" dst-port="coefficient" src="Filter_HH2" src-port="filt_coeff"/>
+    <Connection dst="Resize_HH3" dst-port="coefficient" src="Filter_HH3" src-port="filt_coeff"/>
+    <Connection dst="Resize_HH4" dst-port="coefficient" src="Filter_HH4" src-port="filt_coeff"/>
+    <Connection dst="Resize_HH5" dst-port="coefficient" src="Filter_HH5" src-port="filt_coeff"/>
+    <Connection dst="mapVer" dst-port="L1" src="Resize_LH1" src-port="filt_coeff"/>
+    <Connection dst="mapVer" dst-port="L2" src="Resize_LH2" src-port="filt_coeff"/>
+    <Connection dst="mapVer" dst-port="L3" src="Resize_LH3" src-port="filt_coeff"/>
+    <Connection dst="mapVer" dst-port="L4" src="Resize_LH4" src-port="filt_coeff"/>
+    <Connection dst="mapVer" dst-port="L5" src="Resize_LH5" src-port="filt_coeff"/>
+    <Connection dst="mapHor" dst-port="L1" src="Resize_HL1" src-port="filt_coeff"/>
+    <Connection dst="mapHor" dst-port="L2" src="Resize_HL2" src-port="filt_coeff"/>
+    <Connection dst="mapHor" dst-port="L3" src="Resize_HL3" src-port="filt_coeff"/>
+    <Connection dst="mapHor" dst-port="L4" src="Resize_HL4" src-port="filt_coeff"/>
+    <Connection dst="mapHor" dst-port="L5" src="Resize_HL5" src-port="filt_coeff"/>
+    <Connection dst="mapDia" dst-port="L1" src="Resize_HH1" src-port="filt_coeff"/>
+    <Connection dst="mapDia" dst-port="L2" src="Resize_HH2" src-port="filt_coeff"/>
+    <Connection dst="mapDia" dst-port="L3" src="Resize_HH3" src-port="filt_coeff"/>
+    <Connection dst="mapDia" dst-port="L4" src="Resize_HH4" src-port="filt_coeff"/>
+    <Connection dst="mapDia" dst-port="L5" src="Resize_HH5" src-port="filt_coeff"/>
+    <Connection dst="orientMap" dst-port="map_Ver" src="mapVer" src-port="mapSum"/>
+    <Connection dst="orientMap" dst-port="map_Hor" src="mapHor" src-port="mapSum"/>
+    <Connection dst="orientMap" dst-port="map_Dia" src="mapDia" src-port="mapSum"/>
+    <Connection dst="finalSalMap" dst-port="coefficient" src="orientMap" src-port="orient_map"/>
+    <Connection dst="" dst-port="map_out" src="finalSalMap" src-port="map"/>
+    <Connection dst="Filter_LH1" dst-port="coefficient" src="" src-port="LH1"/>
+    <Connection dst="Filter_HL1" dst-port="coefficient" src="" src-port="HL1"/>
+    <Connection dst="Filter_HH1" dst-port="coefficient" src="" src-port="HH1"/>
+    <Connection dst="Filter_LH2" dst-port="coefficient" src="" src-port="LH2"/>
+    <Connection dst="Filter_HL2" dst-port="coefficient" src="" src-port="HL2"/>
+    <Connection dst="Filter_HH2" dst-port="coefficient" src="" src-port="HH2"/>
+    <Connection dst="Filter_LH3" dst-port="coefficient" src="" src-port="LH3"/>
+    <Connection dst="Filter_HL3" dst-port="coefficient" src="" src-port="HL3"/>
+    <Connection dst="Filter_HH3" dst-port="coefficient" src="" src-port="HH3"/>
+    <Connection dst="Filter_LH4" dst-port="coefficient" src="" src-port="LH4"/>
+    <Connection dst="Filter_HL4" dst-port="coefficient" src="" src-port="HL4"/>
+    <Connection dst="Filter_HH4" dst-port="coefficient" src="" src-port="HH4"/>
+    <Connection dst="Filter_LH5" dst-port="coefficient" src="" src-port="LH5"/>
+    <Connection dst="Filter_HL5" dst-port="coefficient" src="" src-port="HL5"/>
+    <Connection dst="Filter_HH5" dst-port="coefficient" src="" src-port="HH5"/>
+</XDF>

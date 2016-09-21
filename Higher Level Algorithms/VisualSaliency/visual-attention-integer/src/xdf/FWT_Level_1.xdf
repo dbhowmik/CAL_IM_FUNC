@@ -36,7 +36,7 @@
         </Type>
     </Port>
     <Instance id="filter_row_L1">
-        <Class name="main.vamodel.lifting53fwd_circ_bfr_input"/>
+        <Class name="main.vamodel.lift53_row1"/>
     </Instance>
     <Instance id="transpose_row_L_L1">
         <Class name="main.vamodel.transpose_row1"/>
@@ -62,8 +62,9 @@
     <Instance id="transpose_column_HL_L1">
         <Class name="main.vamodel.transpose_column1"/>
     </Instance>
-    <Connection dst="transpose_row_H_L1" dst-port="coeffStream"
-        src="filter_row_L1" src-port="coeff_H"/>
+    <Instance id="Split_1">
+        <Class name="main.vamodel.coeff_split"/>
+    </Instance>
     <Connection dst="filter_column_H_L1" dst-port="imageStream"
         src="transpose_row_H_L1" src-port="coeffStream_tr"/>
     <Connection dst="transpose_column_HL_L1" dst-port="coeffStream"
@@ -79,8 +80,11 @@
         src="filter_column_L_L1" src-port="coeff_L"/>
     <Connection dst="transpose_column_LH_L1" dst-port="coeffStream"
         src="filter_column_L_L1" src-port="coeff_H"/>
-    <Connection dst="transpose_row_L_L1" dst-port="coeffStream"
-        src="filter_row_L1" src-port="coeff_L"/>
     <Connection dst="filter_column_L_L1" dst-port="imageStream"
         src="transpose_row_L_L1" src-port="coeffStream_tr"/>
+    <Connection dst="Split_1" dst-port="coeffStream" src="filter_row_L1" src-port="coeff"/>
+    <Connection dst="transpose_row_L_L1" dst-port="coeffStream"
+        src="Split_1" src-port="coeff_L"/>
+    <Connection dst="transpose_row_H_L1" dst-port="coeffStream"
+        src="Split_1" src-port="coeff_H"/>
 </XDF>

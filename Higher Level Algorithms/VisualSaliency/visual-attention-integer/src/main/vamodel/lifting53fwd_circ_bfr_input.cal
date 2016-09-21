@@ -4,7 +4,7 @@ import std.header.Parameter.*;
 
 
 actor lifting53fwd_circ_bfr_input() uint(size=8) imageStream ==> int coeff_L, int coeff_H: 
-	int(size=4) sizeArr = 3;
+  int(size=4) sizeArr = 3;
   int(size=16) threePixelBuffer[sizeArr]; // circular buffer
   int(size=8) midPoint := 0;
   // the C backend incorrectly uses '0' as an unsigned int when compared with < comparator,
