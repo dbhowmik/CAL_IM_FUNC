@@ -18,7 +18,7 @@
         <Type name="bool"/>
     </Port>
     <Instance id="str2Y">
-        <Class name="std.stdio.StreamToYUV"/>
+        <Class name="std.stdio.StreamToY"/>
     </Instance>
     <Instance id="FWD_WV_Y">
         <Class name="xdf.multi-resolution-decomp"/>
@@ -28,21 +28,6 @@
     </Instance>
     <Instance id="SAL_map_Y">
         <Class name="xdf.saliencyMapGen"/>
-    </Instance>
-    <Instance id="FWD_WV_U">
-        <Class name="xdf.multi-resolution-decomp"/>
-    </Instance>
-    <Instance id="SAL_map_U">
-        <Class name="xdf.saliencyMapGen"/>
-    </Instance>
-    <Instance id="FWD_WV_V">
-        <Class name="xdf.multi-resolution-decomp"/>
-    </Instance>
-    <Instance id="SAL_map_V">
-        <Class name="xdf.saliencyMapGen"/>
-    </Instance>
-    <Instance id="colorCombine">
-        <Class name="main.vamodel.colorFinalMap"/>
     </Instance>
     <Connection dst="str2Y" dst-port="stream" src="" src-port="input"/>
     <Connection dst="" dst-port="output" src="Y2str" src-port="Yout"/>
@@ -63,40 +48,5 @@
     <Connection dst="SAL_map_Y" dst-port="HL5" src="FWD_WV_Y" src-port="HL5"/>
     <Connection dst="SAL_map_Y" dst-port="HH5" src="FWD_WV_Y" src-port="HH5"/>
     <Connection dst="" dst-port="EOS" src="Y2str" src-port="pEOF"/>
-    <Connection dst="SAL_map_U" dst-port="LH1" src="FWD_WV_U" src-port="LH1"/>
-    <Connection dst="SAL_map_U" dst-port="HL1" src="FWD_WV_U" src-port="HL1"/>
-    <Connection dst="SAL_map_U" dst-port="HH1" src="FWD_WV_U" src-port="HH1"/>
-    <Connection dst="SAL_map_U" dst-port="LH2" src="FWD_WV_U" src-port="LH2"/>
-    <Connection dst="SAL_map_U" dst-port="HL2" src="FWD_WV_U" src-port="HL2"/>
-    <Connection dst="SAL_map_U" dst-port="HH2" src="FWD_WV_U" src-port="HH2"/>
-    <Connection dst="SAL_map_U" dst-port="LH3" src="FWD_WV_U" src-port="LH3"/>
-    <Connection dst="SAL_map_U" dst-port="HL3" src="FWD_WV_U" src-port="HL3"/>
-    <Connection dst="SAL_map_U" dst-port="HH3" src="FWD_WV_U" src-port="HH3"/>
-    <Connection dst="SAL_map_U" dst-port="LH4" src="FWD_WV_U" src-port="LH4"/>
-    <Connection dst="SAL_map_U" dst-port="HL4" src="FWD_WV_U" src-port="HL4"/>
-    <Connection dst="SAL_map_U" dst-port="HH4" src="FWD_WV_U" src-port="HH4"/>
-    <Connection dst="SAL_map_U" dst-port="LH5" src="FWD_WV_U" src-port="LH5"/>
-    <Connection dst="SAL_map_U" dst-port="HL5" src="FWD_WV_U" src-port="HL5"/>
-    <Connection dst="SAL_map_U" dst-port="HH5" src="FWD_WV_U" src-port="HH5"/>
-    <Connection dst="SAL_map_V" dst-port="LH1" src="FWD_WV_V" src-port="LH1"/>
-    <Connection dst="SAL_map_V" dst-port="HL1" src="FWD_WV_V" src-port="HL1"/>
-    <Connection dst="SAL_map_V" dst-port="HH1" src="FWD_WV_V" src-port="HH1"/>
-    <Connection dst="SAL_map_V" dst-port="LH2" src="FWD_WV_V" src-port="LH2"/>
-    <Connection dst="SAL_map_V" dst-port="HL2" src="FWD_WV_V" src-port="HL2"/>
-    <Connection dst="SAL_map_V" dst-port="HH2" src="FWD_WV_V" src-port="HH2"/>
-    <Connection dst="SAL_map_V" dst-port="LH3" src="FWD_WV_V" src-port="LH3"/>
-    <Connection dst="SAL_map_V" dst-port="HL3" src="FWD_WV_V" src-port="HL3"/>
-    <Connection dst="SAL_map_V" dst-port="HH3" src="FWD_WV_V" src-port="HH3"/>
-    <Connection dst="SAL_map_V" dst-port="LH4" src="FWD_WV_V" src-port="LH4"/>
-    <Connection dst="SAL_map_V" dst-port="HL4" src="FWD_WV_V" src-port="HL4"/>
-    <Connection dst="SAL_map_V" dst-port="HH4" src="FWD_WV_V" src-port="HH4"/>
-    <Connection dst="SAL_map_V" dst-port="LH5" src="FWD_WV_V" src-port="LH5"/>
-    <Connection dst="SAL_map_V" dst-port="HL5" src="FWD_WV_V" src-port="HL5"/>
-    <Connection dst="SAL_map_V" dst-port="HH5" src="FWD_WV_V" src-port="HH5"/>
-    <Connection dst="FWD_WV_U" dst-port="in" src="str2Y" src-port="U"/>
-    <Connection dst="FWD_WV_V" dst-port="in" src="str2Y" src-port="V"/>
-    <Connection dst="colorCombine" dst-port="map_Y" src="SAL_map_Y" src-port="map_out"/>
-    <Connection dst="colorCombine" dst-port="map_U" src="SAL_map_U" src-port="map_out"/>
-    <Connection dst="colorCombine" dst-port="map_V" src="SAL_map_V" src-port="map_out"/>
-    <Connection dst="Y2str" dst-port="Y" src="colorCombine" src-port="final_map"/>
+    <Connection dst="Y2str" dst-port="Y" src="SAL_map_Y" src-port="map_out"/>
 </XDF>

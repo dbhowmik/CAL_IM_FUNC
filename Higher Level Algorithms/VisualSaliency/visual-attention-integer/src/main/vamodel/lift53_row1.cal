@@ -2,11 +2,11 @@ package main.vamodel;
 
 import std.header.Parameter.*;
 
-actor lift53_row1() uint(size=8) imageStream ==> int coeff:
+actor lift53_row1() uint(size=8) imageStream ==> int coeff_L, int coeff_H:
      
-	int width = IM_WIDTH;
-
-	int Buffer[width];	
+	int length = IM_WIDTH;
+	int count := 0;
+	int Buffer[length];	
 	int countX := 0;
 	bool predict;	
 	
@@ -17,31 +17,39 @@ actor lift53_row1() uint(size=8) imageStream ==> int coeff:
 	end
 	
 	/* Wavelet Row Filtering */
-	wavelet_filter: action imageStream:[value] ==> coeff:[out_val]
-	var int out_val	
+	wavelet_filter: action imageStream:[value] ==> coeff_L:[val_L], coeff_H:[val_H]
+	var int val_L,
+		int val_H
+	//var int out_val	 
 	do		
 		Buffer[countX] := value;						
 		if(countX=1) then // Symmetric extension
-		    out_val := Buffer[0] + (Buffer[1]>>1); 
+		    Buffer[0] := Buffer[0] + (Buffer[1]>>1);
+		    val_L := Buffer[0]; 
 		    predict := true;
 		else						
 			if(predict=true) then  // Predict 
-				out_val := Buffer[countX-1] - ((Buffer[countX-2] + Buffer[countX])>>1);				
+				Buffer[countX-1] := Buffer[countX-1] - ((Buffer[countX-2] + Buffer[countX])>>1);
+				val_H := Buffer[countX-1]; 				
 				predict := false;
 			else              // Update
-				out_val := Buffer[countX-1] + ((Buffer[countX-2] + Buffer[countX])>>2);				
+				Buffer[countX-1] := Buffer[countX-1] + ((Buffer[countX-2] + Buffer[countX])>>2);
+				val_L := Buffer[countX-1];				
 				predict := true; 				
 			end			
 		end
 		
 		countX := countX + 1;
+		//println(countX);
 	end		
 			
 		
-	doneCountX: action ==> coeff:[out_val_end] 
-	guard countX = width	
+	doneCountX: action ==> coeff_H:[out_val_end] 
+	guard countX = length	
 	var int out_val_end	
 	do					
+		count := count +1 ;
+		println("-------------------------    " + count + " " + countX);
 		out_val_end := Buffer[countX-1] - Buffer[countX-2] ;// Symmetric extension	
 		countX := 0;		
 	end
