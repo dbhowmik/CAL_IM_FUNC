@@ -4,61 +4,252 @@ import std.header.Parameter.*;
 
 actor lift53_col1() int imageStream ==> int coeff_L, int coeff_H:
      
-	int  length = IM_HEIGHT;
-	int  Buffer[length];	
-	int  countX := 0;
+	int length = IM_HEIGHT;
+	int width = IM_WIDTH/2;
+	int height = 3;
+	int Buffer[height][width];	
+	int countX := 0;
+	int countY := 0; 
+	
+	
+	 
 	
 	getCoeffValue: action imageStream:[value] ==>  	
 	do			
-		Buffer[countX] := value;				
-		countX := countX + 1;																		
-	end
-	
-	/* Wavelet Row Filtering */
-	wavelet_filter_L: action imageStream:[value] ==> coeff_L:[val_L]
-	var int val_L		
-	do	
-		Buffer[countX] := value;						
-		if(countX=1) then // Symmetric extension
-		    Buffer[0] := Buffer[0] + (Buffer[1]>>1);
-		    val_L := Buffer[0];		    
-		else // Update
-			Buffer[countX-1] := Buffer[countX-1] + ((Buffer[countX-2] + Buffer[countX])>>2);
-			val_L := Buffer[countX-1];							
-		end		
+		Buffer[countY][countX] := value;				
 		countX := countX + 1;
-	end		
-	
-	wavelet_filter_H: action imageStream:[value] ==> coeff_H:[val_H]
-	var int val_H		 
-	do	// Predict 	
-		Buffer[countX] := value;	
-		Buffer[countX-1] := Buffer[countX-1] - ((Buffer[countX-2] + Buffer[countX])>>1);
-		val_H := Buffer[countX-1];			
-		countX := countX + 1;	
-	end		
-			
-		
-	doneCountX: action ==> coeff_H:[out_val_end] 				
-	guard countX = length		
-	var int out_val_end
-	do
-		out_val_end := Buffer[countX-1] - Buffer[countX-2] ;// Symmetric extension	
-		countX := 0;					
+		if(countX = width) then
+			countY := countY + 1;
+			countX := 0; 
+		end																						
 	end
 	
+	doneCountY_init: action ==>
+	guard countY = 1
+	do				
+		//countY := 0;		
+	end
+	
+	
+//	//int gx; 
+//	//int gy;
+//	int index := 2;
+//	int index_1;
+//	int index_2;
+//	int index_3;
+//	uint(size=8) tmp_00;
+//	uint(size=8) tmp_02;
+//	uint(size=8) tmp_01;
+//	uint(size=8) tmp_10;	
+//	uint(size=8) tmp_12;
+//	uint(size=8) tmp_20;
+//	uint(size=8) tmp_21;
+//	uint(size=8) tmp_22;
+//	
+//	/* Sobel Filtering */
+//	sobel_filter: action Y:[value] ==> pix_00:[tmp_00], pix_10:[tmp_10], pix_20:[tmp_20], pix_01:[tmp_01],
+//						pix_02:[tmp_02], pix_12:[tmp_12], pix_22:[tmp_22], pix_21:[tmp_21]	
+//	do					
+//		if(countX=0 || countX=IM_WIDTH || countY=0 || countY=IM_HEIGHT) then
+//		    tmp_00 := 0;
+//		    tmp_02 := 0;
+//		    tmp_01 := 0;
+//		    tmp_10 := 0;
+//		    tmp_12 := 0; 
+//		    tmp_20 := 0;
+//		    tmp_21 := 0; 
+//		    tmp_22 := 0;	
+//		else
+//			if(index=0) then 
+//				index_1 := 1;
+//				index_2 := 2;
+//				index_3 := 3;
+//			end
+//			
+//			if(index=1) then 
+//				index_1 := 2;
+//				index_2 := 3;
+//				index_3 := 0;
+//			end
+//			
+//			if(index=2) then 
+//				index_1 := 3;
+//				index_2 := 0;
+//				index_3 := 1;
+//			end
+//			
+//			if(index=3) then 
+//				index_1 := 0;
+//				index_2 := 1;
+//				index_3 := 2;
+//			end
+//		
+//		    tmp_00 := Buffer[index_1][countX-1];
+//		    tmp_02 := Buffer[index_1][countX+1];
+//		    tmp_01 := Buffer[index_1][countX];
+//		    tmp_10 := Buffer[index_2][countX-1];
+//		    tmp_12 := Buffer[index_2][countX+1]; 
+//		    tmp_20 := Buffer[index_3][countX-1];
+//		    tmp_21 := Buffer[index_3][countX]; 
+//		    tmp_22 := Buffer[index_3][countX+1];		    	
+//		end
+//		
+//		Buffer[index][countX] := value;
+//		
+//		countX := countX + 1;		
+//		if(countX = IM_WIDTH) then
+//			countY := countY + 1;
+//			countX := 0; 					
+//			index := index + 1;
+//		
+//			if(index >= 4) then				
+//				index := 0;
+//			end 
+//		end
+//		
+//	end
+//		
+//	
+//	doneCountY: action ==>
+//	guard countY = IM_HEIGHT-2
+//	do						
+//	end
+//	
+//	
+//	sobel_filter_end: action ==> pix_00:[tmp_00], pix_10:[tmp_10], pix_20:[tmp_20], pix_01:[tmp_01],
+//						pix_02:[tmp_02], pix_12:[tmp_12], pix_22:[tmp_22], pix_21:[tmp_21]	
+//	do			 		
+//		if(countX=0 || countX=IM_WIDTH || countY=0 || countY=IM_HEIGHT) then
+//			tmp_00 := 0;
+//		    tmp_02 := 0;
+//		    tmp_01 := 0;
+//		    tmp_10 := 0;
+//		    tmp_12 := 0; 
+//		    tmp_20 := 0;
+//		    tmp_21 := 0; 
+//		    tmp_22 := 0;	
+//		else
+//			if(index=0) then 
+//				index_1 := 1;
+//				index_2 := 2;
+//				index_3 := 3;
+//			end
+//			
+//			if(index=1) then 
+//				index_1 := 2;
+//				index_2 := 3;
+//				index_3 := 0;
+//			end
+//			
+//			if(index=2) then 
+//				index_1 := 3;
+//				index_2 := 0;
+//				index_3 := 1;
+//			end
+//			
+//			if(index=3) then 
+//				index_1 := 0;
+//				index_2 := 1;
+//				index_3 := 2;
+//			end
+//		
+//		    tmp_00 := Buffer[index_1][countX-1];
+//		    tmp_02 := Buffer[index_1][countX+1];
+//		    tmp_01 := Buffer[index_1][countX];
+//		    tmp_10 := Buffer[index_2][countX-1];
+//		    tmp_12 := Buffer[index_2][countX+1]; 
+//		    tmp_20 := Buffer[index_3][countX-1];
+//		    tmp_21 := Buffer[index_3][countX]; 
+//		    tmp_22 := Buffer[index_3][countX+1];		    	
+//		end
+//				
+//		countX := countX + 1;		
+//		if(countX = IM_WIDTH) then
+//			countY := countY + 1;
+//			countX := 0; 
+//			index := index + 1;
+//		
+//			if(index >= 4) then				
+//				index := 0;
+//			end 
+//		end
+//						
+//	end
+//	
+//	
+//	doneCountY_end: action ==>
+//	guard countY = IM_HEIGHT
+//	do
+//		countY := 0;				
+//	end
+
 		
-	schedule fsm s0 :				
-		s0 (getCoeffValue ) --> s1;		
-		s1 (wavelet_filter_L) --> s2;
-		s1 (doneCountX    ) --> s0;				
-		s2 (wavelet_filter_H) --> s1;
-		s2 (doneCountX    ) --> s0;			
+	schedule fsm s0 :			
+		s0 (getCoeffValue ) --> s0;
+		s0 (doneCountY_init ) --> s1;
+		//s1 (sobel_filter) --> s1;
+		//s1 (doneCountY) --> s2;
+		//s2 (sobel_filter_end) --> s2;
+		//s2 (doneCountY_end) --> s0;		
 	end
 	
 	priority
-		doneCountX > wavelet_filter_L;
-		doneCountX > wavelet_filter_H;		
+		doneCountY_init > getCoeffValue;
+		//doneCountY > sobel_filter;		
+		//doneCountY_end > sobel_filter_end;
 	end
+	
+//	getCoeffValue: action imageStream:[value] ==>  	
+//	do			
+//		Buffer[countX] := value;				
+//		countX := countX + 1;																		
+//	end
+//	
+//	/* Wavelet Row Filtering */
+//	wavelet_filter_L: action imageStream:[value] ==> coeff_L:[val_L]
+//	var int val_L		
+//	do	
+//		Buffer[countX] := value;						
+//		if(countX=1) then // Symmetric extension
+//		    Buffer[0] := Buffer[0] + (Buffer[1]>>1);
+//		    val_L := Buffer[0];		    
+//		else // Update
+//			Buffer[countX-1] := Buffer[countX-1] + ((Buffer[countX-2] + Buffer[countX])>>2);
+//			val_L := Buffer[countX-1];							
+//		end		
+//		countX := countX + 1;
+//	end		
+//	
+//	wavelet_filter_H: action imageStream:[value] ==> coeff_H:[val_H]
+//	var int val_H		 
+//	do	// Predict 	
+//		Buffer[countX] := value;	
+//		Buffer[countX-1] := Buffer[countX-1] - ((Buffer[countX-2] + Buffer[countX])>>1);
+//		val_H := Buffer[countX-1];			
+//		countX := countX + 1;	
+//	end		
+//			
+//		
+//	doneCountX: action ==> coeff_H:[out_val_end] 				
+//	guard countX = length		
+//	var int out_val_end
+//	do
+//		out_val_end := Buffer[countX-1] - Buffer[countX-2] ;// Symmetric extension	
+//		countX := 0;					
+//	end
+//	
+//		
+//	schedule fsm s0 :				
+//		s0 (getCoeffValue ) --> s1;		
+//		s1 (wavelet_filter_L) --> s2;
+//		s1 (doneCountX    ) --> s0;				
+//		s2 (wavelet_filter_H) --> s1;
+//		s2 (doneCountX    ) --> s0;			
+//	end
+//	
+//	priority
+//		doneCountX > wavelet_filter_L;
+//		doneCountX > wavelet_filter_H;		
+//	end
 	
 end

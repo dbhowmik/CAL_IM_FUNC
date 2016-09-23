@@ -44,7 +44,8 @@ actor transpose_column5() int coeffStream ==> int coeffStream_tr:
 	do		
 		foreach int i in 0 .. width-1
 		do
-			outVal[i] := (coeffBuffer[countX][i]*100)/max_val; // Normalisation  			 
+			//outVal[i] := (coeffBuffer[countX][i]*100)/max_val; // Normalisation
+			outVal[i] := coeffBuffer[countX][i];  			 
 		end						      	
 		countX := countX + 1;										
 	end
