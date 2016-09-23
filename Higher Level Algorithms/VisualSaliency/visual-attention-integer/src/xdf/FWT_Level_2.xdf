@@ -42,7 +42,7 @@
         <Class name="main.vamodel.transpose_row2"/>
     </Instance>
     <Instance id="filter_column_L_L2">
-        <Class name="main.vamodel.lifting53fwd_circ_bfr"/>
+        <Class name="main.vamodel.lift53_col2"/>
     </Instance>
     <Instance id="transpose_column_LL_L2">
         <Class name="main.vamodel.trans_col_wo_norm2"/>
@@ -54,7 +54,7 @@
         <Class name="main.vamodel.transpose_column2"/>
     </Instance>
     <Instance id="filter_column_H_L2">
-        <Class name="main.vamodel.lifting53fwd_circ_bfr"/>
+        <Class name="main.vamodel.lift53_col2"/>
     </Instance>
     <Instance id="transpose_column_HH_L2">
         <Class name="main.vamodel.transpose_column2"/>
