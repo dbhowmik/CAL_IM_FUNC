@@ -36,7 +36,7 @@
         </Type>
     </Port>
     <Instance id="filter_row_L4">
-        <Class name="main.vamodel.lifting53fwd_circ_bfr"/>
+        <Class name="main.vamodel.lift53_row4"/>
     </Instance>
     <Instance id="transpose_row_L_L4">
         <Class name="main.vamodel.transpose_row4"/>

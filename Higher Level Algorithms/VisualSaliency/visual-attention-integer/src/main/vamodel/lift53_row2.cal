@@ -1,0 +1,64 @@
+package main.vamodel;
+
+import std.header.Parameter.*;
+
+actor lift53_row2() int imageStream ==> int coeff_L, int coeff_H:
+     
+	int  length = IM_WIDTH/2;
+	int  Buffer[length];	
+	int  countX := 0;
+	
+	getCoeffValue: action imageStream:[value] ==>  	
+	do			
+		Buffer[countX] := value;				
+		countX := countX + 1;																		
+	end
+	
+	/* Wavelet Row Filtering */
+	wavelet_filter_L: action imageStream:[value] ==> coeff_L:[val_L]
+	var int val_L		
+	do	
+		Buffer[countX] := value;						
+		if(countX=1) then // Symmetric extension
+		    Buffer[0] := Buffer[0] + (Buffer[1]>>1);
+		    val_L := Buffer[0];		    
+		else // Update
+			Buffer[countX-1] := Buffer[countX-1] + ((Buffer[countX-2] + Buffer[countX])>>2);
+			val_L := Buffer[countX-1];							
+		end		
+		countX := countX + 1;
+	end		
+	
+	wavelet_filter_H: action imageStream:[value] ==> coeff_H:[val_H]
+	var int val_H		 
+	do	// Predict 	
+		Buffer[countX] := value;	
+		Buffer[countX-1] := Buffer[countX-1] - ((Buffer[countX-2] + Buffer[countX])>>1);
+		val_H := Buffer[countX-1];			
+		countX := countX + 1;	
+	end		
+			
+		
+	doneCountX: action ==> coeff_H:[out_val_end] 				
+	guard countX = length		
+	var int out_val_end
+	do
+		out_val_end := Buffer[countX-1] - Buffer[countX-2] ;// Symmetric extension	
+		countX := 0;					
+	end
+	
+		
+	schedule fsm s0 :				
+		s0 (getCoeffValue ) --> s1;		
+		s1 (wavelet_filter_L) --> s2;
+		s1 (doneCountX    ) --> s0;				
+		s2 (wavelet_filter_H) --> s1;
+		s2 (doneCountX    ) --> s0;			
+	end
+	
+	priority
+		doneCountX > wavelet_filter_L;
+		doneCountX > wavelet_filter_H;		
+	end
+	
+end
