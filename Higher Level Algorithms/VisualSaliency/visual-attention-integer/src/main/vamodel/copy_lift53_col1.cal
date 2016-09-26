@@ -2,7 +2,7 @@ package main.vamodel;
 
 import std.header.Parameter.*;
 
-actor lift53_col1() int imageStream ==> int coeff_L, int coeff_H:
+actor copy_lift53_col1() int imageStream ==> int coeff_L, int coeff_H:
      
 	int  length = IM_HEIGHT;
 	int  Buffer[length];	
