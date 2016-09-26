@@ -19,7 +19,7 @@ actor transpose_column5() int coeffStream ==> int coeffStream_tr:
 	do	
 		foreach int count in 0 .. height-1
 		do
-			coeffBuffer[count][countY] := abs(Val[count]*100);									
+			coeffBuffer[count][countY] := abs(Val[count]);//*100);									
 			if(coeffBuffer[count][countY]>max_val) then max_val := coeffBuffer[count][countY]; end // Find the maximum value.			
 		end
 		countY := countY + 1;										

@@ -134,7 +134,6 @@
     <Connection dst="FWT_L2" dst-port="input" src="FWT_L1" src-port="LL"/>
     <Connection dst="FWT_L3" dst-port="input" src="FWT_L2" src-port="LL"/>
     <Connection dst="FWT_L4" dst-port="input" src="FWT_L3" src-port="LL"/>
-    <Connection dst="FWT_L5" dst-port="input" src="FWT_L4" src-port="LL"/>
     <Connection dst="" dst-port="LH2" src="FWT_L2" src-port="LH"/>
     <Connection dst="" dst-port="HL2" src="FWT_L2" src-port="HL"/>
     <Connection dst="" dst-port="HH2" src="FWT_L2" src-port="HH"/>
@@ -144,6 +143,7 @@
     <Connection dst="" dst-port="LH4" src="FWT_L4" src-port="LH"/>
     <Connection dst="" dst-port="HL4" src="FWT_L4" src-port="HL"/>
     <Connection dst="" dst-port="HH4" src="FWT_L4" src-port="HH"/>
+    <Connection dst="FWT_L5" dst-port="input" src="FWT_L4" src-port="LL"/>
     <Connection dst="" dst-port="LH5" src="FWT_L5" src-port="LH"/>
     <Connection dst="" dst-port="HL5" src="FWT_L5" src-port="HL"/>
     <Connection dst="" dst-port="HH5" src="FWT_L5" src-port="HH"/>

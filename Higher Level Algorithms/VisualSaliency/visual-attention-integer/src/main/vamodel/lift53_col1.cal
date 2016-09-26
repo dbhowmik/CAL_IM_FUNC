@@ -11,9 +11,7 @@ actor lift53_col1() int imageStream ==> int coeff_L, int coeff_H:
 	int countX := 0;
 	int countY := 0;
 	int count := 0; 
-	
-	
-	 
+			
 	
 	getCoeffValue: action imageStream:[value] ==>  	
 	do			
