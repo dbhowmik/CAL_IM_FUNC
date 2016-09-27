@@ -21,7 +21,7 @@
         <Class name="std.stdio.StreamToY"/>
     </Instance>
     <Instance id="FWD_WV_Y">
-        <Class name="xdf.multi-resolution-decomp"/>
+        <Class name="xdf.multi_resolution_decomp"/>
     </Instance>
     <Instance id="Y2str">
         <Class name="std.stdio.YtoStream"/>

@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="ASCII"?>
-<pi:Diagram xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:al="http://eclipse.org/graphiti/mm/algorithms" xmlns:pi="http://eclipse.org/graphiti/mm/pictograms" visible="true" gridUnit="10" diagramTypeId="xdfDiagram" name="multi-resolution-decomp" snapToGrid="true" pictogramLinks="//@link //@children.0/@link //@children.0/@anchors.0/@link //@children.0/@anchors.1/@link //@children.0/@anchors.2/@link //@children.0/@anchors.3/@link //@children.0/@anchors.4/@link //@children.1/@link //@children.1/@anchors.0/@link //@children.1/@anchors.1/@link //@children.1/@anchors.2/@link //@children.1/@anchors.3/@link //@children.1/@anchors.4/@link //@children.2/@link //@children.2/@anchors.0/@link //@children.2/@anchors.1/@link //@children.2/@anchors.2/@link //@children.2/@anchors.3/@link //@children.2/@anchors.4/@link //@children.3/@link //@children.3/@anchors.0/@link //@children.3/@anchors.1/@link //@children.3/@anchors.2/@link //@children.3/@anchors.3/@link //@children.3/@anchors.4/@link //@children.4/@link //@children.5/@link //@children.6/@link //@children.7/@link //@children.8/@link //@children.9/@link //@children.10/@link //@children.11/@link //@children.12/@link //@children.13/@link //@children.14/@link //@children.15/@link //@children.16/@link //@children.17/@link //@children.18/@link //@children.19/@link //@children.20/@link //@connections.0/@link //@connections.1/@link //@connections.2/@link //@connections.3/@link //@connections.4/@link //@connections.5/@link //@connections.6/@link //@connections.7/@link //@connections.8/@link //@connections.9/@link //@connections.10/@link //@connections.11/@link //@connections.12/@link //@connections.13/@link //@connections.14/@link //@connections.15/@link //@connections.16/@link //@connections.17/@link //@connections.18/@link //@connections.19/@link //@children.4/@anchors.0/@link //@children.4/@anchors.1/@link //@children.4/@anchors.2/@link //@children.4/@anchors.3/@link" version="0.11.0">
+<pi:Diagram xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:al="http://eclipse.org/graphiti/mm/algorithms" xmlns:pi="http://eclipse.org/graphiti/mm/pictograms" visible="true" gridUnit="10" diagramTypeId="xdfDiagram" name="multi_resolution_decomp" snapToGrid="true" pictogramLinks="//@link //@children.0/@link //@children.0/@anchors.0/@link //@children.0/@anchors.1/@link //@children.0/@anchors.2/@link //@children.0/@anchors.3/@link //@children.0/@anchors.4/@link //@children.1/@link //@children.1/@anchors.0/@link //@children.1/@anchors.1/@link //@children.1/@anchors.2/@link //@children.1/@anchors.3/@link //@children.1/@anchors.4/@link //@children.2/@link //@children.2/@anchors.0/@link //@children.2/@anchors.1/@link //@children.2/@anchors.2/@link //@children.2/@anchors.3/@link //@children.2/@anchors.4/@link //@children.3/@link //@children.3/@anchors.0/@link //@children.3/@anchors.1/@link //@children.3/@anchors.2/@link //@children.3/@anchors.3/@link //@children.3/@anchors.4/@link //@children.4/@link //@children.4/@anchors.0/@link //@children.4/@anchors.1/@link //@children.4/@anchors.2/@link //@children.4/@anchors.3/@link //@children.5/@link //@children.6/@link //@children.7/@link //@children.8/@link //@children.9/@link //@children.10/@link //@children.11/@link //@children.12/@link //@children.13/@link //@children.14/@link //@children.15/@link //@children.16/@link //@children.17/@link //@children.18/@link //@children.19/@link //@children.20/@link //@connections.0/@link //@connections.1/@link //@connections.2/@link //@connections.3/@link //@connections.4/@link //@connections.5/@link //@connections.6/@link //@connections.7/@link //@connections.8/@link //@connections.9/@link //@connections.10/@link //@connections.11/@link //@connections.12/@link //@connections.13/@link //@connections.14/@link //@connections.15/@link //@connections.16/@link //@connections.17/@link //@connections.18/@link //@connections.19/@link" version="0.11.0">
   <properties key="xdf_diagram_version" value="2"/>
   <graphicsAlgorithm xsi:type="al:Rectangle" background="//@colors.1" foreground="//@colors.0" lineWidth="1" transparency="0.0" width="1000" height="1000"/>
   <link>
-    <businessObjects href="multi-resolution-decomp.xdf#/"/>
+    <businessObjects href="multi_resolution_decomp.xdf#/"/>
   </link>
   <children xsi:type="pi:ContainerShape" visible="true" active="true">
     <properties key="XDF_ID" value="INSTANCE"/>
@@ -39,7 +39,7 @@
       </graphicsAlgorithmChildren>
     </graphicsAlgorithm>
     <link>
-      <businessObjects href="multi-resolution-decomp.xdf#//@instances.0"/>
+      <businessObjects href="multi_resolution_decomp.xdf#//@instances.0"/>
     </link>
     <anchors xsi:type="pi:FixPointAnchor" visible="true" active="true" incomingConnections="//@connections.0" useAnchorLocationAsConnectionEndpoint="true">
       <properties key="XDF_ID" value="INSTANCE_PORT"/>
@@ -126,7 +126,7 @@
       </graphicsAlgorithmChildren>
     </graphicsAlgorithm>
     <link>
-      <businessObjects href="multi-resolution-decomp.xdf#//@instances.1"/>
+      <businessObjects href="multi_resolution_decomp.xdf#//@instances.1"/>
     </link>
     <anchors xsi:type="pi:FixPointAnchor" visible="true" active="true" incomingConnections="//@connections.4" useAnchorLocationAsConnectionEndpoint="true">
       <properties key="XDF_ID" value="INSTANCE_PORT"/>
@@ -213,7 +213,7 @@
       </graphicsAlgorithmChildren>
     </graphicsAlgorithm>
     <link>
-      <businessObjects href="multi-resolution-decomp.xdf#//@instances.2"/>
+      <businessObjects href="multi_resolution_decomp.xdf#//@instances.2"/>
     </link>
     <anchors xsi:type="pi:FixPointAnchor" visible="true" active="true" incomingConnections="//@connections.5" useAnchorLocationAsConnectionEndpoint="true">
       <properties key="XDF_ID" value="INSTANCE_PORT"/>
@@ -300,7 +300,7 @@
       </graphicsAlgorithmChildren>
     </graphicsAlgorithm>
     <link>
-      <businessObjects href="multi-resolution-decomp.xdf#//@instances.3"/>
+      <businessObjects href="multi_resolution_decomp.xdf#//@instances.3"/>
     </link>
     <anchors xsi:type="pi:FixPointAnchor" visible="true" active="true" incomingConnections="//@connections.6" useAnchorLocationAsConnectionEndpoint="true">
       <properties key="XDF_ID" value="INSTANCE_PORT"/>
@@ -383,7 +383,7 @@
       </graphicsAlgorithmChildren>
     </graphicsAlgorithm>
     <link>
-      <businessObjects href="multi-resolution-decomp.xdf#//@instances.4"/>
+      <businessObjects href="multi_resolution_decomp.xdf#//@instances.4"/>
     </link>
     <anchors xsi:type="pi:FixPointAnchor" visible="true" active="true" incomingConnections="//@connections.16" useAnchorLocationAsConnectionEndpoint="true">
       <properties key="XDF_ID" value="INSTANCE_PORT"/>
@@ -440,7 +440,7 @@
       </graphicsAlgorithmChildren>
     </graphicsAlgorithm>
     <link>
-      <businessObjects href="multi-resolution-decomp.xdf#//@inputs.0"/>
+      <businessObjects href="multi_resolution_decomp.xdf#//@inputs.0"/>
     </link>
     <anchors xsi:type="pi:ChopboxAnchor" outgoingConnections="//@connections.0"/>
   </children>
@@ -458,7 +458,7 @@
       </graphicsAlgorithmChildren>
     </graphicsAlgorithm>
     <link>
-      <businessObjects href="multi-resolution-decomp.xdf#//@outputs.0"/>
+      <businessObjects href="multi_resolution_decomp.xdf#//@outputs.0"/>
     </link>
     <anchors xsi:type="pi:ChopboxAnchor" incomingConnections="//@connections.1"/>
   </children>
@@ -476,7 +476,7 @@
       </graphicsAlgorithmChildren>
     </graphicsAlgorithm>
     <link>
-      <businessObjects href="multi-resolution-decomp.xdf#//@outputs.1"/>
+      <businessObjects href="multi_resolution_decomp.xdf#//@outputs.1"/>
     </link>
     <anchors xsi:type="pi:ChopboxAnchor" incomingConnections="//@connections.2"/>
   </children>
@@ -494,7 +494,7 @@
       </graphicsAlgorithmChildren>
     </graphicsAlgorithm>
     <link>
-      <businessObjects href="multi-resolution-decomp.xdf#//@outputs.2"/>
+      <businessObjects href="multi_resolution_decomp.xdf#//@outputs.2"/>
     </link>
     <anchors xsi:type="pi:ChopboxAnchor" incomingConnections="//@connections.3"/>
   </children>
@@ -512,7 +512,7 @@
       </graphicsAlgorithmChildren>
     </graphicsAlgorithm>
     <link>
-      <businessObjects href="multi-resolution-decomp.xdf#//@outputs.3"/>
+      <businessObjects href="multi_resolution_decomp.xdf#//@outputs.3"/>
     </link>
     <anchors xsi:type="pi:ChopboxAnchor" incomingConnections="//@connections.7"/>
   </children>
@@ -530,7 +530,7 @@
       </graphicsAlgorithmChildren>
     </graphicsAlgorithm>
     <link>
-      <businessObjects href="multi-resolution-decomp.xdf#//@outputs.4"/>
+      <businessObjects href="multi_resolution_decomp.xdf#//@outputs.4"/>
     </link>
     <anchors xsi:type="pi:ChopboxAnchor" incomingConnections="//@connections.8"/>
   </children>
@@ -548,7 +548,7 @@
       </graphicsAlgorithmChildren>
     </graphicsAlgorithm>
     <link>
-      <businessObjects href="multi-resolution-decomp.xdf#//@outputs.5"/>
+      <businessObjects href="multi_resolution_decomp.xdf#//@outputs.5"/>
     </link>
     <anchors xsi:type="pi:ChopboxAnchor" incomingConnections="//@connections.9"/>
   </children>
@@ -566,7 +566,7 @@
       </graphicsAlgorithmChildren>
     </graphicsAlgorithm>
     <link>
-      <businessObjects href="multi-resolution-decomp.xdf#//@outputs.6"/>
+      <businessObjects href="multi_resolution_decomp.xdf#//@outputs.6"/>
     </link>
     <anchors xsi:type="pi:ChopboxAnchor" incomingConnections="//@connections.10"/>
   </children>
@@ -584,7 +584,7 @@
       </graphicsAlgorithmChildren>
     </graphicsAlgorithm>
     <link>
-      <businessObjects href="multi-resolution-decomp.xdf#//@outputs.7"/>
+      <businessObjects href="multi_resolution_decomp.xdf#//@outputs.7"/>
     </link>
     <anchors xsi:type="pi:ChopboxAnchor" incomingConnections="//@connections.11"/>
   </children>
@@ -602,13 +602,13 @@
       </graphicsAlgorithmChildren>
     </graphicsAlgorithm>
     <link>
-      <businessObjects href="multi-resolution-decomp.xdf#//@outputs.8"/>
+      <businessObjects href="multi_resolution_decomp.xdf#//@outputs.8"/>
     </link>
     <anchors xsi:type="pi:ChopboxAnchor" incomingConnections="//@connections.12"/>
   </children>
   <children xsi:type="pi:ContainerShape" visible="true" active="true">
     <properties key="XDF_ID" value="OUT_PORT"/>
-    <graphicsAlgorithm xsi:type="al:Rectangle" lineWidth="1" filled="false" lineVisible="false" transparency="0.0" width="29" height="50" x="795" y="143">
+    <graphicsAlgorithm xsi:type="al:Rectangle" lineWidth="1" filled="false" lineVisible="false" transparency="0.0" width="29" height="50" x="795" y="129">
       <graphicsAlgorithmChildren xsi:type="al:Polygon" lineStyle="UNSPECIFIED" width="29" height="34" style="//@styles.0/@styles.4">
         <properties key="XDF_ID" value="PORT_SHAPE"/>
         <points/>
@@ -620,13 +620,13 @@
       </graphicsAlgorithmChildren>
     </graphicsAlgorithm>
     <link>
-      <businessObjects href="multi-resolution-decomp.xdf#//@outputs.9"/>
+      <businessObjects href="multi_resolution_decomp.xdf#//@outputs.9"/>
     </link>
     <anchors xsi:type="pi:ChopboxAnchor" incomingConnections="//@connections.13"/>
   </children>
   <children xsi:type="pi:ContainerShape" visible="true" active="true">
     <properties key="XDF_ID" value="OUT_PORT"/>
-    <graphicsAlgorithm xsi:type="al:Rectangle" lineWidth="1" filled="false" lineVisible="false" transparency="0.0" width="29" height="50" x="795" y="207">
+    <graphicsAlgorithm xsi:type="al:Rectangle" lineWidth="1" filled="false" lineVisible="false" transparency="0.0" width="29" height="50" x="795" y="193">
       <graphicsAlgorithmChildren xsi:type="al:Polygon" lineStyle="UNSPECIFIED" width="29" height="34" style="//@styles.0/@styles.4">
         <properties key="XDF_ID" value="PORT_SHAPE"/>
         <points/>
@@ -638,13 +638,13 @@
       </graphicsAlgorithmChildren>
     </graphicsAlgorithm>
     <link>
-      <businessObjects href="multi-resolution-decomp.xdf#//@outputs.10"/>
+      <businessObjects href="multi_resolution_decomp.xdf#//@outputs.10"/>
     </link>
     <anchors xsi:type="pi:ChopboxAnchor" incomingConnections="//@connections.14"/>
   </children>
   <children xsi:type="pi:ContainerShape" visible="true" active="true">
     <properties key="XDF_ID" value="OUT_PORT"/>
-    <graphicsAlgorithm xsi:type="al:Rectangle" lineWidth="1" filled="false" lineVisible="false" transparency="0.0" width="29" height="50" x="795" y="271">
+    <graphicsAlgorithm xsi:type="al:Rectangle" lineWidth="1" filled="false" lineVisible="false" transparency="0.0" width="29" height="50" x="795" y="257">
       <graphicsAlgorithmChildren xsi:type="al:Polygon" lineStyle="UNSPECIFIED" width="29" height="34" style="//@styles.0/@styles.4">
         <properties key="XDF_ID" value="PORT_SHAPE"/>
         <points/>
@@ -656,13 +656,13 @@
       </graphicsAlgorithmChildren>
     </graphicsAlgorithm>
     <link>
-      <businessObjects href="multi-resolution-decomp.xdf#//@outputs.11"/>
+      <businessObjects href="multi_resolution_decomp.xdf#//@outputs.11"/>
     </link>
     <anchors xsi:type="pi:ChopboxAnchor" incomingConnections="//@connections.15"/>
   </children>
   <children xsi:type="pi:ContainerShape" visible="true" active="true">
     <properties key="XDF_ID" value="OUT_PORT"/>
-    <graphicsAlgorithm xsi:type="al:Rectangle" lineWidth="1" filled="false" lineVisible="false" transparency="0.0" width="29" height="50" x="976" y="44">
+    <graphicsAlgorithm xsi:type="al:Rectangle" lineWidth="1" filled="false" lineVisible="false" transparency="0.0" width="29" height="50" x="961" y="44">
       <graphicsAlgorithmChildren xsi:type="al:Polygon" lineStyle="UNSPECIFIED" width="29" height="34" style="//@styles.0/@styles.4">
         <properties key="XDF_ID" value="PORT_SHAPE"/>
         <points/>
@@ -674,13 +674,13 @@
       </graphicsAlgorithmChildren>
     </graphicsAlgorithm>
     <link>
-      <businessObjects href="multi-resolution-decomp.xdf#//@outputs.12"/>
+      <businessObjects href="multi_resolution_decomp.xdf#//@outputs.12"/>
     </link>
     <anchors xsi:type="pi:ChopboxAnchor" incomingConnections="//@connections.17"/>
   </children>
   <children xsi:type="pi:ContainerShape" visible="true" active="true">
     <properties key="XDF_ID" value="OUT_PORT"/>
-    <graphicsAlgorithm xsi:type="al:Rectangle" lineWidth="1" filled="false" lineVisible="false" transparency="0.0" width="29" height="50" x="976" y="108">
+    <graphicsAlgorithm xsi:type="al:Rectangle" lineWidth="1" filled="false" lineVisible="false" transparency="0.0" width="29" height="50" x="961" y="108">
       <graphicsAlgorithmChildren xsi:type="al:Polygon" lineStyle="UNSPECIFIED" width="29" height="34" style="//@styles.0/@styles.4">
         <properties key="XDF_ID" value="PORT_SHAPE"/>
         <points/>
@@ -692,13 +692,13 @@
       </graphicsAlgorithmChildren>
     </graphicsAlgorithm>
     <link>
-      <businessObjects href="multi-resolution-decomp.xdf#//@outputs.13"/>
+      <businessObjects href="multi_resolution_decomp.xdf#//@outputs.13"/>
     </link>
     <anchors xsi:type="pi:ChopboxAnchor" incomingConnections="//@connections.18"/>
   </children>
   <children xsi:type="pi:ContainerShape" visible="true" active="true">
     <properties key="XDF_ID" value="OUT_PORT"/>
-    <graphicsAlgorithm xsi:type="al:Rectangle" lineWidth="1" filled="false" lineVisible="false" transparency="0.0" width="29" height="50" x="976" y="172">
+    <graphicsAlgorithm xsi:type="al:Rectangle" lineWidth="1" filled="false" lineVisible="false" transparency="0.0" width="29" height="50" x="961" y="172">
       <graphicsAlgorithmChildren xsi:type="al:Polygon" lineStyle="UNSPECIFIED" width="29" height="34" style="//@styles.0/@styles.4">
         <properties key="XDF_ID" value="PORT_SHAPE"/>
         <points/>
@@ -710,7 +710,7 @@
       </graphicsAlgorithmChildren>
     </graphicsAlgorithm>
     <link>
-      <businessObjects href="multi-resolution-decomp.xdf#//@outputs.14"/>
+      <businessObjects href="multi_resolution_decomp.xdf#//@outputs.14"/>
     </link>
     <anchors xsi:type="pi:ChopboxAnchor" incomingConnections="//@connections.19"/>
   </children>
@@ -822,7 +822,7 @@
   <connections xsi:type="pi:FreeFormConnection" visible="true" active="true" start="//@children.5/@anchors.0" end="//@children.0/@anchors.0">
     <graphicsAlgorithm xsi:type="al:Polyline" lineWidth="1" filled="false" transparency="0.0" style="//@styles.0/@styles.5"/>
     <link>
-      <businessObjects href="multi-resolution-decomp.xdf#//@edges.0"/>
+      <businessObjects href="multi_resolution_decomp.xdf#//@edges.0"/>
     </link>
     <connectionDecorators visible="true" locationRelative="true" location="1.0">
       <graphicsAlgorithm xsi:type="al:Polygon" lineWidth="1" filled="true" lineVisible="false" transparency="0.0" style="//@styles.0/@styles.5">
@@ -835,7 +835,7 @@
   <connections xsi:type="pi:FreeFormConnection" visible="true" active="true" start="//@children.0/@anchors.2" end="//@children.6/@anchors.0">
     <graphicsAlgorithm xsi:type="al:Polyline" lineWidth="1" filled="false" transparency="0.0" style="//@styles.0/@styles.5"/>
     <link>
-      <businessObjects href="multi-resolution-decomp.xdf#//@edges.1"/>
+      <businessObjects href="multi_resolution_decomp.xdf#//@edges.1"/>
     </link>
     <connectionDecorators visible="true" locationRelative="true" location="1.0">
       <graphicsAlgorithm xsi:type="al:Polygon" lineWidth="1" filled="true" lineVisible="false" transparency="0.0" style="//@styles.0/@styles.5">
@@ -850,7 +850,7 @@
   <connections xsi:type="pi:FreeFormConnection" visible="true" active="true" start="//@children.0/@anchors.3" end="//@children.7/@anchors.0">
     <graphicsAlgorithm xsi:type="al:Polyline" lineWidth="1" filled="false" transparency="0.0" style="//@styles.0/@styles.5"/>
     <link>
-      <businessObjects href="multi-resolution-decomp.xdf#//@edges.2"/>
+      <businessObjects href="multi_resolution_decomp.xdf#//@edges.2"/>
     </link>
     <connectionDecorators visible="true" locationRelative="true" location="1.0">
       <graphicsAlgorithm xsi:type="al:Polygon" lineWidth="1" filled="true" lineVisible="false" transparency="0.0" style="//@styles.0/@styles.5">
@@ -865,7 +865,7 @@
   <connections xsi:type="pi:FreeFormConnection" visible="true" active="true" start="//@children.0/@anchors.4" end="//@children.8/@anchors.0">
     <graphicsAlgorithm xsi:type="al:Polyline" lineWidth="1" filled="false" transparency="0.0" style="//@styles.0/@styles.5"/>
     <link>
-      <businessObjects href="multi-resolution-decomp.xdf#//@edges.3"/>
+      <businessObjects href="multi_resolution_decomp.xdf#//@edges.3"/>
     </link>
     <connectionDecorators visible="true" locationRelative="true" location="1.0">
       <graphicsAlgorithm xsi:type="al:Polygon" lineWidth="1" filled="true" lineVisible="false" transparency="0.0" style="//@styles.0/@styles.5">
@@ -880,7 +880,7 @@
   <connections xsi:type="pi:FreeFormConnection" visible="true" active="true" start="//@children.0/@anchors.1" end="//@children.1/@anchors.0">
     <graphicsAlgorithm xsi:type="al:Polyline" lineWidth="1" filled="false" transparency="0.0" style="//@styles.0/@styles.5"/>
     <link>
-      <businessObjects href="multi-resolution-decomp.xdf#//@edges.4"/>
+      <businessObjects href="multi_resolution_decomp.xdf#//@edges.4"/>
     </link>
     <connectionDecorators visible="true" locationRelative="true" location="1.0">
       <graphicsAlgorithm xsi:type="al:Polygon" lineWidth="1" filled="true" lineVisible="false" transparency="0.0" style="//@styles.0/@styles.5">
@@ -893,7 +893,7 @@
   <connections xsi:type="pi:FreeFormConnection" visible="true" active="true" start="//@children.1/@anchors.1" end="//@children.2/@anchors.0">
     <graphicsAlgorithm xsi:type="al:Polyline" lineWidth="1" filled="false" transparency="0.0" style="//@styles.0/@styles.5"/>
     <link>
-      <businessObjects href="multi-resolution-decomp.xdf#//@edges.5"/>
+      <businessObjects href="multi_resolution_decomp.xdf#//@edges.5"/>
     </link>
     <connectionDecorators visible="true" locationRelative="true" location="1.0">
       <graphicsAlgorithm xsi:type="al:Polygon" lineWidth="1" filled="true" lineVisible="false" transparency="0.0" style="//@styles.0/@styles.5">
@@ -906,7 +906,7 @@
   <connections xsi:type="pi:FreeFormConnection" visible="true" active="true" start="//@children.2/@anchors.1" end="//@children.3/@anchors.0">
     <graphicsAlgorithm xsi:type="al:Polyline" lineWidth="1" filled="false" transparency="0.0" style="//@styles.0/@styles.5"/>
     <link>
-      <businessObjects href="multi-resolution-decomp.xdf#//@edges.6"/>
+      <businessObjects href="multi_resolution_decomp.xdf#//@edges.6"/>
     </link>
     <connectionDecorators visible="true" locationRelative="true" location="1.0">
       <graphicsAlgorithm xsi:type="al:Polygon" lineWidth="1" filled="true" lineVisible="false" transparency="0.0" style="//@styles.0/@styles.5">
@@ -919,7 +919,7 @@
   <connections xsi:type="pi:FreeFormConnection" visible="true" active="true" start="//@children.1/@anchors.2" end="//@children.9/@anchors.0">
     <graphicsAlgorithm xsi:type="al:Polyline" lineWidth="1" filled="false" transparency="0.0" style="//@styles.0/@styles.5"/>
     <link>
-      <businessObjects href="multi-resolution-decomp.xdf#//@edges.7"/>
+      <businessObjects href="multi_resolution_decomp.xdf#//@edges.7"/>
     </link>
     <connectionDecorators visible="true" locationRelative="true" location="1.0">
       <graphicsAlgorithm xsi:type="al:Polygon" lineWidth="1" filled="true" lineVisible="false" transparency="0.0" style="//@styles.0/@styles.5">
@@ -934,7 +934,7 @@
   <connections xsi:type="pi:FreeFormConnection" visible="true" active="true" start="//@children.1/@anchors.3" end="//@children.10/@anchors.0">
     <graphicsAlgorithm xsi:type="al:Polyline" lineWidth="1" filled="false" transparency="0.0" style="//@styles.0/@styles.5"/>
     <link>
-      <businessObjects href="multi-resolution-decomp.xdf#//@edges.8"/>
+      <businessObjects href="multi_resolution_decomp.xdf#//@edges.8"/>
     </link>
     <connectionDecorators visible="true" locationRelative="true" location="1.0">
       <graphicsAlgorithm xsi:type="al:Polygon" lineWidth="1" filled="true" lineVisible="false" transparency="0.0" style="//@styles.0/@styles.5">
@@ -949,7 +949,7 @@
   <connections xsi:type="pi:FreeFormConnection" visible="true" active="true" start="//@children.1/@anchors.4" end="//@children.11/@anchors.0">
     <graphicsAlgorithm xsi:type="al:Polyline" lineWidth="1" filled="false" transparency="0.0" style="//@styles.0/@styles.5"/>
     <link>
-      <businessObjects href="multi-resolution-decomp.xdf#//@edges.9"/>
+      <businessObjects href="multi_resolution_decomp.xdf#//@edges.9"/>
     </link>
     <connectionDecorators visible="true" locationRelative="true" location="1.0">
       <graphicsAlgorithm xsi:type="al:Polygon" lineWidth="1" filled="true" lineVisible="false" transparency="0.0" style="//@styles.0/@styles.5">
@@ -964,7 +964,7 @@
   <connections xsi:type="pi:FreeFormConnection" visible="true" active="true" start="//@children.2/@anchors.2" end="//@children.12/@anchors.0">
     <graphicsAlgorithm xsi:type="al:Polyline" lineWidth="1" filled="false" transparency="0.0" style="//@styles.0/@styles.5"/>
     <link>
-      <businessObjects href="multi-resolution-decomp.xdf#//@edges.10"/>
+      <businessObjects href="multi_resolution_decomp.xdf#//@edges.10"/>
     </link>
     <connectionDecorators visible="true" locationRelative="true" location="1.0">
       <graphicsAlgorithm xsi:type="al:Polygon" lineWidth="1" filled="true" lineVisible="false" transparency="0.0" style="//@styles.0/@styles.5">
@@ -979,7 +979,7 @@
   <connections xsi:type="pi:FreeFormConnection" visible="true" active="true" start="//@children.2/@anchors.3" end="//@children.13/@anchors.0">
     <graphicsAlgorithm xsi:type="al:Polyline" lineWidth="1" filled="false" transparency="0.0" style="//@styles.0/@styles.5"/>
     <link>
-      <businessObjects href="multi-resolution-decomp.xdf#//@edges.11"/>
+      <businessObjects href="multi_resolution_decomp.xdf#//@edges.11"/>
     </link>
     <connectionDecorators visible="true" locationRelative="true" location="1.0">
       <graphicsAlgorithm xsi:type="al:Polygon" lineWidth="1" filled="true" lineVisible="false" transparency="0.0" style="//@styles.0/@styles.5">
@@ -994,7 +994,7 @@
   <connections xsi:type="pi:FreeFormConnection" visible="true" active="true" start="//@children.2/@anchors.4" end="//@children.14/@anchors.0">
     <graphicsAlgorithm xsi:type="al:Polyline" lineWidth="1" filled="false" transparency="0.0" style="//@styles.0/@styles.5"/>
     <link>
-      <businessObjects href="multi-resolution-decomp.xdf#//@edges.12"/>
+      <businessObjects href="multi_resolution_decomp.xdf#//@edges.12"/>
     </link>
     <connectionDecorators visible="true" locationRelative="true" location="1.0">
       <graphicsAlgorithm xsi:type="al:Polygon" lineWidth="1" filled="true" lineVisible="false" transparency="0.0" style="//@styles.0/@styles.5">
@@ -1009,7 +1009,7 @@
   <connections xsi:type="pi:FreeFormConnection" visible="true" active="true" start="//@children.3/@anchors.2" end="//@children.15/@anchors.0">
     <graphicsAlgorithm xsi:type="al:Polyline" lineWidth="1" filled="false" transparency="0.0" style="//@styles.0/@styles.5"/>
     <link>
-      <businessObjects href="multi-resolution-decomp.xdf#//@edges.13"/>
+      <businessObjects href="multi_resolution_decomp.xdf#//@edges.13"/>
     </link>
     <connectionDecorators visible="true" locationRelative="true" location="1.0">
       <graphicsAlgorithm xsi:type="al:Polygon" lineWidth="1" filled="true" lineVisible="false" transparency="0.0" style="//@styles.0/@styles.5">
@@ -1019,12 +1019,12 @@
       </graphicsAlgorithm>
     </connectionDecorators>
     <bendpoints x="780" y="75"/>
-    <bendpoints x="780" y="160"/>
+    <bendpoints x="780" y="146"/>
   </connections>
   <connections xsi:type="pi:FreeFormConnection" visible="true" active="true" start="//@children.3/@anchors.3" end="//@children.16/@anchors.0">
     <graphicsAlgorithm xsi:type="al:Polyline" lineWidth="1" filled="false" transparency="0.0" style="//@styles.0/@styles.5"/>
     <link>
-      <businessObjects href="multi-resolution-decomp.xdf#//@edges.14"/>
+      <businessObjects href="multi_resolution_decomp.xdf#//@edges.14"/>
     </link>
     <connectionDecorators visible="true" locationRelative="true" location="1.0">
       <graphicsAlgorithm xsi:type="al:Polygon" lineWidth="1" filled="true" lineVisible="false" transparency="0.0" style="//@styles.0/@styles.5">
@@ -1034,12 +1034,12 @@
       </graphicsAlgorithm>
     </connectionDecorators>
     <bendpoints x="765" y="89"/>
-    <bendpoints x="765" y="224"/>
+    <bendpoints x="765" y="210"/>
   </connections>
   <connections xsi:type="pi:FreeFormConnection" visible="true" active="true" start="//@children.3/@anchors.4" end="//@children.17/@anchors.0">
     <graphicsAlgorithm xsi:type="al:Polyline" lineWidth="1" filled="false" transparency="0.0" style="//@styles.0/@styles.5"/>
     <link>
-      <businessObjects href="multi-resolution-decomp.xdf#//@edges.15"/>
+      <businessObjects href="multi_resolution_decomp.xdf#//@edges.15"/>
     </link>
     <connectionDecorators visible="true" locationRelative="true" location="1.0">
       <graphicsAlgorithm xsi:type="al:Polygon" lineWidth="1" filled="true" lineVisible="false" transparency="0.0" style="//@styles.0/@styles.5">
@@ -1049,12 +1049,12 @@
       </graphicsAlgorithm>
     </connectionDecorators>
     <bendpoints x="750" y="103"/>
-    <bendpoints x="750" y="288"/>
+    <bendpoints x="750" y="274"/>
   </connections>
   <connections xsi:type="pi:FreeFormConnection" visible="true" active="true" start="//@children.3/@anchors.1" end="//@children.4/@anchors.0">
     <graphicsAlgorithm xsi:type="al:Polyline" lineWidth="1" filled="false" transparency="0.0" style="//@styles.0/@styles.5"/>
     <link>
-      <businessObjects href="multi-resolution-decomp.xdf#//@edges.16"/>
+      <businessObjects href="multi_resolution_decomp.xdf#//@edges.16"/>
     </link>
     <connectionDecorators visible="true" locationRelative="true" location="1.0">
       <graphicsAlgorithm xsi:type="al:Polygon" lineWidth="1" filled="true" lineVisible="false" transparency="0.0" style="//@styles.0/@styles.5">
@@ -1067,7 +1067,7 @@
   <connections xsi:type="pi:FreeFormConnection" visible="true" active="true" start="//@children.4/@anchors.1" end="//@children.18/@anchors.0">
     <graphicsAlgorithm xsi:type="al:Polyline" lineWidth="1" filled="false" transparency="0.0" style="//@styles.0/@styles.5"/>
     <link>
-      <businessObjects href="multi-resolution-decomp.xdf#//@edges.17"/>
+      <businessObjects href="multi_resolution_decomp.xdf#//@edges.17"/>
     </link>
     <connectionDecorators visible="true" locationRelative="true" location="1.0">
       <graphicsAlgorithm xsi:type="al:Polygon" lineWidth="1" filled="true" lineVisible="false" transparency="0.0" style="//@styles.0/@styles.5">
@@ -1080,7 +1080,7 @@
   <connections xsi:type="pi:FreeFormConnection" visible="true" active="true" start="//@children.4/@anchors.2" end="//@children.19/@anchors.0">
     <graphicsAlgorithm xsi:type="al:Polyline" lineWidth="1" filled="false" transparency="0.0" style="//@styles.0/@styles.5"/>
     <link>
-      <businessObjects href="multi-resolution-decomp.xdf#//@edges.18"/>
+      <businessObjects href="multi_resolution_decomp.xdf#//@edges.18"/>
     </link>
     <connectionDecorators visible="true" locationRelative="true" location="1.0">
       <graphicsAlgorithm xsi:type="al:Polygon" lineWidth="1" filled="true" lineVisible="false" transparency="0.0" style="//@styles.0/@styles.5">
@@ -1089,13 +1089,13 @@
         <points x="-12" y="-5"/>
       </graphicsAlgorithm>
     </connectionDecorators>
-    <bendpoints x="961" y="75"/>
-    <bendpoints x="961" y="125"/>
+    <bendpoints x="946" y="75"/>
+    <bendpoints x="946" y="125"/>
   </connections>
   <connections xsi:type="pi:FreeFormConnection" visible="true" active="true" start="//@children.4/@anchors.3" end="//@children.20/@anchors.0">
     <graphicsAlgorithm xsi:type="al:Polyline" lineWidth="1" filled="false" transparency="0.0" style="//@styles.0/@styles.5"/>
     <link>
-      <businessObjects href="multi-resolution-decomp.xdf#//@edges.19"/>
+      <businessObjects href="multi_resolution_decomp.xdf#//@edges.19"/>
     </link>
     <connectionDecorators visible="true" locationRelative="true" location="1.0">
       <graphicsAlgorithm xsi:type="al:Polygon" lineWidth="1" filled="true" lineVisible="false" transparency="0.0" style="//@styles.0/@styles.5">
@@ -1104,8 +1104,8 @@
         <points x="-12" y="-5"/>
       </graphicsAlgorithm>
     </connectionDecorators>
-    <bendpoints x="946" y="89"/>
-    <bendpoints x="946" y="189"/>
+    <bendpoints x="931" y="89"/>
+    <bendpoints x="931" y="189"/>
   </connections>
   <colors red="227" green="238" blue="249"/>
   <colors red="255" green="255" blue="255"/>
