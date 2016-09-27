@@ -12,7 +12,7 @@ actor average_filter_3x3_L1() int coefficient ==> int filt_coeff:
 	
 	getCoeffValue: action coefficient:[value] ==>  	
 	do			
-		coeffBuffer[countX][countY] := value;				
+		coeffBuffer[countX][countY] := abs(value)*100;				
 		countY := countY + 1;
 		
 		if(countY = width) then

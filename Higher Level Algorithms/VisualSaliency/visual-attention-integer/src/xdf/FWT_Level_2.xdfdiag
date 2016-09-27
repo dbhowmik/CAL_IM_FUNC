@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="ASCII"?>
-<pi:Diagram xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:al="http://eclipse.org/graphiti/mm/algorithms" xmlns:pi="http://eclipse.org/graphiti/mm/pictograms" visible="true" gridUnit="10" diagramTypeId="xdfDiagram" name="FWT_Level_2" snapToGrid="true" pictogramLinks="//@link //@children.0/@link //@children.1/@link //@children.2/@link //@children.3/@link //@children.4/@link //@children.5/@link //@children.6/@link //@children.7/@link //@connections.0/@link //@children.0/@anchors.0/@link //@children.0/@anchors.1/@link //@children.0/@anchors.2/@link //@children.1/@anchors.0/@link //@children.1/@anchors.1/@link //@children.1/@anchors.2/@link //@children.2/@anchors.0/@link //@children.2/@anchors.1/@link //@children.2/@anchors.2/@link //@connections.1/@link //@connections.2/@link //@connections.3/@link //@connections.4/@link //@connections.5/@link //@connections.6/@link" version="0.11.0">
+<pi:Diagram xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:al="http://eclipse.org/graphiti/mm/algorithms" xmlns:pi="http://eclipse.org/graphiti/mm/pictograms" visible="true" gridUnit="10" diagramTypeId="xdfDiagram" name="FWT_Level_2" snapToGrid="true" pictogramLinks="//@link //@children.0/@link //@children.1/@link //@children.2/@link //@children.3/@link //@children.4/@link //@children.5/@link //@children.6/@link //@children.7/@link //@connections.0/@link //@children.0/@anchors.0/@link //@children.0/@anchors.1/@link //@children.0/@anchors.2/@link //@children.2/@anchors.0/@link //@children.2/@anchors.1/@link //@children.2/@anchors.2/@link //@connections.1/@link //@connections.2/@link //@connections.3/@link //@children.1/@anchors.0/@link //@children.1/@anchors.1/@link //@children.1/@anchors.2/@link //@connections.4/@link //@connections.5/@link //@connections.6/@link" version="0.11.0">
   <properties key="xdf_diagram_version" value="2"/>
   <graphicsAlgorithm xsi:type="al:Rectangle" background="//@colors.1" foreground="//@colors.0" lineWidth="1" transparency="0.0" width="1000" height="1000"/>
   <link>
@@ -43,7 +43,7 @@
       </link>
       <location y="49"/>
     </anchors>
-    <anchors xsi:type="pi:FixPointAnchor" visible="true" active="true" outgoingConnections="//@connections.1" useAnchorLocationAsConnectionEndpoint="true">
+    <anchors xsi:type="pi:FixPointAnchor" visible="true" active="true" outgoingConnections="//@connections.4" useAnchorLocationAsConnectionEndpoint="true">
       <properties key="XDF_ID" value="INSTANCE_PORT"/>
       <properties key="REF_PORT_NAME" value="coeff_L"/>
       <properties key="SHAPE_DIRECTION" value="output"/>
@@ -53,7 +53,7 @@
       </link>
       <location x="142" y="49"/>
     </anchors>
-    <anchors xsi:type="pi:FixPointAnchor" visible="true" active="true" outgoingConnections="//@connections.2" useAnchorLocationAsConnectionEndpoint="true">
+    <anchors xsi:type="pi:FixPointAnchor" visible="true" active="true" outgoingConnections="//@connections.1" useAnchorLocationAsConnectionEndpoint="true">
       <properties key="XDF_ID" value="INSTANCE_PORT"/>
       <properties key="REF_PORT_NAME" value="coeff_H"/>
       <properties key="SHAPE_DIRECTION" value="output"/>
@@ -92,7 +92,7 @@
     <link>
       <businessObjects href="FWT_Level_2.xdf#//@instances.1"/>
     </link>
-    <anchors xsi:type="pi:FixPointAnchor" visible="true" active="true" incomingConnections="//@connections.1" useAnchorLocationAsConnectionEndpoint="true">
+    <anchors xsi:type="pi:FixPointAnchor" visible="true" active="true" incomingConnections="//@connections.4" useAnchorLocationAsConnectionEndpoint="true">
       <properties key="XDF_ID" value="INSTANCE_PORT"/>
       <properties key="REF_PORT_NAME" value="imageStream"/>
       <properties key="SHAPE_DIRECTION" value="input"/>
@@ -102,7 +102,7 @@
       </link>
       <location y="49"/>
     </anchors>
-    <anchors xsi:type="pi:FixPointAnchor" visible="true" active="true" outgoingConnections="//@connections.3" useAnchorLocationAsConnectionEndpoint="true">
+    <anchors xsi:type="pi:FixPointAnchor" visible="true" active="true" outgoingConnections="//@connections.5" useAnchorLocationAsConnectionEndpoint="true">
       <properties key="XDF_ID" value="INSTANCE_PORT"/>
       <properties key="REF_PORT_NAME" value="coeff_L"/>
       <properties key="SHAPE_DIRECTION" value="output"/>
@@ -112,7 +112,7 @@
       </link>
       <location x="142" y="49"/>
     </anchors>
-    <anchors xsi:type="pi:FixPointAnchor" visible="true" active="true" outgoingConnections="//@connections.4" useAnchorLocationAsConnectionEndpoint="true">
+    <anchors xsi:type="pi:FixPointAnchor" visible="true" active="true" outgoingConnections="//@connections.6" useAnchorLocationAsConnectionEndpoint="true">
       <properties key="XDF_ID" value="INSTANCE_PORT"/>
       <properties key="REF_PORT_NAME" value="coeff_H"/>
       <properties key="SHAPE_DIRECTION" value="output"/>
@@ -151,7 +151,7 @@
     <link>
       <businessObjects href="FWT_Level_2.xdf#//@instances.2"/>
     </link>
-    <anchors xsi:type="pi:FixPointAnchor" visible="true" active="true" incomingConnections="//@connections.2" useAnchorLocationAsConnectionEndpoint="true">
+    <anchors xsi:type="pi:FixPointAnchor" visible="true" active="true" incomingConnections="//@connections.1" useAnchorLocationAsConnectionEndpoint="true">
       <properties key="XDF_ID" value="INSTANCE_PORT"/>
       <properties key="REF_PORT_NAME" value="imageStream"/>
       <properties key="SHAPE_DIRECTION" value="input"/>
@@ -161,7 +161,7 @@
       </link>
       <location y="49"/>
     </anchors>
-    <anchors xsi:type="pi:FixPointAnchor" visible="true" active="true" outgoingConnections="//@connections.5" useAnchorLocationAsConnectionEndpoint="true">
+    <anchors xsi:type="pi:FixPointAnchor" visible="true" active="true" outgoingConnections="//@connections.2" useAnchorLocationAsConnectionEndpoint="true">
       <properties key="XDF_ID" value="INSTANCE_PORT"/>
       <properties key="REF_PORT_NAME" value="coeff_L"/>
       <properties key="SHAPE_DIRECTION" value="output"/>
@@ -171,7 +171,7 @@
       </link>
       <location x="142" y="49"/>
     </anchors>
-    <anchors xsi:type="pi:FixPointAnchor" visible="true" active="true" outgoingConnections="//@connections.6" useAnchorLocationAsConnectionEndpoint="true">
+    <anchors xsi:type="pi:FixPointAnchor" visible="true" active="true" outgoingConnections="//@connections.3" useAnchorLocationAsConnectionEndpoint="true">
       <properties key="XDF_ID" value="INSTANCE_PORT"/>
       <properties key="REF_PORT_NAME" value="coeff_H"/>
       <properties key="SHAPE_DIRECTION" value="output"/>
@@ -216,7 +216,7 @@
     <link>
       <businessObjects href="FWT_Level_2.xdf#//@outputs.0"/>
     </link>
-    <anchors xsi:type="pi:ChopboxAnchor" incomingConnections="//@connections.3"/>
+    <anchors xsi:type="pi:ChopboxAnchor" incomingConnections="//@connections.5"/>
   </children>
   <children xsi:type="pi:ContainerShape" visible="true" active="true">
     <properties key="XDF_ID" value="OUT_PORT"/>
@@ -234,7 +234,7 @@
     <link>
       <businessObjects href="FWT_Level_2.xdf#//@outputs.1"/>
     </link>
-    <anchors xsi:type="pi:ChopboxAnchor" incomingConnections="//@connections.4"/>
+    <anchors xsi:type="pi:ChopboxAnchor" incomingConnections="//@connections.6"/>
   </children>
   <children xsi:type="pi:ContainerShape" visible="true" active="true">
     <properties key="XDF_ID" value="OUT_PORT"/>
@@ -252,7 +252,7 @@
     <link>
       <businessObjects href="FWT_Level_2.xdf#//@outputs.2"/>
     </link>
-    <anchors xsi:type="pi:ChopboxAnchor" incomingConnections="//@connections.5"/>
+    <anchors xsi:type="pi:ChopboxAnchor" incomingConnections="//@connections.2"/>
   </children>
   <children xsi:type="pi:ContainerShape" visible="true" active="true">
     <properties key="XDF_ID" value="OUT_PORT"/>
@@ -270,7 +270,7 @@
     <link>
       <businessObjects href="FWT_Level_2.xdf#//@outputs.3"/>
     </link>
-    <anchors xsi:type="pi:ChopboxAnchor" incomingConnections="//@connections.6"/>
+    <anchors xsi:type="pi:ChopboxAnchor" incomingConnections="//@connections.3"/>
   </children>
   <styles lineWidth="1" lineVisible="true" transparency="0.0" id="COMMON_GENERIC" horizontalAlignment="UNSPECIFIED" verticalAlignment="UNSPECIFIED">
     <styles lineStyle="UNSPECIFIED" filled="true" id="INSTANCE" horizontalAlignment="UNSPECIFIED" verticalAlignment="UNSPECIFIED">
@@ -390,53 +390,10 @@
       </graphicsAlgorithm>
     </connectionDecorators>
   </connections>
-  <connections xsi:type="pi:FreeFormConnection" visible="true" active="true" start="//@children.0/@anchors.1" end="//@children.1/@anchors.0">
-    <graphicsAlgorithm xsi:type="al:Polyline" lineWidth="1" filled="false" transparency="0.0" style="//@styles.0/@styles.5"/>
-    <link>
-      <businessObjects href="FWT_Level_2.xdf#//@edges.1"/>
-    </link>
-    <connectionDecorators visible="true" locationRelative="true" location="1.0">
-      <graphicsAlgorithm xsi:type="al:Polygon" lineWidth="1" filled="true" lineVisible="false" transparency="0.0" style="//@styles.0/@styles.5">
-        <points/>
-        <points x="-12" y="5"/>
-        <points x="-12" y="-5"/>
-      </graphicsAlgorithm>
-    </connectionDecorators>
-    <bendpoints x="229" y="193"/>
-    <bendpoints x="229" y="79"/>
-  </connections>
   <connections xsi:type="pi:FreeFormConnection" visible="true" active="true" start="//@children.0/@anchors.2" end="//@children.2/@anchors.0">
     <graphicsAlgorithm xsi:type="al:Polyline" lineWidth="1" filled="false" transparency="0.0" style="//@styles.0/@styles.5"/>
     <link>
-      <businessObjects href="FWT_Level_2.xdf#//@edges.2"/>
-    </link>
-    <connectionDecorators visible="true" locationRelative="true" location="1.0">
-      <graphicsAlgorithm xsi:type="al:Polygon" lineWidth="1" filled="true" lineVisible="false" transparency="0.0" style="//@styles.0/@styles.5">
-        <points/>
-        <points x="-12" y="5"/>
-        <points x="-12" y="-5"/>
-      </graphicsAlgorithm>
-    </connectionDecorators>
-  </connections>
-  <connections xsi:type="pi:FreeFormConnection" visible="true" active="true" start="//@children.1/@anchors.1" end="//@children.4/@anchors.0">
-    <graphicsAlgorithm xsi:type="al:Polyline" lineWidth="1" filled="false" transparency="0.0" style="//@styles.0/@styles.5"/>
-    <link>
-      <businessObjects href="FWT_Level_2.xdf#//@edges.3"/>
-    </link>
-    <connectionDecorators visible="true" locationRelative="true" location="1.0">
-      <graphicsAlgorithm xsi:type="al:Polygon" lineWidth="1" filled="true" lineVisible="false" transparency="0.0" style="//@styles.0/@styles.5">
-        <points/>
-        <points x="-12" y="5"/>
-        <points x="-12" y="-5"/>
-      </graphicsAlgorithm>
-    </connectionDecorators>
-    <bendpoints x="402" y="79"/>
-    <bendpoints x="402" y="29"/>
-  </connections>
-  <connections xsi:type="pi:FreeFormConnection" visible="true" active="true" start="//@children.1/@anchors.2" end="//@children.5/@anchors.0">
-    <graphicsAlgorithm xsi:type="al:Polyline" lineWidth="1" filled="false" transparency="0.0" style="//@styles.0/@styles.5"/>
-    <link>
-      <businessObjects href="FWT_Level_2.xdf#//@edges.4"/>
+      <businessObjects href="FWT_Level_2.xdf#//@edges.1"/>
     </link>
     <connectionDecorators visible="true" locationRelative="true" location="1.0">
       <graphicsAlgorithm xsi:type="al:Polygon" lineWidth="1" filled="true" lineVisible="false" transparency="0.0" style="//@styles.0/@styles.5">
@@ -449,7 +406,7 @@
   <connections xsi:type="pi:FreeFormConnection" visible="true" active="true" start="//@children.2/@anchors.1" end="//@children.6/@anchors.0">
     <graphicsAlgorithm xsi:type="al:Polyline" lineWidth="1" filled="false" transparency="0.0" style="//@styles.0/@styles.5"/>
     <link>
-      <businessObjects href="FWT_Level_2.xdf#//@edges.5"/>
+      <businessObjects href="FWT_Level_2.xdf#//@edges.2"/>
     </link>
     <connectionDecorators visible="true" locationRelative="true" location="1.0">
       <graphicsAlgorithm xsi:type="al:Polygon" lineWidth="1" filled="true" lineVisible="false" transparency="0.0" style="//@styles.0/@styles.5">
@@ -462,6 +419,49 @@
     <bendpoints x="402" y="157"/>
   </connections>
   <connections xsi:type="pi:FreeFormConnection" visible="true" active="true" start="//@children.2/@anchors.2" end="//@children.7/@anchors.0">
+    <graphicsAlgorithm xsi:type="al:Polyline" lineWidth="1" filled="false" transparency="0.0" style="//@styles.0/@styles.5"/>
+    <link>
+      <businessObjects href="FWT_Level_2.xdf#//@edges.3"/>
+    </link>
+    <connectionDecorators visible="true" locationRelative="true" location="1.0">
+      <graphicsAlgorithm xsi:type="al:Polygon" lineWidth="1" filled="true" lineVisible="false" transparency="0.0" style="//@styles.0/@styles.5">
+        <points/>
+        <points x="-12" y="5"/>
+        <points x="-12" y="-5"/>
+      </graphicsAlgorithm>
+    </connectionDecorators>
+  </connections>
+  <connections xsi:type="pi:FreeFormConnection" visible="true" active="true" start="//@children.0/@anchors.1" end="//@children.1/@anchors.0">
+    <graphicsAlgorithm xsi:type="al:Polyline" lineWidth="1" filled="false" transparency="0.0" style="//@styles.0/@styles.5"/>
+    <link>
+      <businessObjects href="FWT_Level_2.xdf#//@edges.4"/>
+    </link>
+    <connectionDecorators visible="true" locationRelative="true" location="1.0">
+      <graphicsAlgorithm xsi:type="al:Polygon" lineWidth="1" filled="true" lineVisible="false" transparency="0.0" style="//@styles.0/@styles.5">
+        <points/>
+        <points x="-12" y="5"/>
+        <points x="-12" y="-5"/>
+      </graphicsAlgorithm>
+    </connectionDecorators>
+    <bendpoints x="229" y="193"/>
+    <bendpoints x="229" y="79"/>
+  </connections>
+  <connections xsi:type="pi:FreeFormConnection" visible="true" active="true" start="//@children.1/@anchors.1" end="//@children.4/@anchors.0">
+    <graphicsAlgorithm xsi:type="al:Polyline" lineWidth="1" filled="false" transparency="0.0" style="//@styles.0/@styles.5"/>
+    <link>
+      <businessObjects href="FWT_Level_2.xdf#//@edges.5"/>
+    </link>
+    <connectionDecorators visible="true" locationRelative="true" location="1.0">
+      <graphicsAlgorithm xsi:type="al:Polygon" lineWidth="1" filled="true" lineVisible="false" transparency="0.0" style="//@styles.0/@styles.5">
+        <points/>
+        <points x="-12" y="5"/>
+        <points x="-12" y="-5"/>
+      </graphicsAlgorithm>
+    </connectionDecorators>
+    <bendpoints x="402" y="79"/>
+    <bendpoints x="402" y="29"/>
+  </connections>
+  <connections xsi:type="pi:FreeFormConnection" visible="true" active="true" start="//@children.1/@anchors.2" end="//@children.5/@anchors.0">
     <graphicsAlgorithm xsi:type="al:Polyline" lineWidth="1" filled="false" transparency="0.0" style="//@styles.0/@styles.5"/>
     <link>
       <businessObjects href="FWT_Level_2.xdf#//@edges.6"/>

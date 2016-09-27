@@ -11,6 +11,7 @@ actor lift53_col4() int imageStream ==> int coeff_L, int coeff_H:
 	int countX := 0;
 	int countY := 0;
 	int count := 0; 
+	int index;
 			
 	
 	getCoeffValue: action imageStream:[value] ==>  	
@@ -20,8 +21,9 @@ actor lift53_col4() int imageStream ==> int coeff_L, int coeff_H:
 		if(countX = width) then
 			count := count + 1; 
 			countY := countY + 1;
-			countX := 0; 
-		end																						
+			countX := 0;
+			index := 1; 
+		end																								
 	end
 	
 	
@@ -31,8 +33,7 @@ actor lift53_col4() int imageStream ==> int coeff_L, int coeff_H:
 		count := 0;		
 	end
 	
-	
-	int index := 1;
+		
 	int index_1;
 	int index_2;
 	int index_3;
@@ -52,7 +53,7 @@ actor lift53_col4() int imageStream ==> int coeff_L, int coeff_H:
 			countY := countY + 1;
 			countX := 0; 					
 			index := index + 1;
-		end								
+		end									
 	end		
 	
 	wavelet_filter_H: action imageStream:[value] ==> coeff_H:[val_H]
@@ -92,7 +93,7 @@ actor lift53_col4() int imageStream ==> int coeff_L, int coeff_H:
 			if(index >= 3) then 
 				index := 0;
 			end
-		end								
+		end												
 	end
 	
 	wavelet_filter_L: action imageStream:[value] ==> coeff_L:[val_L]
@@ -131,12 +132,12 @@ actor lift53_col4() int imageStream ==> int coeff_L, int coeff_H:
 			if(index >= 3) then 
 				index := 0;
 			end
-		end								
+		end										
 	end
 	
 	wavelet_filter_H_bottom: action imageStream:[value] ==> coeff_H:[val_H]
 	var int val_H		
-	do	
+	do		
 		Buffer[index][countX] := value;
 		
 		if(index=0) then 
@@ -160,16 +161,17 @@ actor lift53_col4() int imageStream ==> int coeff_L, int coeff_H:
 		val_H := Buffer[index_2][countX] - Buffer[index_1][countX]; 
 		
 		countX := countX + 1;		
-		if(countX = width) then			
+		if(countX = width) then
+			count := count + 1; 
 			countX := 0; 					
-		end								
+		end												
 	end
 
 	doneCountY_end: action ==>
 	guard countY = length
-	do
+	do					
 		countY := 0;	
-		index := 0;			
+		count := 0;		
 	end
 
 		
@@ -180,6 +182,7 @@ actor lift53_col4() int imageStream ==> int coeff_L, int coeff_H:
 		s1 (doneCountY_itar ) --> s2;
 		s2 (wavelet_filter_H) --> s2;
 		s2 (doneCountY_itar ) --> s3;
+		s2 (doneCountY_end ) --> s4;
 		s3 (wavelet_filter_L) --> s3;
 		s3 (doneCountY_itar ) --> s2;
 		s3 (doneCountY_end ) --> s4;

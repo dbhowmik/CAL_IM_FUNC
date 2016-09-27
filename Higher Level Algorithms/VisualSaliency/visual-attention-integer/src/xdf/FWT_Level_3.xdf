@@ -45,12 +45,12 @@
         <Class name="main.vamodel.lift53_col3"/>
     </Instance>
     <Connection dst="filter_row_L3" dst-port="imageStream" src="" src-port="input"/>
-    <Connection dst="filter_column_L_L3" dst-port="imageStream"
-        src="filter_row_L3" src-port="coeff_L"/>
     <Connection dst="filter_column_H_L3" dst-port="imageStream"
         src="filter_row_L3" src-port="coeff_H"/>
-    <Connection dst="" dst-port="LL" src="filter_column_L_L3" src-port="coeff_L"/>
-    <Connection dst="" dst-port="LH" src="filter_column_L_L3" src-port="coeff_H"/>
     <Connection dst="" dst-port="HL" src="filter_column_H_L3" src-port="coeff_L"/>
     <Connection dst="" dst-port="HH" src="filter_column_H_L3" src-port="coeff_H"/>
+    <Connection dst="filter_column_L_L3" dst-port="imageStream"
+        src="filter_row_L3" src-port="coeff_L"/>
+    <Connection dst="" dst-port="LL" src="filter_column_L_L3" src-port="coeff_L"/>
+    <Connection dst="" dst-port="LH" src="filter_column_L_L3" src-port="coeff_H"/>
 </XDF>

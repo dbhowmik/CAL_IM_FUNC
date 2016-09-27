@@ -32,40 +32,17 @@
         <Class name="main.vamodel.lift53_row5"/>
     </Instance>
     <Instance id="filter_column_L_L5">
-        <Class name="main.vamodel.lifting53fwd_circ_bfr_output"/>
+        <Class name="main.vamodel.lift53_col5_1"/>
     </Instance>
     <Instance id="filter_column_H_L5">
-        <Class name="main.vamodel.lifting53fwd_circ_bfr"/>
-    </Instance>
-    <Instance id="tr1">
-        <Class name="main.vamodel.transpose_row5"/>
-    </Instance>
-    <Instance id="tr2">
-        <Class name="main.vamodel.transpose_row5"/>
-    </Instance>
-    <Instance id="tr4">
-        <Class name="main.vamodel.transpose_column5"/>
-    </Instance>
-    <Instance id="tr5">
-        <Class name="main.vamodel.transpose_column5"/>
-    </Instance>
-    <Instance id="tr6">
-        <Class name="main.vamodel.transpose_column5"/>
+        <Class name="main.vamodel.lift53_col5"/>
     </Instance>
     <Connection dst="filter_row_L5" dst-port="imageStream" src="" src-port="input"/>
-    <Connection dst="tr1" dst-port="coeffStream" src="filter_row_L5" src-port="coeff_L"/>
-    <Connection dst="tr2" dst-port="coeffStream" src="filter_row_L5" src-port="coeff_H"/>
     <Connection dst="filter_column_L_L5" dst-port="imageStream"
-        src="tr1" src-port="coeffStream_tr"/>
+        src="filter_row_L5" src-port="coeff_L"/>
+    <Connection dst="" dst-port="LH" src="filter_column_L_L5" src-port="coeff_H"/>
     <Connection dst="filter_column_H_L5" dst-port="imageStream"
-        src="tr2" src-port="coeffStream_tr"/>
-    <Connection dst="tr4" dst-port="coeffStream"
-        src="filter_column_L_L5" src-port="coeff_H"/>
-    <Connection dst="" dst-port="LH" src="tr4" src-port="coeffStream_tr"/>
-    <Connection dst="tr5" dst-port="coeffStream"
-        src="filter_column_H_L5" src-port="coeff_L"/>
-    <Connection dst="tr6" dst-port="coeffStream"
-        src="filter_column_H_L5" src-port="coeff_H"/>
-    <Connection dst="" dst-port="HL" src="tr5" src-port="coeffStream_tr"/>
-    <Connection dst="" dst-port="HH" src="tr6" src-port="coeffStream_tr"/>
+        src="filter_row_L5" src-port="coeff_H"/>
+    <Connection dst="" dst-port="HL" src="filter_column_H_L5" src-port="coeff_L"/>
+    <Connection dst="" dst-port="HH" src="filter_column_H_L5" src-port="coeff_H"/>
 </XDF>

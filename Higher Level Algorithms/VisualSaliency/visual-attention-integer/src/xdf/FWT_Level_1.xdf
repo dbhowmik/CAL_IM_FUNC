@@ -41,16 +41,16 @@
     <Instance id="filter_column_L_L1">
         <Class name="main.vamodel.lift53_col1"/>
     </Instance>
-    <Instance id="transpose_row_H_L1">
+    <Instance id="filter_coulmn_H_L1">
         <Class name="main.vamodel.lift53_col1"/>
     </Instance>
     <Connection dst="filter_row_L1" dst-port="imageStream" src="" src-port="input"/>
+    <Connection dst="filter_coulmn_H_L1" dst-port="imageStream"
+        src="filter_row_L1" src-port="coeff_H"/>
+    <Connection dst="" dst-port="HL" src="filter_coulmn_H_L1" src-port="coeff_L"/>
+    <Connection dst="" dst-port="HH" src="filter_coulmn_H_L1" src-port="coeff_H"/>
     <Connection dst="filter_column_L_L1" dst-port="imageStream"
         src="filter_row_L1" src-port="coeff_L"/>
     <Connection dst="" dst-port="LL" src="filter_column_L_L1" src-port="coeff_L"/>
     <Connection dst="" dst-port="LH" src="filter_column_L_L1" src-port="coeff_H"/>
-    <Connection dst="transpose_row_H_L1" dst-port="imageStream"
-        src="filter_row_L1" src-port="coeff_H"/>
-    <Connection dst="" dst-port="HL" src="transpose_row_H_L1" src-port="coeff_L"/>
-    <Connection dst="" dst-port="HH" src="transpose_row_H_L1" src-port="coeff_H"/>
 </XDF>
