@@ -65,7 +65,7 @@ Disclaimer: This is a non-exhaustive list. Not all function will be implemented 
 1. Distance Transform, maps binary images to distance from background
 2. Fourier Transform, maps image into spatial frequency domain
 3. Hough Transform, maps image into votes for specified shapes
-4. Wavelet Transform, maps image into spatial frequency domain
+4. Wavelet Transform, maps image into spatial frequency domain -- FWT 5/3 lifting for 5 level decomposition (I) 
 
 # Temporal Image Analysis (P)
 1. Motion Estimation
