@@ -1,0 +1,158 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<XDF name="multi_resolution_decomp">
+    <Port kind="Input" name="in">
+        <Type name="uint">
+            <Entry kind="Expr" name="size">
+                <Expr kind="Literal" literal-kind="Integer" value="8"/>
+            </Entry>
+        </Type>
+    </Port>
+    <Port kind="Output" name="LH1">
+        <Type name="int">
+            <Entry kind="Expr" name="size">
+                <Expr kind="Literal" literal-kind="Integer" value="32"/>
+            </Entry>
+        </Type>
+    </Port>
+    <Port kind="Output" name="HL1">
+        <Type name="int">
+            <Entry kind="Expr" name="size">
+                <Expr kind="Literal" literal-kind="Integer" value="32"/>
+            </Entry>
+        </Type>
+    </Port>
+    <Port kind="Output" name="HH1">
+        <Type name="int">
+            <Entry kind="Expr" name="size">
+                <Expr kind="Literal" literal-kind="Integer" value="32"/>
+            </Entry>
+        </Type>
+    </Port>
+    <Port kind="Output" name="LH2">
+        <Type name="int">
+            <Entry kind="Expr" name="size">
+                <Expr kind="Literal" literal-kind="Integer" value="32"/>
+            </Entry>
+        </Type>
+    </Port>
+    <Port kind="Output" name="HL2">
+        <Type name="int">
+            <Entry kind="Expr" name="size">
+                <Expr kind="Literal" literal-kind="Integer" value="32"/>
+            </Entry>
+        </Type>
+    </Port>
+    <Port kind="Output" name="HH2">
+        <Type name="int">
+            <Entry kind="Expr" name="size">
+                <Expr kind="Literal" literal-kind="Integer" value="32"/>
+            </Entry>
+        </Type>
+    </Port>
+    <Port kind="Output" name="LH3">
+        <Type name="int">
+            <Entry kind="Expr" name="size">
+                <Expr kind="Literal" literal-kind="Integer" value="32"/>
+            </Entry>
+        </Type>
+    </Port>
+    <Port kind="Output" name="HL3">
+        <Type name="int">
+            <Entry kind="Expr" name="size">
+                <Expr kind="Literal" literal-kind="Integer" value="32"/>
+            </Entry>
+        </Type>
+    </Port>
+    <Port kind="Output" name="HH3">
+        <Type name="int">
+            <Entry kind="Expr" name="size">
+                <Expr kind="Literal" literal-kind="Integer" value="32"/>
+            </Entry>
+        </Type>
+    </Port>
+    <Port kind="Output" name="LH4">
+        <Type name="int">
+            <Entry kind="Expr" name="size">
+                <Expr kind="Literal" literal-kind="Integer" value="32"/>
+            </Entry>
+        </Type>
+    </Port>
+    <Port kind="Output" name="HL4">
+        <Type name="int">
+            <Entry kind="Expr" name="size">
+                <Expr kind="Literal" literal-kind="Integer" value="32"/>
+            </Entry>
+        </Type>
+    </Port>
+    <Port kind="Output" name="HH4">
+        <Type name="int">
+            <Entry kind="Expr" name="size">
+                <Expr kind="Literal" literal-kind="Integer" value="32"/>
+            </Entry>
+        </Type>
+    </Port>
+    <Port kind="Output" name="LH5">
+        <Type name="int">
+            <Entry kind="Expr" name="size">
+                <Expr kind="Literal" literal-kind="Integer" value="32"/>
+            </Entry>
+        </Type>
+    </Port>
+    <Port kind="Output" name="HL5">
+        <Type name="int">
+            <Entry kind="Expr" name="size">
+                <Expr kind="Literal" literal-kind="Integer" value="32"/>
+            </Entry>
+        </Type>
+    </Port>
+    <Port kind="Output" name="HH5">
+        <Type name="int">
+            <Entry kind="Expr" name="size">
+                <Expr kind="Literal" literal-kind="Integer" value="32"/>
+            </Entry>
+        </Type>
+    </Port>
+    <Port kind="Output" name="LL5">
+        <Type name="int">
+            <Entry kind="Expr" name="size">
+                <Expr kind="Literal" literal-kind="Integer" value="32"/>
+            </Entry>
+        </Type>
+    </Port>
+    <Instance id="FWT_L1">
+        <Class name="xdf.FWT_Level_1"/>
+    </Instance>
+    <Instance id="FWT_L2">
+        <Class name="xdf.FWT_Level_2"/>
+    </Instance>
+    <Instance id="FWT_L3">
+        <Class name="xdf.FWT_Level_3"/>
+    </Instance>
+    <Instance id="FWT_L4">
+        <Class name="xdf.FWT_Level_4"/>
+    </Instance>
+    <Instance id="FWT_L5">
+        <Class name="xdf.FWT_Level_5"/>
+    </Instance>
+    <Connection dst="FWT_L1" dst-port="input" src="" src-port="in"/>
+    <Connection dst="" dst-port="LH1" src="FWT_L1" src-port="LH"/>
+    <Connection dst="" dst-port="HL1" src="FWT_L1" src-port="HL"/>
+    <Connection dst="" dst-port="HH1" src="FWT_L1" src-port="HH"/>
+    <Connection dst="FWT_L2" dst-port="input" src="FWT_L1" src-port="LL"/>
+    <Connection dst="FWT_L3" dst-port="input" src="FWT_L2" src-port="LL"/>
+    <Connection dst="FWT_L4" dst-port="input" src="FWT_L3" src-port="LL"/>
+    <Connection dst="" dst-port="LH2" src="FWT_L2" src-port="LH"/>
+    <Connection dst="" dst-port="HL2" src="FWT_L2" src-port="HL"/>
+    <Connection dst="" dst-port="HH2" src="FWT_L2" src-port="HH"/>
+    <Connection dst="" dst-port="LH3" src="FWT_L3" src-port="LH"/>
+    <Connection dst="" dst-port="HL3" src="FWT_L3" src-port="HL"/>
+    <Connection dst="" dst-port="HH3" src="FWT_L3" src-port="HH"/>
+    <Connection dst="" dst-port="LH4" src="FWT_L4" src-port="LH"/>
+    <Connection dst="" dst-port="HL4" src="FWT_L4" src-port="HL"/>
+    <Connection dst="" dst-port="HH4" src="FWT_L4" src-port="HH"/>
+    <Connection dst="FWT_L5" dst-port="input" src="FWT_L4" src-port="LL"/>
+    <Connection dst="" dst-port="LH5" src="FWT_L5" src-port="LH"/>
+    <Connection dst="" dst-port="HL5" src="FWT_L5" src-port="HL"/>
+    <Connection dst="" dst-port="HH5" src="FWT_L5" src-port="HH"/>
+    <Connection dst="" dst-port="LL5" src="FWT_L5" src-port="LL"/>
+</XDF>

@@ -152,7 +152,7 @@
         <Class name="main.vamodel.filter_3x3_L3"/>
     </Instance>
     <Instance id="Filter_HH4">
-        <Class name="main.vamodel.average_filter_3x3_L4"/>
+        <Class name="main.vamodel.filter_3x3_L4"/>
     </Instance>
     <Instance id="Filter_HH5">
         <Class name="main.vamodel.filter_3x3_L5"/>

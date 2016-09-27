@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<XDF name="FWT_Level_2">
+    <Port kind="Input" name="input">
+        <Type name="int">
+            <Entry kind="Expr" name="size">
+                <Expr kind="Literal" literal-kind="Integer" value="32"/>
+            </Entry>
+        </Type>
+    </Port>
+    <Port kind="Output" name="LL">
+        <Type name="int">
+            <Entry kind="Expr" name="size">
+                <Expr kind="Literal" literal-kind="Integer" value="32"/>
+            </Entry>
+        </Type>
+    </Port>
+    <Port kind="Output" name="LH">
+        <Type name="int">
+            <Entry kind="Expr" name="size">
+                <Expr kind="Literal" literal-kind="Integer" value="32"/>
+            </Entry>
+        </Type>
+    </Port>
+    <Port kind="Output" name="HL">
+        <Type name="int">
+            <Entry kind="Expr" name="size">
+                <Expr kind="Literal" literal-kind="Integer" value="32"/>
+            </Entry>
+        </Type>
+    </Port>
+    <Port kind="Output" name="HH">
+        <Type name="int">
+            <Entry kind="Expr" name="size">
+                <Expr kind="Literal" literal-kind="Integer" value="32"/>
+            </Entry>
+        </Type>
+    </Port>
+    <Instance id="filter_row_L2">
+        <Class name="main.vamodel.lift53_row2"/>
+    </Instance>
+    <Instance id="filter_column_L_L2">
+        <Class name="main.vamodel.lift53_col2"/>
+    </Instance>
+    <Instance id="filter_column_H_L2">
+        <Class name="main.vamodel.lift53_col2"/>
+    </Instance>
+    <Connection dst="filter_row_L2" dst-port="imageStream" src="" src-port="input"/>
+    <Connection dst="filter_column_H_L2" dst-port="imageStream"
+        src="filter_row_L2" src-port="coeff_H"/>
+    <Connection dst="" dst-port="HL" src="filter_column_H_L2" src-port="coeff_L"/>
+    <Connection dst="" dst-port="HH" src="filter_column_H_L2" src-port="coeff_H"/>
+    <Connection dst="filter_column_L_L2" dst-port="imageStream"
+        src="filter_row_L2" src-port="coeff_L"/>
+    <Connection dst="" dst-port="LL" src="filter_column_L_L2" src-port="coeff_L"/>
+    <Connection dst="" dst-port="LH" src="filter_column_L_L2" src-port="coeff_H"/>
+</XDF>
