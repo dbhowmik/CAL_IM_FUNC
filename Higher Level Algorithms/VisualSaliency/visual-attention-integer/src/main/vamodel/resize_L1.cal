@@ -1,0 +1,110 @@
+package main.vamodel;
+
+import std.header.Parameter.*;
+import std.util.Math.*;
+
+actor resize_L1() int coefficient ==> int filt_coeff:
+	int width = SUB1_WIDTH;
+	int height = SUB1_HEIGHT;
+	int scale := SCALE_PARAM_1;
+	
+	int coeffBuffer[height][width];	
+	int countX := 0;
+	int countY := 0;	
+	
+	getCoeffValue: action coefficient:[value] ==>  	
+	do			
+		coeffBuffer[countX][countY] := value;
+				
+		countY := countY + 1;
+		
+		if(countY = width) then
+			countX := countX + 1;
+			countY := 0; 
+		end									
+	end
+	
+	doneCountX: action ==>
+	guard countX = height
+	do
+		countX := 0;					
+	end
+
+	// Image resize using nearest neighbor algorithm. 
+	// Good comparison point against other algorithm e.g. bi-linear / bicubic. 
+	// Comparison will be accuracy vs FPGA speed/resource etc.
+	/*
+	BilinearInterpolation(float q11, float q12, float q21, float q22, float x1, float x2, float y1, float y2, float x, float y) 
+{
+    float x2x1, y2y1, x2x, y2y, yy1, xx1;
+    x2x1 = x2 - x1;
+    y2y1 = y2 - y1;
+    x2x = x2 - x;
+    y2y = y2 - y;
+    yy1 = y - y1;
+    xx1 = x - x1;
+    return 1.0 / (x2x1 * y2y1) * (
+        q11 * x2x * y2y +
+        q21 * xx1 * y2y +
+        q12 * x2x * yy1 +
+        q22 * xx1 * yy1
+    );
+} */
+	    
+	int tmp[IM_HEIGHT][IM_WIDTH];  
+	int max_val := 0;
+	int x_ratio; int y_ratio; int px; int py;
+	
+	imageResize: action ==>
+	do						
+		x_ratio := IM_HEIGHT/height;
+		y_ratio := IM_WIDTH/width;
+		max_val := 0;
+		
+				
+		foreach int i in 0 .. (IM_HEIGHT-1) do
+			foreach int j in 0 .. (IM_WIDTH-1) do				
+				px := i/x_ratio;
+				py := j/y_ratio;				
+								
+				// Scale parameter and max calculation combined here  
+				tmp[i][j] := coeffBuffer[px][py] * scale;					
+					
+				if(tmp[i][j]>max_val) then max_val := tmp[i][j]; end // Find maximum value for normalisation
+			end 
+		end
+		
+	end
+	
+	sendResizedValue: action ==> filt_coeff:[coeff_Val]
+	var int coeff_Val
+	do  
+		coeff_Val := (tmp[countX][countY]* 100)/max_val;
+			
+		countY := countY + 1;		
+		if(countY = IM_WIDTH) then
+			countX := countX + 1;
+			countY := 0; 
+		end
+	end
+	
+	doneResizeCountX: action ==>
+	guard countX = IM_HEIGHT
+	do
+		countX := 0;		
+	end
+		
+	schedule fsm s0 :			
+		s0 (getCoeffValue ) --> s0;
+		s0 (doneCountX ) --> s1;
+		s1 (imageResize) --> s2;
+		s2 (sendResizedValue) --> s2;
+		s2 (doneResizeCountX) --> s0;		
+	end
+	
+	priority
+		doneCountX > getCoeffValue;
+		doneResizeCountX > sendResizedValue;		
+	end
+
+end
