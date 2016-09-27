@@ -23,7 +23,7 @@ actor average_filter_3x3_L1() int coefficient ==> int filt_coeff:
 	
 	doneCountX: action ==>
 	guard countX = height
-	do
+	do		
 		countX := 0;				
 	end
 
@@ -90,7 +90,7 @@ actor average_filter_3x3_L1() int coefficient ==> int filt_coeff:
 		if(countY = width) then
 			countX := countX + 1;
 			countY := 0; 
-		end
+		end			
 	end
 		
 	schedule fsm s0 :			

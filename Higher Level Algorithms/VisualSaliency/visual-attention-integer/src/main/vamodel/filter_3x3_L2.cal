@@ -1,0 +1,168 @@
+package main.vamodel;
+
+import std.header.Parameter.*;
+import std.util.Math.*;
+
+actor filter_3x3_L2() int coefficient ==> int filt_coeff:
+	int width = SUB2_WIDTH;
+	int length = SUB2_HEIGHT;
+	
+	int height = 4; 
+	
+	int Buffer[height][width];	
+	int countX := 0;
+	int countY := 0;	
+	
+	getCoeffValue: action coefficient:[value] ==>  	
+	do			
+		Buffer[countY][countX] := abs(value)*100;				
+		countX := countX + 1;		
+		if(countX = width) then
+			countY := countY + 1;
+			countX := 0; 
+		end									
+	end
+	
+	doneCountY_init: action ==>
+	guard countY = 2
+	do								
+		countY := 0;		
+	end
+	
+	int index := 2;
+	int index_1;
+	int index_2;
+	int index_3;
+	int out_val;
+	
+	/* Mean Filtering */
+	mean_filter: action coefficient:[value] ==> filt_coeff:[out_val] 	
+	do					
+		if(countX=0 || countX=width || countY=0 || countY=length) then
+		    out_val := 0;	
+		else
+			if(index=0) then 
+				index_1 := 1;
+				index_2 := 2;
+				index_3 := 3;
+			end
+			
+			if(index=1) then 
+				index_1 := 2;
+				index_2 := 3;
+				index_3 := 0;
+			end
+			
+			if(index=2) then 
+				index_1 := 3;
+				index_2 := 0;
+				index_3 := 1;
+			end
+			
+			if(index=3) then 
+				index_1 := 0;
+				index_2 := 1;
+				index_3 := 2;
+			end
+		
+			out_val := (Buffer[index_1][countX-1] + Buffer[index_1][countX+1] + Buffer[index_1][countX] + 
+							Buffer[index_2][countX-1] + Buffer[index_2][countX+1] + Buffer[index_3][countX-1] + 
+							Buffer[index_3][countX] + Buffer[index_3][countX+1]) / 9; // Mean filter  		    		    
+		end
+		
+		Buffer[index][countX] := abs(value)*100;
+		
+		countX := countX + 1;		
+		if(countX = width) then
+			countY := countY + 1;
+			countX := 0; 					
+			index := index + 1;
+		
+			if(index >= 4) then				
+				index := 0;
+			end
+			
+			 
+		end	
+			
+		
+	end
+		
+	
+	doneCountY: action ==>
+	guard countY = length-2
+	do						
+	end
+	
+	
+	mean_filter_end: action ==> filt_coeff:[out_val]
+	do	
+		if(countX=0 || countX=width || countY=0 || countY=length) then
+			out_val := 0;
+		else
+			if(index=0) then 
+				index_1 := 1;
+				index_2 := 2;
+				index_3 := 3;
+			end
+			
+			if(index=1) then 
+				index_1 := 2;
+				index_2 := 3;
+				index_3 := 0;
+			end
+			
+			if(index=2) then 
+				index_1 := 3;
+				index_2 := 0;
+				index_3 := 1;
+			end
+			
+			if(index=3) then 
+				index_1 := 0;
+				index_2 := 1;
+				index_3 := 2;
+			end
+		
+		    out_val := (Buffer[index_1][countX-1] + Buffer[index_1][countX+1] + Buffer[index_1][countX] + 
+							Buffer[index_2][countX-1] + Buffer[index_2][countX+1] + Buffer[index_3][countX-1] + 
+							Buffer[index_3][countX] + Buffer[index_3][countX+1]) / 9; // Mean filter  	    	
+		end
+				
+		countX := countX + 1;		
+		if(countX = width) then
+			countY := countY + 1;
+			countX := 0; 
+			index := index + 1;
+		
+			if(index >= 4) then				
+				index := 0;
+			end 
+		end
+						
+	end
+	
+	
+	doneCountY_end: action ==>
+	guard countY = length
+	do		
+		countY := 0;				
+	end
+
+		
+	schedule fsm s0 :			
+		s0 (getCoeffValue ) --> s0;
+		s0 (doneCountY_init ) --> s1;
+		s1 (mean_filter) --> s1;
+		s1 (doneCountY) --> s2;
+		s2 (mean_filter_end) --> s2;
+		s2 (doneCountY_end) --> s0;		
+	end
+	
+	priority
+		doneCountY_init > getCoeffValue;
+		doneCountY > mean_filter;		
+		doneCountY_end > mean_filter_end;
+	end
+	
+end
