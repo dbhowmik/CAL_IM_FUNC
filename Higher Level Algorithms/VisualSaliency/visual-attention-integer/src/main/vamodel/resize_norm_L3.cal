@@ -68,9 +68,10 @@ actor resize_norm_L3() int coefficient ==> int filt_coeff:
 				
 				tmp[i][j] := ((x2-i)*fy + (i-x1)*fx)/((y2-y1)*(x2-x1));
 
-				if(tmp[i][j]>max_val) then max_val := tmp[i][j]; end // Find maximum value for normalisation
+			//	if(tmp[i][j]>max_val) then max_val := tmp[i][j]; end // Find maximum value for normalisation
 			end 
 		end
+		//println(max_val);
 	end
 	
 
@@ -78,7 +79,7 @@ actor resize_norm_L3() int coefficient ==> int filt_coeff:
 	sendResizedValue: action ==> filt_coeff:[coeff_Val]
 	var int coeff_Val
 	do  
-		coeff_Val := (tmp[countX][countY]* 100)/max_val;
+		coeff_Val := (tmp[countX][countY] >> 9 ); //* 100)/max_val;
 			
 		countY := countY + 1;		
 		if(countY = IM_WIDTH) then
