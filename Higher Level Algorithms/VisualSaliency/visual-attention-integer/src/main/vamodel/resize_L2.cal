@@ -1,0 +1,140 @@
+package main.vamodel;
+
+import std.header.Parameter.*;
+import std.util.Math.*;
+
+actor resize_L2() int coefficient ==> int filt_coeff:
+	int width = SUB2_WIDTH;
+	int height = SUB2_HEIGHT;
+	
+	int Buffer[2][width];	
+	int count_width := 0;
+	int countX := 0;
+	int countY := 0;
+	int count := 0; 
+	int index := 0;
+			
+	init: action ==>
+	do
+		x_ratio := IM_HEIGHT/height;
+		y_ratio := IM_WIDTH/width;
+	end
+		
+	getCoeffValue_init: action coefficient:[value] ==>  	
+	do			
+		Buffer[count][count_width] := value;				
+		count_width := count_width + 1;
+		if(count_width = width) then
+			count := 1; 			
+			count_width := 0;
+			
+			index := index + 1; 			
+			if(index >= 2) then 
+				index := 0;
+			end
+		end																								
+	end		
+			
+	getCoeffValue: action coefficient:[value] ==>  	
+	do			
+		Buffer[count][count_width] := value;				
+		count_width := count_width + 1;
+		if(count_width = width) then
+			count := 1; 			
+			count_width := 0;
+			
+			index := index + 1; 			
+			if(index >= 2) then 
+				index := 0;
+			end
+		end																								
+	end
+		
+	doneCountY_itar: action ==>
+	guard count = 1
+	do				
+		count := 0;		
+	end
+	
+	
+	int x_ratio; int y_ratio; int px; int py;
+	int p1; int p2; int p3; int p4;
+	int x1; int x2; int y1; int y2;
+	int fx; int fy; 
+		
+	int index_1;
+	int index_2;
+	int tmp;
+	
+	/* Resizing */
+	resize: action ==> filt_coeff:[out_val]
+	var int out_val		
+	do		
+		if(index=0) then 
+			index_1 := 1;
+			index_2 := 0;			
+		end
+			
+		if(index=1) then 
+			index_1 := 0;
+			index_2 := 1;			
+		end
+					
+					
+		px := countY/x_ratio;
+		py := countX/y_ratio;				
+			
+		p1 := Buffer[index_1][py];
+		p2 := Buffer[index_1][py+1];
+		p3 := Buffer[index_2][py];
+		p4 := Buffer[index_2][py+1];
+				
+		y1 := py*y_ratio;
+		y2 := (py+1)*y_ratio;
+		x1 := px*x_ratio;
+		x2 := (px+1)*x_ratio;
+				
+					
+		fy := (y2-countX)*p1 + (countX-y1)*p2;
+		fx := (y2-countX)*p3 + (countX-y1)*p4;
+				
+		tmp := ((x2-countY)*fy + (countY-x1)*fx)/((y2-y1)*(x2-x1));
+			
+		out_val := tmp >> 8; // Normalization with wavelet approximation 
+	
+		countX := countX + 1;		
+		if(countX = IM_WIDTH) then
+			count := 1;			 
+			countY := countY + 1;
+			countX := 0; 								
+		end									
+	end		
+	
+
+	doneCountY_end: action ==>
+	guard countY = IM_HEIGHT
+	do					
+		countY := 0;	
+		count := 0;		
+	end
+		
+	schedule fsm s0 :	
+		s0 (init) --> s1;		
+		s1 (getCoeffValue_init ) --> s1;
+		s1 (doneCountY_itar ) --> s2;
+		s2 (getCoeffValue ) --> s2;
+		s2 (doneCountY_itar ) --> s3;
+		s3 (resize) --> s3;
+		s3 (doneCountY_itar ) --> s2;
+		s3 (doneCountY_end) --> s4;
+		s4 (resize) --> s4;
+		s4 (doneCountY_itar ) --> s0;		
+	end
+	
+	priority
+		doneCountY_itar > getCoeffValue;
+		doneCountY_itar > resize;
+		doneCountY_end > doneCountY_itar;  
+	end
+	
+end

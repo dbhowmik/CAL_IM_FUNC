@@ -161,7 +161,7 @@
         <Class name="main.vamodel.resize_norm_L1"/>
     </Instance>
     <Instance id="Resize_LH2">
-        <Class name="main.vamodel.resize_norm_L2"/>
+        <Class name="main.vamodel.resize_L2"/>
     </Instance>
     <Instance id="Resize_LH3">
         <Class name="main.vamodel.resize_norm_L3"/>
