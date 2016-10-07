@@ -11,7 +11,6 @@ actor resize_L4() int coefficient ==> int filt_coeff:
 	int count_width := 0;
 	int countX := 0;
 	int countY := 0;
-	int count := 0; 
 	int index := 0;
 			
 	init: action ==>
@@ -22,23 +21,18 @@ actor resize_L4() int coefficient ==> int filt_coeff:
 			
 	getCoeffValue: action coefficient:[value] ==>  	
 	do			
-		Buffer[count][count_width] := value;				
+		Buffer[index][count_width] := value;				
 		count_width := count_width + 1;
-		if(count_width = width) then
-			count := 1; 			
-			count_width := 0;
-			
-			index := index + 1; 			
-			if(index >= 2) then 
-				index := 0;
-			end
-		end																								
 	end
 		
 	doneCountY_itar: action ==>
-	guard count = 1
+	guard count_width = width
 	do				
-		count := 0;		
+		count_width := 0;
+		index := index + 1; 			
+		if(index >= 2) then 
+			index := 0;
+		end
 	end
 	
 	
@@ -56,16 +50,13 @@ actor resize_L4() int coefficient ==> int filt_coeff:
 	var int out_val		
 	do		
 		if(index=0) then 
+			index_1 := 0;
+			index_2 := 1;			
+		else 
 			index_1 := 1;
 			index_2 := 0;			
 		end
-			
-		if(index=1) then 
-			index_1 := 0;
-			index_2 := 1;			
-		end
-					
-					
+										
 		px := countY/x_ratio;
 		py := countX/y_ratio;				
 			
@@ -78,8 +69,7 @@ actor resize_L4() int coefficient ==> int filt_coeff:
 		y2 := (py+1)*y_ratio;
 		x1 := px*x_ratio;
 		x2 := (px+1)*x_ratio;
-				
-					
+								
 		fy := (y2-countX)*p1 + (countX-y1)*p2;
 		fx := (y2-countX)*p3 + (countX-y1)*p4;
 				
@@ -89,142 +79,34 @@ actor resize_L4() int coefficient ==> int filt_coeff:
 	
 		countX := countX + 1;		
 		if(countX = IM_WIDTH) then
-			count := 1;			 
 			countY := countY + 1;
 			countX := 0; 								
 		end									
 	end		
 	
-	
-	
-
 	doneCountY_end: action ==>
 	guard countY = IM_HEIGHT
 	do					
-		countY := 0;	
-		count := 0;		
+		countY := 0;					
 	end
-
 		
 	schedule fsm s0 :	
 		s0 (init) --> s1;		
 		s1 (getCoeffValue ) --> s1;
 		s1 (doneCountY_itar ) --> s2;
-		s2 (resize) --> s2;
-		s2 (doneCountY_itar ) --> s1;
-		s2 (doneCountY_end) --> s3;
+		s2 (getCoeffValue ) --> s2;
+		s2 (doneCountY_itar ) --> s3;
 		s3 (resize) --> s3;
-		s3 (doneCountY_itar ) --> s0;
-		
-//		s2 (wavelet_filter_L_top) --> s1;
-//		s1 (doneCountY_itar ) --> s2;
-//		s2 (wavelet_filter_H) --> s2;
-//		s2 (doneCountY_itar ) --> s3;
-//		s2 (doneCountY_end ) --> s4;
-//		s3 (wavelet_filter_L) --> s3;
-//		s3 (doneCountY_itar ) --> s2;
-//		s3 (doneCountY_end ) --> s4;
-//		s4 (wavelet_filter_H_bottom) --> s4;
-//		s4 (doneCountY_itar ) --> s0;
+		s3 (doneCountY_itar ) --> s2;
+		s3 (doneCountY_end) --> s4;
+		s4 (resize) --> s4;
+		s4 (doneCountY_itar ) --> s0;		
 	end
 	
 	priority
 		doneCountY_itar > getCoeffValue;
 		doneCountY_itar > resize;
-		doneCountY_end > doneCountY_itar;
-//		doneCountY_itar > wavelet_filter_H_bottom;  
+		doneCountY_end  > doneCountY_itar;  
 	end
 	
 end
-	
-//	int coeffBuffer[height][width];	
-//	int countX := 0;
-//	int countY := 0;	
-//	
-//	getCoeffValue: action coefficient:[value] ==>  	
-//	do			
-//		coeffBuffer[countX][countY] := value;
-//				
-//		countY := countY + 1;
-//		
-//		if(countY = width) then
-//			countX := countX + 1;
-//			countY := 0; 
-//		end									
-//	end
-//	
-//	doneCountX: action ==>
-//	guard countX = height
-//	do
-//		countX := 0;					
-//	end
-//
-//	// Image resize using nearest bi-linear interpolation. 
-//	// Comparison will be accuracy vs FPGA speed/resource etc.
-//	    
-//	int tmp[IM_HEIGHT][IM_WIDTH];  
-//	int x_ratio; int y_ratio; int px; int py;
-//	int p1; int p2; int p3; int p4;
-//	int x1; int x2; int y1; int y2;
-//	int fx; int fy; 
-//	
-//	imageResize: action ==>
-//	do						
-//		x_ratio := IM_HEIGHT/height;
-//		y_ratio := IM_WIDTH/width;
-//				
-//		foreach int i in 0 .. (IM_HEIGHT-1) do
-//			foreach int j in 0 .. (IM_WIDTH-1) do				
-//				px := i/x_ratio;
-//				py := j/y_ratio;				
-//				
-//				p1 := coeffBuffer[px][py];
-//				p2 := coeffBuffer[px][py+1];
-//				p3 := coeffBuffer[px+1][py];
-//				p4 := coeffBuffer[px+1][py+1];
-//				
-//				y1 := py*y_ratio;
-//				y2 := (py+1)*y_ratio;
-//				x1 := px*x_ratio;
-//				x2 := (px+1)*x_ratio;
-//				
-//					
-//				fy := (y2-j)*p1 + (j-y1)*p2;
-//				fx := (y2-j)*p3 + (j-y1)*p4;
-//				
-//				tmp[i][j] := ((x2-i)*fy + (i-x1)*fx)/((y2-y1)*(x2-x1));
-//			end 
-//		end		
-//	end
-//	
-//	sendResizedValue: action ==> filt_coeff:[coeff_Val]
-//	var int coeff_Val
-//	do  
-//		coeff_Val := (tmp[countX][countY] >> 7);		
-//		countY := countY + 1;		
-//		if(countY = IM_WIDTH) then
-//			countX := countX + 1;
-//			countY := 0; 
-//		end
-//	end
-//	
-//	doneResizeCountX: action ==>
-//	guard countX = IM_HEIGHT
-//	do
-//		countX := 0;		
-//	end
-//		
-//	schedule fsm s0 :			
-//		s0 (getCoeffValue ) --> s0;
-//		s0 (doneCountX ) --> s1;
-//		s1 (imageResize) --> s2;
-//		s2 (sendResizedValue) --> s2;
-//		s2 (doneResizeCountX) --> s0;		
-//	end
-//	
-//	priority
-//		doneCountX > getCoeffValue;
-//		doneResizeCountX > sendResizedValue;		
-//	end
-//	
-//end
