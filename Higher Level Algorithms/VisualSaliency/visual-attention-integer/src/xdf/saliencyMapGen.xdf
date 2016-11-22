@@ -164,7 +164,7 @@
         <Class name="main.vamodel.resize_norm_L2"/>
     </Instance>
     <Instance id="Resize_LH3">
-        <Class name="main.vamodel.resize_L3"/>
+        <Class name="main.vamodel.resize_norm_L3"/>
     </Instance>
     <Instance id="Resize_LH4">
         <Class name="main.vamodel.resize_norm_L4"/>
@@ -179,7 +179,7 @@
         <Class name="main.vamodel.resize_norm_L2"/>
     </Instance>
     <Instance id="Resize_HL3">
-        <Class name="main.vamodel.resize_L3"/>
+        <Class name="main.vamodel.resize_norm_L3"/>
     </Instance>
     <Instance id="Resize_HL4">
         <Class name="main.vamodel.resize_norm_L4"/>
@@ -194,7 +194,7 @@
         <Class name="main.vamodel.resize_norm_L2"/>
     </Instance>
     <Instance id="Resize_HH3">
-        <Class name="main.vamodel.resize_L3"/>
+        <Class name="main.vamodel.resize_norm_L3"/>
     </Instance>
     <Instance id="Resize_HH4">
         <Class name="main.vamodel.resize_norm_L4"/>

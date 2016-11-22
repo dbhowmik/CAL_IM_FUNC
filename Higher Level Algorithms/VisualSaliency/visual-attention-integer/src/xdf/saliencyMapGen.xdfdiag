@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="ASCII"?>
-<pi:Diagram xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:al="http://eclipse.org/graphiti/mm/algorithms" xmlns:pi="http://eclipse.org/graphiti/mm/pictograms" visible="true" gridUnit="10" diagramTypeId="xdfDiagram" name="saliencyMapGen" snapToGrid="true" pictogramLinks="//@link //@children.0/@link //@children.1/@link //@children.2/@link //@children.3/@link //@children.4/@link //@children.5/@link //@children.6/@link //@children.7/@link //@children.8/@link //@children.9/@link //@children.10/@link //@children.11/@link //@children.12/@link //@children.13/@link //@children.14/@link //@children.15/@link //@children.16/@link //@children.17/@link //@children.18/@link //@children.19/@link //@children.20/@link //@children.21/@link //@children.22/@link //@children.23/@link //@children.24/@link //@children.25/@link //@children.26/@link //@children.27/@link //@children.28/@link //@children.29/@link //@children.30/@link //@children.30/@anchors.0/@link //@children.30/@anchors.1/@link //@children.30/@anchors.2/@link //@children.30/@anchors.3/@link //@children.30/@anchors.4/@link //@children.30/@anchors.5/@link //@children.31/@link //@children.31/@anchors.0/@link //@children.31/@anchors.1/@link //@children.31/@anchors.2/@link //@children.31/@anchors.3/@link //@children.31/@anchors.4/@link //@children.31/@anchors.5/@link //@children.32/@link //@children.32/@anchors.0/@link //@children.32/@anchors.1/@link //@children.32/@anchors.2/@link //@children.32/@anchors.3/@link //@children.32/@anchors.4/@link //@children.32/@anchors.5/@link //@children.33/@link //@children.33/@anchors.0/@link //@children.33/@anchors.1/@link //@children.33/@anchors.2/@link //@children.33/@anchors.3/@link //@children.34/@link //@children.34/@anchors.0/@link //@children.34/@anchors.1/@link //@children.35/@link //@children.36/@link //@children.37/@link //@children.38/@link //@children.39/@link //@children.40/@link //@children.41/@link //@children.42/@link //@children.43/@link //@children.44/@link //@children.45/@link //@children.46/@link //@children.47/@link //@children.48/@link //@children.49/@link //@children.50/@link //@connections.0/@link //@connections.1/@link //@connections.2/@link //@connections.3/@link //@connections.4/@link //@connections.5/@link //@connections.6/@link //@connections.7/@link //@connections.8/@link //@connections.9/@link //@connections.10/@link //@connections.11/@link //@connections.12/@link //@connections.13/@link //@connections.14/@link //@connections.15/@link //@connections.16/@link //@connections.17/@link //@connections.18/@link //@connections.19/@link //@connections.20/@link //@connections.21/@link //@connections.22/@link //@connections.23/@link //@connections.24/@link //@connections.25/@link //@connections.26/@link //@connections.27/@link //@connections.28/@link //@connections.29/@link //@connections.30/@link //@connections.31/@link //@connections.32/@link //@connections.33/@link //@connections.34/@link //@connections.35/@link //@connections.36/@link //@connections.37/@link //@connections.38/@link //@connections.39/@link //@connections.40/@link //@connections.41/@link //@connections.42/@link //@connections.43/@link //@connections.44/@link //@connections.45/@link //@connections.46/@link //@connections.47/@link //@connections.48/@link //@connections.49/@link //@children.0/@anchors.0/@link //@children.0/@anchors.1/@link //@children.3/@anchors.0/@link //@children.3/@anchors.1/@link //@children.10/@anchors.0/@link //@children.10/@anchors.1/@link //@children.1/@anchors.0/@link //@children.1/@anchors.1/@link //@children.4/@anchors.0/@link //@children.4/@anchors.1/@link //@children.11/@anchors.0/@link //@children.11/@anchors.1/@link //@children.2/@anchors.0/@link //@children.2/@anchors.1/@link //@children.5/@anchors.0/@link //@children.5/@anchors.1/@link //@children.12/@anchors.0/@link //@children.12/@anchors.1/@link //@children.6/@anchors.0/@link //@children.6/@anchors.1/@link //@children.8/@anchors.0/@link //@children.8/@anchors.1/@link //@children.7/@anchors.0/@link //@children.7/@anchors.1/@link //@children.9/@anchors.0/@link //@children.9/@anchors.1/@link //@children.14/@anchors.0/@link //@children.14/@anchors.1/@link //@children.13/@anchors.0/@link //@children.13/@anchors.1/@link //@children.15/@anchors.0/@link //@children.15/@anchors.1/@link //@children.16/@anchors.0/@link //@children.16/@anchors.1/@link //@children.20/@anchors.0/@link //@children.20/@anchors.1/@link //@children.21/@anchors.0/@link //@children.21/@anchors.1/@link //@children.25/@anchors.0/@link //@children.25/@anchors.1/@link //@children.26/@anchors.0/@link //@children.26/@anchors.1/@link //@children.19/@anchors.0/@link //@children.19/@anchors.1/@link //@children.24/@anchors.0/@link //@children.24/@anchors.1/@link //@children.29/@anchors.0/@link //@children.29/@anchors.1/@link //@children.17/@anchors.0/@link //@children.17/@anchors.1/@link //@children.22/@anchors.0/@link //@children.22/@anchors.1/@link //@children.27/@anchors.0/@link //@children.27/@anchors.1/@link //@children.28/@anchors.0/@link //@children.28/@anchors.1/@link //@children.23/@anchors.0/@link //@children.23/@anchors.1/@link //@children.18/@anchors.0/@link //@children.18/@anchors.1/@link" version="0.11.0">
+<pi:Diagram xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:al="http://eclipse.org/graphiti/mm/algorithms" xmlns:pi="http://eclipse.org/graphiti/mm/pictograms" visible="true" gridUnit="10" diagramTypeId="xdfDiagram" name="saliencyMapGen" snapToGrid="true" pictogramLinks="//@link //@children.0/@link //@children.1/@link //@children.2/@link //@children.3/@link //@children.4/@link //@children.5/@link //@children.6/@link //@children.7/@link //@children.8/@link //@children.9/@link //@children.10/@link //@children.11/@link //@children.12/@link //@children.13/@link //@children.14/@link //@children.15/@link //@children.16/@link //@children.17/@link //@children.18/@link //@children.19/@link //@children.20/@link //@children.21/@link //@children.22/@link //@children.23/@link //@children.24/@link //@children.25/@link //@children.26/@link //@children.27/@link //@children.28/@link //@children.29/@link //@children.30/@link //@children.30/@anchors.0/@link //@children.30/@anchors.1/@link //@children.30/@anchors.2/@link //@children.30/@anchors.3/@link //@children.30/@anchors.4/@link //@children.30/@anchors.5/@link //@children.31/@link //@children.31/@anchors.0/@link //@children.31/@anchors.1/@link //@children.31/@anchors.2/@link //@children.31/@anchors.3/@link //@children.31/@anchors.4/@link //@children.31/@anchors.5/@link //@children.32/@link //@children.32/@anchors.0/@link //@children.32/@anchors.1/@link //@children.32/@anchors.2/@link //@children.32/@anchors.3/@link //@children.32/@anchors.4/@link //@children.32/@anchors.5/@link //@children.33/@link //@children.33/@anchors.0/@link //@children.33/@anchors.1/@link //@children.33/@anchors.2/@link //@children.33/@anchors.3/@link //@children.34/@link //@children.34/@anchors.0/@link //@children.34/@anchors.1/@link //@children.35/@link //@children.36/@link //@children.37/@link //@children.38/@link //@children.39/@link //@children.40/@link //@children.41/@link //@children.42/@link //@children.43/@link //@children.44/@link //@children.45/@link //@children.46/@link //@children.47/@link //@children.48/@link //@children.49/@link //@children.50/@link //@connections.0/@link //@connections.1/@link //@connections.2/@link //@connections.3/@link //@connections.4/@link //@connections.5/@link //@connections.6/@link //@connections.7/@link //@connections.8/@link //@connections.9/@link //@connections.10/@link //@connections.11/@link //@connections.12/@link //@connections.13/@link //@connections.14/@link //@connections.15/@link //@connections.16/@link //@connections.17/@link //@connections.18/@link //@connections.19/@link //@connections.20/@link //@connections.21/@link //@connections.22/@link //@connections.23/@link //@connections.24/@link //@connections.25/@link //@connections.26/@link //@connections.27/@link //@connections.28/@link //@connections.29/@link //@connections.30/@link //@connections.31/@link //@connections.32/@link //@connections.33/@link //@connections.34/@link //@connections.35/@link //@connections.36/@link //@connections.37/@link //@connections.38/@link //@connections.39/@link //@connections.40/@link //@connections.41/@link //@connections.42/@link //@connections.43/@link //@connections.44/@link //@connections.45/@link //@connections.46/@link //@connections.47/@link //@connections.48/@link //@connections.49/@link //@children.0/@anchors.0/@link //@children.0/@anchors.1/@link //@children.3/@anchors.0/@link //@children.3/@anchors.1/@link //@children.10/@anchors.0/@link //@children.10/@anchors.1/@link //@children.1/@anchors.0/@link //@children.1/@anchors.1/@link //@children.4/@anchors.0/@link //@children.4/@anchors.1/@link //@children.11/@anchors.0/@link //@children.11/@anchors.1/@link //@children.2/@anchors.0/@link //@children.2/@anchors.1/@link //@children.5/@anchors.0/@link //@children.5/@anchors.1/@link //@children.12/@anchors.0/@link //@children.12/@anchors.1/@link //@children.6/@anchors.0/@link //@children.6/@anchors.1/@link //@children.8/@anchors.0/@link //@children.8/@anchors.1/@link //@children.7/@anchors.0/@link //@children.7/@anchors.1/@link //@children.9/@anchors.0/@link //@children.9/@anchors.1/@link //@children.14/@anchors.0/@link //@children.14/@anchors.1/@link //@children.13/@anchors.0/@link //@children.13/@anchors.1/@link //@children.15/@anchors.0/@link //@children.15/@anchors.1/@link //@children.16/@anchors.0/@link //@children.16/@anchors.1/@link //@children.20/@anchors.0/@link //@children.20/@anchors.1/@link //@children.21/@anchors.0/@link //@children.21/@anchors.1/@link //@children.25/@anchors.0/@link //@children.25/@anchors.1/@link //@children.26/@anchors.0/@link //@children.26/@anchors.1/@link //@children.19/@anchors.0/@link //@children.19/@anchors.1/@link //@children.24/@anchors.0/@link //@children.24/@anchors.1/@link //@children.29/@anchors.0/@link //@children.29/@anchors.1/@link //@children.28/@anchors.0/@link //@children.28/@anchors.1/@link //@children.23/@anchors.0/@link //@children.23/@anchors.1/@link //@children.18/@anchors.0/@link //@children.18/@anchors.1/@link //@children.17/@anchors.0/@link //@children.17/@anchors.1/@link //@children.22/@anchors.0/@link //@children.22/@anchors.1/@link //@children.27/@anchors.0/@link //@children.27/@anchors.1/@link" version="0.11.0">
   <properties key="xdf_diagram_version" value="2"/>
   <graphicsAlgorithm xsi:type="al:Rectangle" background="//@colors.1" foreground="//@colors.0" lineWidth="1" transparency="0.0" width="1000" height="1000"/>
   <link>
@@ -772,7 +772,7 @@
   </children>
   <children xsi:type="pi:ContainerShape" visible="true" active="true">
     <properties key="XDF_ID" value="INSTANCE"/>
-    <properties key="refinement" value="/INT-VA-Model-naive/bin/main/vamodel/resize_L3.ir"/>
+    <properties key="refinement" value="/INT-VA-Model-naive/bin/main/vamodel/resize_norm_L3.ir"/>
     <graphicsAlgorithm xsi:type="al:RoundedRectangle" lineStyle="UNSPECIFIED" width="128" height="80" x="233" y="233" style="//@styles.0/@styles.2" cornerHeight="5" cornerWidth="5">
       <graphicsAlgorithmChildren xsi:type="al:Text" lineStyle="UNSPECIFIED" width="128" height="40" style="//@styles.1/@styles.0" horizontalAlignment="UNSPECIFIED" verticalAlignment="UNSPECIFIED" value="Resize_LH3">
         <properties key="XDF_ID" value="INSTANCE_LABEL"/>
@@ -800,7 +800,7 @@
       <properties key="SHAPE_DIRECTION" value="input"/>
       <graphicsAlgorithm xsi:type="al:Rectangle" lineStyle="UNSPECIFIED" width="12" height="12" y="-6" style="//@styles.0/@styles.1"/>
       <link>
-        <businessObjects href="../../bin/main/vamodel/resize_L3.ir#//@inputs.0"/>
+        <businessObjects href="../../bin/main/vamodel/resize_norm_L3.ir#//@inputs.0"/>
       </link>
       <location y="48"/>
     </anchors>
@@ -810,7 +810,7 @@
       <properties key="SHAPE_DIRECTION" value="output"/>
       <graphicsAlgorithm xsi:type="al:Rectangle" lineStyle="UNSPECIFIED" width="13" height="12" x="-12" y="-6" style="//@styles.0/@styles.1"/>
       <link>
-        <businessObjects href="../../bin/main/vamodel/resize_L3.ir#//@outputs.0"/>
+        <businessObjects href="../../bin/main/vamodel/resize_norm_L3.ir#//@outputs.0"/>
       </link>
       <location x="128" y="48"/>
     </anchors>
@@ -997,7 +997,7 @@
   </children>
   <children xsi:type="pi:ContainerShape" visible="true" active="true">
     <properties key="XDF_ID" value="INSTANCE"/>
-    <properties key="refinement" value="/INT-VA-Model-naive/bin/main/vamodel/resize_L3.ir"/>
+    <properties key="refinement" value="/INT-VA-Model-naive/bin/main/vamodel/resize_norm_L3.ir"/>
     <graphicsAlgorithm xsi:type="al:RoundedRectangle" lineStyle="UNSPECIFIED" width="128" height="80" x="233" y="783" style="//@styles.0/@styles.2" cornerHeight="5" cornerWidth="5">
       <graphicsAlgorithmChildren xsi:type="al:Text" lineStyle="UNSPECIFIED" width="128" height="40" style="//@styles.1/@styles.0" horizontalAlignment="UNSPECIFIED" verticalAlignment="UNSPECIFIED" value="Resize_HL3">
         <properties key="XDF_ID" value="INSTANCE_LABEL"/>
@@ -1025,7 +1025,7 @@
       <properties key="SHAPE_DIRECTION" value="input"/>
       <graphicsAlgorithm xsi:type="al:Rectangle" lineStyle="UNSPECIFIED" width="12" height="12" y="-6" style="//@styles.0/@styles.1"/>
       <link>
-        <businessObjects href="../../bin/main/vamodel/resize_L3.ir#//@inputs.0"/>
+        <businessObjects href="../../bin/main/vamodel/resize_norm_L3.ir#//@inputs.0"/>
       </link>
       <location y="48"/>
     </anchors>
@@ -1035,7 +1035,7 @@
       <properties key="SHAPE_DIRECTION" value="output"/>
       <graphicsAlgorithm xsi:type="al:Rectangle" lineStyle="UNSPECIFIED" width="13" height="12" x="-12" y="-6" style="//@styles.0/@styles.1"/>
       <link>
-        <businessObjects href="../../bin/main/vamodel/resize_L3.ir#//@outputs.0"/>
+        <businessObjects href="../../bin/main/vamodel/resize_norm_L3.ir#//@outputs.0"/>
       </link>
       <location x="128" y="48"/>
     </anchors>
@@ -1222,7 +1222,7 @@
   </children>
   <children xsi:type="pi:ContainerShape" visible="true" active="true">
     <properties key="XDF_ID" value="INSTANCE"/>
-    <properties key="refinement" value="/INT-VA-Model-naive/bin/main/vamodel/resize_L3.ir"/>
+    <properties key="refinement" value="/INT-VA-Model-naive/bin/main/vamodel/resize_norm_L3.ir"/>
     <graphicsAlgorithm xsi:type="al:RoundedRectangle" lineStyle="UNSPECIFIED" width="128" height="80" x="233" y="1333" style="//@styles.0/@styles.2" cornerHeight="5" cornerWidth="5">
       <graphicsAlgorithmChildren xsi:type="al:Text" lineStyle="UNSPECIFIED" width="128" height="40" style="//@styles.1/@styles.0" horizontalAlignment="UNSPECIFIED" verticalAlignment="UNSPECIFIED" value="Resize_HH3">
         <properties key="XDF_ID" value="INSTANCE_LABEL"/>
@@ -1250,7 +1250,7 @@
       <properties key="SHAPE_DIRECTION" value="input"/>
       <graphicsAlgorithm xsi:type="al:Rectangle" lineStyle="UNSPECIFIED" width="12" height="12" y="-6" style="//@styles.0/@styles.1"/>
       <link>
-        <businessObjects href="../../bin/main/vamodel/resize_L3.ir#//@inputs.0"/>
+        <businessObjects href="../../bin/main/vamodel/resize_norm_L3.ir#//@inputs.0"/>
       </link>
       <location y="48"/>
     </anchors>
@@ -1260,7 +1260,7 @@
       <properties key="SHAPE_DIRECTION" value="output"/>
       <graphicsAlgorithm xsi:type="al:Rectangle" lineStyle="UNSPECIFIED" width="13" height="12" x="-12" y="-6" style="//@styles.0/@styles.1"/>
       <link>
-        <businessObjects href="../../bin/main/vamodel/resize_L3.ir#//@outputs.0"/>
+        <businessObjects href="../../bin/main/vamodel/resize_norm_L3.ir#//@outputs.0"/>
       </link>
       <location x="128" y="48"/>
     </anchors>
