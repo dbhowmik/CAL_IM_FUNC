@@ -12,11 +12,12 @@ actor resize_L5() int coefficient ==> int filt_coeff:
 	int countX := 0;
 	int countY := 0;
 	int index := 0;
+	int count := 0;
 			
 	init: action ==>
 	do
 		x_ratio := IM_HEIGHT/height;
-		y_ratio := IM_WIDTH/width;
+		y_ratio := IM_WIDTH/width;		
 	end
 			
 	getCoeffValue: action coefficient:[value] ==>  	
@@ -34,7 +35,6 @@ actor resize_L5() int coefficient ==> int filt_coeff:
 			index := 0;
 		end
 	end
-	
 	
 	int x_ratio; int y_ratio; int px; int py;
 	int p1; int p2; int p3; int p4;
@@ -77,12 +77,20 @@ actor resize_L5() int coefficient ==> int filt_coeff:
 			
 		out_val := tmp >> 11; // Normalization with wavelet approximation 
 	
-		countX := countX + 1;		
-		if(countX = IM_WIDTH) then
-			countY := countY + 1;
-			countX := 0; 								
-		end									
+		countX := countX + 1;
+		
+		if(countX = IM_WIDTH) then		
+			countX := 0;
+			countY := countY + 1; 
+			count := count + 1;			
+		end			 											
 	end		
+	
+	count_height: action ==>
+	guard count = x_ratio * 2
+	do		
+		count := 0;
+	end
 	
 	doneCountY_end: action ==>
 	guard countY = IM_HEIGHT
@@ -96,17 +104,17 @@ actor resize_L5() int coefficient ==> int filt_coeff:
 		s1 (doneCountY_itar ) --> s2;
 		s2 (getCoeffValue ) --> s2;
 		s2 (doneCountY_itar ) --> s3;
-		s3 (resize) --> s3;
-		s3 (doneCountY_itar ) --> s2;
+		s3 (resize) --> s3;		
+		s3 (count_height) --> s1;		
 		s3 (doneCountY_end) --> s4;
 		s4 (resize) --> s4;
-		s4 (doneCountY_itar ) --> s0;		
+		s4 (count_height) --> s0;		
 	end
 	
 	priority
 		doneCountY_itar > getCoeffValue;
-		doneCountY_itar > resize;
-		doneCountY_end  > doneCountY_itar;  
+		count_height > resize;		
+		doneCountY_end  > count_height;  
 	end
 	
 end

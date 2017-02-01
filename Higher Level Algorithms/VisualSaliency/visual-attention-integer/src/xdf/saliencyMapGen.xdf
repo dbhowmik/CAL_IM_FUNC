@@ -158,49 +158,49 @@
         <Class name="main.vamodel.filter_3x3_L5"/>
     </Instance>
     <Instance id="Resize_LH1">
-        <Class name="main.vamodel.resize_norm_L1"/>
+        <Class name="main.vamodel.resize_L1"/>
     </Instance>
     <Instance id="Resize_LH2">
-        <Class name="main.vamodel.resize_norm_L2"/>
+        <Class name="main.vamodel.resize_L2"/>
     </Instance>
     <Instance id="Resize_LH3">
-        <Class name="main.vamodel.resize_norm_L3"/>
+        <Class name="main.vamodel.resize_L3"/>
     </Instance>
     <Instance id="Resize_LH4">
-        <Class name="main.vamodel.resize_norm_L4"/>
+        <Class name="main.vamodel.resize_L4"/>
     </Instance>
     <Instance id="Resize_LH5">
-        <Class name="main.vamodel.resize_norm_L5"/>
+        <Class name="main.vamodel.resize_L5"/>
     </Instance>
     <Instance id="Resize_HL1">
-        <Class name="main.vamodel.resize_norm_L1"/>
+        <Class name="main.vamodel.resize_L1"/>
     </Instance>
     <Instance id="Resize_HL2">
-        <Class name="main.vamodel.resize_norm_L2"/>
+        <Class name="main.vamodel.resize_L2"/>
     </Instance>
     <Instance id="Resize_HL3">
-        <Class name="main.vamodel.resize_norm_L3"/>
+        <Class name="main.vamodel.resize_L3"/>
     </Instance>
     <Instance id="Resize_HL4">
-        <Class name="main.vamodel.resize_norm_L4"/>
+        <Class name="main.vamodel.resize_L4"/>
     </Instance>
     <Instance id="Resize_HL5">
-        <Class name="main.vamodel.resize_norm_L5"/>
+        <Class name="main.vamodel.resize_L5"/>
     </Instance>
     <Instance id="Resize_HH1">
-        <Class name="main.vamodel.resize_norm_L1"/>
+        <Class name="main.vamodel.resize_L1"/>
     </Instance>
     <Instance id="Resize_HH2">
-        <Class name="main.vamodel.resize_norm_L2"/>
+        <Class name="main.vamodel.resize_L2"/>
     </Instance>
     <Instance id="Resize_HH3">
-        <Class name="main.vamodel.resize_norm_L3"/>
+        <Class name="main.vamodel.resize_L3"/>
     </Instance>
     <Instance id="Resize_HH4">
-        <Class name="main.vamodel.resize_norm_L4"/>
+        <Class name="main.vamodel.resize_L4"/>
     </Instance>
     <Instance id="Resize_HH5">
-        <Class name="main.vamodel.resize_norm_L5"/>
+        <Class name="main.vamodel.resize_L5"/>
     </Instance>
     <Instance id="mapHor">
         <Class name="main.vamodel.mapForm"/>
