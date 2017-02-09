@@ -27,7 +27,7 @@
  * SUCH DAMAGE.
  */
   
-// Author: Deepayan Bhowmik <d.bhowmik@hw.ac.uk> 
+// Author: Deepayan Bhowmik <deepayan.bhowmik@shu.ac.uk> 
 
 package std.stdio;
 import std.header.Parameter.*;
@@ -35,73 +35,20 @@ import std.header.Source.*;
 
 actor YtoStream() uint(size=8) Y ==> uint(size=8) Yout, bool pEOF: 
 	
-	uint(size=8)  pictureBufferYUV[IM_WIDTH * IM_HEIGHT];
-	int (size=16) pictureWidthLuma;
-	int (size=16) pictureHeightLuma;
-		
-	getPictureSize: action ==> 
-	do
-		pictureWidthLuma := IM_WIDTH;
-		pictureHeightLuma := IM_HEIGHT;
-	end
-	
 	int count := 0;
-	
-	
-	getPixValueY: action Y:[Bytes] ==>	
+	getAndSendImage: action Y:[Bytes] ==> Yout:[Bytes], pEOF:[false]	
 	do
-		pictureBufferYUV[count] := Bytes;			
-		count := count + 1;				
+		count := count + 1;
 	end
-					
-    
-	doneCount: action ==> 
-	guard count = pictureWidthLuma * pictureHeightLuma
+	
+	doneCount: action ==> Yout:[0x0A], pEOF:[true]
+	guard count = IM_WIDTH * IM_HEIGHT
 	do
 		count := 0;
-	end		
-	
-	int count_frame := 0;
-	doneCountYUV: action ==>  
-	guard count = pictureWidthLuma * pictureHeightLuma
-	do	    
-		count := 0;
-		
-		count_frame := count_frame + 1;
-	//	println("Frame number : " + count_frame);
-		
-	//	if(count_frame >= 2) then
-	//		source_exit(0);
-	//	end
-		
 	end
-	
-	send: action ==> Yout:[stream], pEOF:[false]
-	var uint(size=8) stream
-	do	    
-		stream  := pictureBufferYUV[count];				
-		count := count + 1;					
-		//println(count);	
-	end
-	
-	sendEOF: action ==> Yout:[stream], pEOF:[true]
-	var uint(size=8) stream	
-	do
-		stream := 0x0A;
-	end
-	
-	schedule fsm s10 :
-		s10 (getPictureSize) --> s0;
-		s0 ( getPixValueY ) --> s0;
-		s0 ( doneCount ) --> s1;	
-		s1 ( send )-->s1;
-		s1 ( doneCountYUV)-->s2;
-		s2 ( sendEOF) --> s2;
-	end
-	
+			
 	priority
-		doneCount > getPixValueY;
-		doneCountYUV > send;
+		doneCount > getAndSendImage;		
 	end	
 	
 end
