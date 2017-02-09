@@ -5,7 +5,7 @@ import std.util.Math.*;
  
 actor finalMapApprox() int coefficient ==> uint(size=8) map:			
 	getImageValue: action coefficient:[value] ==>  map:[Byte]	
-	var int Byte, 
+	var uint(size=8) Byte, 
 		int tmp
 	do
 		tmp := (value*255)/(2<<20);
