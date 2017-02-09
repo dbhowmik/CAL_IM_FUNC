@@ -215,7 +215,7 @@
         <Class name="main.vamodel.orientForm"/>
     </Instance>
     <Instance id="finalSalMap">
-        <Class name="main.vamodel.finalMap"/>
+        <Class name="main.vamodel.finalMapApprox"/>
     </Instance>
     <Connection dst="Resize_LH1" dst-port="coefficient" src="Filter_LH1" src-port="filt_coeff"/>
     <Connection dst="Resize_LH2" dst-port="coefficient" src="Filter_LH2" src-port="filt_coeff"/>

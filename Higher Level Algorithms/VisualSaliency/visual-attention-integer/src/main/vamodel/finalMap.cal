@@ -41,6 +41,7 @@ actor finalMap() int coefficient ==> uint(size=8) map:
 	var int Byte, 
 		int tmp
 	do
+		println(max_val);
 		tmp := (coeffBuffer[countX][countY]*255)/max_val;
 		floor_c(tmp);	
 		Byte := Val_UINT8; 

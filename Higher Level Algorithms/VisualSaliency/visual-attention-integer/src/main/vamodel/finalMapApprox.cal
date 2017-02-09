@@ -1,0 +1,30 @@
+package main.vamodel;
+
+import std.header.Parameter.*;
+import std.util.Math.*;
+ 
+actor finalMapApprox() int coefficient ==> uint(size=8) map:			
+	getImageValue: action coefficient:[value] ==>  map:[Byte]	
+	var int Byte, 
+		int tmp
+	do
+		tmp := (value*255)/(2<<20);
+		floor_c(tmp);	
+		Byte := Val_UINT8; 
+	end
+	
+	/***************************************/
+	procedure floor_c(int num)
+	var int i := 0
+	begin
+		while(num >= 0) do 
+			i := i+1;
+			num := num-1;
+		end
+		
+		Val_UINT8 := clip_i32_u8(i);
+	end
+	uint(size=8) Val_UINT8;
+	/***************************************/		
+
+end
