@@ -4,15 +4,15 @@ import std.header.Parameter.*;
 import std.util.Math.*;
 
 actor resize_L2() int coefficient ==> int filt_coeff:
-	int width = SUB2_WIDTH;
-	int height = SUB2_HEIGHT;
+	int(size=16) width = SUB2_WIDTH;
+	int(size=16) height = SUB2_HEIGHT;
 	
-	int Buffer[2][width];	
-	int count_width := 0;
-	int countX := 0;
-	int countY := 0;
-	int index := 0;
-	int count := 0;
+	int(size=16) Buffer[2][width];	
+	int(size=16) count_width := 0;
+	int(size=16) countX := 0;
+	int(size=16) countY := 0;
+	int(size=16) index := 0;
+	int(size=16) count := 0;
 			
 	init: action ==>
 	do
@@ -36,13 +36,13 @@ actor resize_L2() int coefficient ==> int filt_coeff:
 		end
 	end
 		
-	int x_ratio; int y_ratio; int px; int py;
-	int p1; int p2; int p3; int p4;
-	int x1; int x2; int y1; int y2;
+	int(size=16) x_ratio; int(size=16) y_ratio; int(size=16) px; int(size=16) py;
+	int(size=16) p1; int(size=16) p2; int(size=16) p3; int(size=16) p4;
+	int(size=16) x1; int(size=16) x2; int(size=16) y1; int(size=16) y2;
 	int fx; int fy; 
 		
-	int index_1;
-	int index_2;
+	int(size=16) index_1;
+	int(size=16) index_2;
 	int tmp;
 	
 	/* Resizing */
